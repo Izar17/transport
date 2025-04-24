@@ -33,7 +33,7 @@
 		<h3 class="card-title">Booking Transfer</h3>
 	</div>
 	<div class="card-body">
-    <form id="vregister-frm" action="" method="post">
+    <form id="frmBooking" action="" method="post">
         <input type="hidden" name="id">
         <div class="row">
             <!-- First Panel (10 columns) -->
@@ -69,43 +69,49 @@
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
 						<select type="text" id="modeOfTransfer" name="modeOfTransfer" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected></option>
+							<option>Departure</option>
+							<option>Roundtrip</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
-						<select type="text" id="paymentType" name="paymentType" class="form-control form-control-sm form-control-border select2" required>
+						<select type="text" id="paymentType" name="paymentType" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
+							<option>Departure</option>
+							<option>Roundtrip</option>
 						</select>
 					</div>
 					
-					<div class="form-group col-md-3">
-						<label for="origin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
-						<select type="text" id="origin" name="origin" class="form-control form-control-sm form-control-border select2" required>
-							<option value="" disabled selected></option>
-						</select>
-					</div>
-					<!-- Departure row -->
-					<div class="form-group col-md-3">
-						<label for="departure" class="control-label clsDeparture">Departure: <span class="required">*</span></label>
-						<select type="text" id="origin" name="origin" class="form-control form-control-sm form-control-border select2 clsDeparture" required>
-							<option value="" disabled selected></option>
-						</select>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="estpickup" class="control-label clsDeparture">Estimated Pick-up Time:</label>
-						<!-- <input type="text" id="estpickup" name="estpickup" class="form-control form-control-sm form-control-border clsDeparture" disabled> -->
-						<input type="time" id="estpickup" autofocus name="estpickup" class="form-control form-control-sm form-control-border clsDeparture" disabled>
-					</div>
+					
 					<div class="form-group col-md-3"></div>
 					<div class="form-group col-md-3"></div>
 					<!-- Arrival Details -->
 					<div class="form-group col-md-12 col-sm-3 clsArrival">
 						<h6>Arrival Details</h6>
 					</div>
-					<!-- 3rd row -->
 					<div class="form-group col-md-3 clsArrival">
-						<label for="airport" class="control-label">Airport: <span class="required">*</span></label>
-						<select type="text" id="airport" name="airport" class="form-control form-control-sm form-control-border select2" required>
+						<label for="arrOrigin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
+						<select type="text" id="arrOrigin" name="arrOrigin" class="form-control form-control-sm form-control-border select2 clsArrival">
+							<option value="" disabled selected></option>
+							<option>Departure</option>
+							<option>Roundtrip</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsArrival">
+						<label for="arrDropOff" class="control-label">Drop Off: <span class="required">*</span></label>
+						<select type="text" id="arrDropOff" name="arrDropOff" class="form-control form-control-sm form-control-border select2">
+							<option value="" disabled selected></option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsArrival">
+						<label for="arrDate" class="control-label">Date: <span class="required">*</span></label>
+						<input type="date" id="arrDate" name="arrDate" class="form-control form-control-sm form-control-border">
+					</div>
+					<div class="form-group col-md-3"></div>
+
+					<div class="form-group col-md-3 clsArrival">
+						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
+						<select type="text" id="arrAirport" name="arrAirport" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
 							<option>CATICLAN AIRPORT (MPH)</option>
 							<option>KALIBO AIRPORT (KLO)</option>
@@ -113,14 +119,14 @@
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
-						<label for="flightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<select type="text" id="flightNumber" name="flightNumber" class="form-control form-control-sm form-control-border select2" required>
+						<label for="arrFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
+						<select type="text" id="arrFlightNumber" name="arrFlightNumber" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
-						<label for="hotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
-						<select type="text" id="hotelResort" name="hotelResort" class="form-control form-control-sm form-control-border select2" required>
+						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
+						<select type="text" id="arrHotelResort" name="arrHotelResort" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
 							<option>FAIRWAYS & BLUEWATER RESORT</option>
 							<option>OTHER HOTEL</option>
@@ -128,16 +134,37 @@
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="eta" lang="en-GB" class="form-control form-control-sm form-control-border" required>
+						<input type="time" id="eta" autofocus name="eta" lang="en-GB" class="form-control form-control-sm form-control-border">
 					</div>
 					<!-- Departure Details -->
 					<div class="form-group col-md-12 col-sm-3 clsDeparture">
 						<h6>Departure Details</h6>
 					</div>
-					<!-- 3rd row -->
 					<div class="form-group col-md-3 clsDeparture">
-						<label for="airport" class="control-label">Airport: <span class="required">*</span></label>
-						<select type="text" id="airport" name="airport" class="form-control form-control-sm form-control-border select2" required>
+						<label for="depOrigin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
+						<select type="text" id="depOrigin" name="depOrigin" class="form-control form-control-sm form-control-border select2">
+							<option value="" disabled selected></option>
+							<option>Departure</option>
+							<option>Roundtrip</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="depDropOff" class="control-label">Drop Off: <span class="required">*</span></label>
+						<select type="text" id="depDropOff" name="depDropOff" class="form-control form-control-sm form-control-border select2">
+							<option value="" disabled selected></option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="depDate" class="control-label">Date: <span class="required">*</span></label>
+						<input type="date" id="depDate" name="depDate" class="form-control form-control-sm form-control-border">
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
+						<input type="time" id="estpickup" autofocus name="estpickup" class="form-control form-control-sm form-control-border" disabled>
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
+						<select type="text" id="depAirport" name="depAirport" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
 							<option>CATICLAN AIRPORT (MPH)</option>
 							<option>KALIBO AIRPORT (KLO)</option>
@@ -145,14 +172,14 @@
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
-						<label for="flightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<select type="text" id="flightNumber" name="flightNumber" class="form-control form-control-sm form-control-border select2" required>
+						<label for="depFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
+						<select type="text" id="depFlightNumber" name="depFlightNumber" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
-						<label for="hotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
-						<select type="text" id="hotelResort" name="hotelResort" class="form-control form-control-sm form-control-border select2" required>
+						<label for="depHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
+						<select type="text" id="depHotelResort" name="depHotelResort" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
 							<option>FAIRWAYS & BLUEWATER RESORT</option>
 							<option>OTHER HOTEL</option>
@@ -160,7 +187,7 @@
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="etd" lang="en-GB" class="form-control form-control-sm form-control-border" required>
+						<input type="time" id="etd" autofocus name="etd" lang="en-GB" class="form-control form-control-sm form-control-border">
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6">
@@ -171,6 +198,12 @@
                         <label for="remarks" class="control-label clsDeparture">Remarks:</label>
                         <textarea id="remarks" autofocus name="remarks" class="form-control form-control-sm form-control-border clsDeparture" style="height:100px;"></textarea>
                     </div>
+					<div class="form-group col-md-3"></div>
+					<div class="form-group col-md-3"></div>
+					<div class="form-group col-md-3"></div>
+					<div class="form-group col-md-3">
+						<button type="submit" class="btn btn-flat btn-primary w-100">Submit Booking</button>
+					</div>
                 </div>
             </div>
             
@@ -186,6 +219,7 @@
                     <input type="number" class="transfercharges"/> Adult (Local) 0.00
                 </div>
             </div>
+			
         </div>
         
     </form>
@@ -225,13 +259,11 @@
 			if (etdTime) {
 				let [hours, minutes] = etdTime.split(':').map(Number);
 
-				minutes += 30;
-				if (minutes >= 60) {
-					hours += 1;
-					minutes -= 60;
+				hours -= 3;
+				if (hours < 0) {
+					hours += 24;
 				}
 
-				// Ensure two-digit format
 				let newHours = String(hours).padStart(2, '0');
 				let newMinutes = String(minutes).padStart(2, '0');
 
@@ -239,6 +271,28 @@
 			}
 		});
 
+
+		$('#frmBooking').on('submit', function(e) {
+			e.preventDefault(); // prevent default form submit
+
+			var formData = new FormData(this);
+
+			$.ajax({
+				url: _base_url_+"classes/Booking.php?f=save_booking",
+				type: 'POST',
+				data: formData,
+				contentType: false,
+				processData: false,
+				error:err=>{
+					console.log(err)
+					alert_toast("An error occured.",err);
+					end_loader();
+				},
+				success: function(response) {
+					console.log('Server response:', response);
+				}
+			});
+		});
 
 
 	})
