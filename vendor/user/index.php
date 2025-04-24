@@ -220,6 +220,7 @@ foreach($user->fetch_array() as $k =>$v){
 	})
 
 </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjxtQg3zmAUPr1wb0W0ZtVi2IwvHMXv1I&callback=initMap" async defer></script>
   <style>
     #map {
       height: 400px;
