@@ -60,8 +60,7 @@
 					<div class="form-group col-md-3">
 						<label for="transferType" class="control-label">Transfer Type: <span class="required">*</span></label>
 						<select type="text" id="transferType" name="transferType" class="form-control form-control-sm form-control-border select2" required>
-							<option value="" disabled selected></option>
-							<option>Arrival</option>
+							<option selected>Arrival</option>
 							<option>Departure</option>
 							<option>Roundtrip</option>
 						</select>
@@ -73,19 +72,38 @@
 						</select>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="origin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
-						<select type="text" id="origin" name="origin" class="form-control form-control-sm form-control-border select2" required>
-							<option value="" disabled selected></option>
-						</select>
-					</div>
-					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
 						<select type="text" id="paymentType" name="paymentType" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected></option>
 						</select>
 					</div>
-					<!-- 3rd row -->
+					
 					<div class="form-group col-md-3">
+						<label for="origin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
+						<select type="text" id="origin" name="origin" class="form-control form-control-sm form-control-border select2" required>
+							<option value="" disabled selected></option>
+						</select>
+					</div>
+					<!-- Departure row -->
+					<div class="form-group col-md-3">
+						<label for="departure" class="control-label clsDeparture">Departure: <span class="required">*</span></label>
+						<select type="text" id="origin" name="origin" class="form-control form-control-sm form-control-border select2 clsDeparture" required>
+							<option value="" disabled selected></option>
+						</select>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="estpickup" class="control-label clsDeparture">Estimated Pick-up Time:</label>
+						<!-- <input type="text" id="estpickup" name="estpickup" class="form-control form-control-sm form-control-border clsDeparture" disabled> -->
+						<input type="time" id="estpickup" autofocus name="estpickup" class="form-control form-control-sm form-control-border clsDeparture" disabled>
+					</div>
+					<div class="form-group col-md-3"></div>
+					<div class="form-group col-md-3"></div>
+					<!-- Arrival Details -->
+					<div class="form-group col-md-12 col-sm-3 clsArrival">
+						<h6>Arrival Details</h6>
+					</div>
+					<!-- 3rd row -->
+					<div class="form-group col-md-3 clsArrival">
 						<label for="airport" class="control-label">Airport: <span class="required">*</span></label>
 						<select type="text" id="airport" name="airport" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected></option>
@@ -94,13 +112,13 @@
 							<option>N/A</option>
 						</select>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-3 clsArrival">
 						<label for="flightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
 						<select type="text" id="flightNumber" name="flightNumber" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected></option>
 						</select>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-3 clsArrival">
 						<label for="hotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
 						<select type="text" id="hotelResort" name="hotelResort" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected></option>
@@ -108,9 +126,41 @@
 							<option>OTHER HOTEL</option>
 						</select>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="eta" class="form-control form-control-sm form-control-border" required>
+						<input type="time" id="eta" autofocus name="eta" lang="en-GB" class="form-control form-control-sm form-control-border" required>
+					</div>
+					<!-- Departure Details -->
+					<div class="form-group col-md-12 col-sm-3 clsDeparture">
+						<h6>Departure Details</h6>
+					</div>
+					<!-- 3rd row -->
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="airport" class="control-label">Airport: <span class="required">*</span></label>
+						<select type="text" id="airport" name="airport" class="form-control form-control-sm form-control-border select2" required>
+							<option value="" disabled selected></option>
+							<option>CATICLAN AIRPORT (MPH)</option>
+							<option>KALIBO AIRPORT (KLO)</option>
+							<option>N/A</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="flightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
+						<select type="text" id="flightNumber" name="flightNumber" class="form-control form-control-sm form-control-border select2" required>
+							<option value="" disabled selected></option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="hotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
+						<select type="text" id="hotelResort" name="hotelResort" class="form-control form-control-sm form-control-border select2" required>
+							<option value="" disabled selected></option>
+							<option>FAIRWAYS & BLUEWATER RESORT</option>
+							<option>OTHER HOTEL</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 clsDeparture">
+						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
+						<input type="time" id="etd" autofocus name="etd" lang="en-GB" class="form-control form-control-sm form-control-border" required>
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6">
@@ -118,8 +168,8 @@
                         <textarea id="otherNames" autofocus name="otherNames" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="remarks" class="control-label">Remarks:</label>
-                        <textarea id="remarks" autofocus name="remarks" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
+                        <label for="remarks" class="control-label clsDeparture">Remarks:</label>
+                        <textarea id="remarks" autofocus name="remarks" class="form-control form-control-sm form-control-border clsDeparture" style="height:100px;"></textarea>
                     </div>
                 </div>
             </div>
@@ -142,16 +192,60 @@
 </div>
 </div>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
+		$('.clsDeparture').hide();
+
 		$('.delete_data').click(function(){
 			_conf("Are you sure to delete this vendor permanently?","delete_vendor",[$(this).attr('data-id')])
 		})
+
 		$('.table').dataTable();
+
+		$('#transferType').on('change', function() {
+			if ($('#transferType').val().toUpperCase() === "ARRIVAL")
+			{
+				$('.clsArrival').show();
+				$('.clsDeparture').hide();
+			}
+			else if ($('#transferType').val().toUpperCase() === "DEPARTURE")
+			{
+				$('.clsArrival').hide();
+				$('.clsDeparture').show();
+			}
+			else if ($('#transferType').val().toUpperCase() === "ROUNDTRIP")
+			{
+				$('.clsArrival').show();
+				$('.clsDeparture').show();
+			}
+        });
+
+		$('#etd').on('change', function() {
+			let etdTime = $(this).val();
+
+			if (etdTime) {
+				let [hours, minutes] = etdTime.split(':').map(Number);
+
+				minutes += 30;
+				if (minutes >= 60) {
+					hours += 1;
+					minutes -= 60;
+				}
+
+				// Ensure two-digit format
+				let newHours = String(hours).padStart(2, '0');
+				let newMinutes = String(minutes).padStart(2, '0');
+
+				$('#estpickup').val(`${newHours}:${newMinutes}`);
+			}
+		});
+
+
+
 	})
 	function delete_vendor($id){
 		start_loader();
 		$.ajax({
-			url:_base_url_+"classes/Users.php?f=delete_vendor",
+			url:_base_url_+"classes/Booking.php?f=save_booking",
 			method:"POST",
 			data:{id: $id},
 			dataType:"json",
