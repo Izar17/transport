@@ -24,24 +24,24 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 						<option></option>
 						<option value="1" <?php echo isset($meta['type']) && $meta['type'] == 1 ? 'selected' : '' ?>>Arrival</option>
 						<option value="2" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected' : '' ?>>Departure</option>
-						<option value="3" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected' : '' ?>>N/A</option>
+						<option value="3" <?php echo isset($meta['type']) && $meta['type'] == 3 ? 'selected' : '' ?>>Default</option>
 					</select>
 				</div>
 				<div class="form-group col-6">
 					<label for="code">Code</label>
 					<select name="code" id="code" class="custom-select" required>
 						<option></option>
-						<option value="MOT" <?php echo isset($meta['code']) && $meta['code'] == 1 ? 'selected' : '' ?>>Mode of Transfer</option>
-						<option value="PT" <?php echo isset($meta['code']) && $meta['code'] == 2 ? 'selected' : '' ?>>Payment Type</option>
-						<option value="OPL" <?php echo isset($meta['code']) && $meta['code'] == 3 ? 'selected' : '' ?>>Origin/Pick-up Location</option>
-						<option value="DO" <?php echo isset($meta['code']) && $meta['code'] == 4 ? 'selected' : '' ?>>Drop Off</option>
-						<option value="AP" <?php echo isset($meta['code']) && $meta['code'] == 5 ? 'selected' : '' ?>>Airport</option>
-						<option value="HR" <?php echo isset($meta['code']) && $meta['code'] == 6 ? 'selected' : '' ?>>Hotel/Resort</option>
+						<option value="MOT" <?php echo isset($meta['code']) && $meta['code'] == 'MOT' ? 'selected' : '' ?>>Mode of Transfer</option>
+						<option value="PT" <?php echo isset($meta['code']) && $meta['code'] == 'PT' ? 'selected' : '' ?>>Payment Type</option>
+						<option value="ODL" <?php echo isset($meta['code']) && $meta['code'] == 'ODL' ? 'selected' : '' ?>>Origin Pick-up & Drop-off Location</option>
+						<option value="AP" <?php echo isset($meta['code']) && $meta['code'] == 'AP' ? 'selected' : '' ?>>Airport</option>
+						<option value="HR" <?php echo isset($meta['code']) && $meta['code'] == 'HR' ? 'selected' : '' ?>>Hotel/Resort</option>
+						<option value="TC" <?php echo isset($meta['code']) && $meta['code'] == 'TC' ? 'selected' : '' ?>>Transfer Charge</option>
 					</select>	
 				</div>
 				<div class="form-group col-6">
 					<label for="title">Title</label>
-					<input type="text" name="title" id="title" class="form-control" value="<?php echo isset($meta['title']) ? $meta['title']: '' ?>" required  autocomplete="off">
+					<input type="text" name="title" id="title" class="form-control" value="<?php echo isset($meta['title']) ? $meta['title']: '' ?>" required  autocomplete="off" oninput="this.value = this.value.toUpperCase()">
 				</div>
 				<div class="form-group col-6">
 					<label for="description">Description</label>
@@ -98,7 +98,7 @@ var _this = $(this)
 				if(resp ==1){
 					location.href = './?page=maintenance';
 				}else{
-					$('#msg').html('<div class="alert alert-danger">Username already exist</div>')
+					$('#msg').html('<div class="alert alert-danger">Reference already exist</div>')
 					$("html, body").animate({ scrollTop: 0 }, "fast");
 				}
                 end_loader()

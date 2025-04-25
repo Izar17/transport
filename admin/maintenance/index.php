@@ -44,7 +44,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php 
+					<?php
 					$i = 1;
 						$qry = $conn->query("SELECT * from reference_table");
 						while($row = $qry->fetch_assoc()):
@@ -78,14 +78,14 @@
 <script>
 	$(document).ready(function(){
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this User permanently?","delete_user",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this User permanently?","delete_reference",[$(this).attr('data-id')])
 		})
 		$('.table').dataTable();
 	})
-	function delete_user($id){
+	function delete_reference($id){
 		start_loader();
 		$.ajax({
-			url:_base_url_+"classes/Users.php?f=delete",
+			url:_base_url_+"classes/Maintenance.php?f=delete",
 			method:"POST",
 			data:{id: $id},
 			dataType:"json",

@@ -10,115 +10,38 @@ Class Users extends DBConnection {
 	public function __destruct(){
 		parent::__destruct();
 	}
-	public function save_users(){
+	public function save_reference(){
 		extract($_POST);
 		$data = '';
-		$chk = $this->conn->query("SELECT * FROM `users` where username ='{$username}' ".($id>0 ? " and id!= '{$id}' " : ""))->num_rows;
-		if($chk > 0){
-			return 3;
-			exit;
-		}
-		foreach($_POST as $k => $v){
-			if(!in_array($k,array('id','password'))){
-				if(!empty($data)) $data .=" , ";
-				$data .= " {$k} = '{$v}' ";
+		
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id'))){
+				if(!empty($data)) $data .=",";
+				$data .= " `{$k}`='{$this->conn->real_escape_string($v)}' ";
 			}
-		}
-		if(!empty($password)){
-			$password = md5($password);
-			if(!empty($data)) $data .=" , ";
-			$data .= " `password` = '{$password}' ";
 		}
 
 		if(empty($id)){
-			$qry = $this->conn->query("INSERT INTO users set {$data}");
+			$qry = $this->conn->query("INSERT INTO reference_table set {$data}");
 			if($qry){
 				$id = $this->conn->insert_id;
-				$this->settings->set_flashdata('success','User Details successfully saved.');
-				if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-					$fname = 'uploads/avatar-'.($id).'.png';
-					$dir_path =base_app. $fname;
-					$upload = $_FILES['img']['tmp_name'];
-					$type = mime_content_type($upload);
-					$allowed = array('image/png','image/jpeg');
-					if(!in_array($type,$allowed)){
-						$resp['msg']=" But Image failed to upload due to invalid file type.";
-					}else{
-						$new_height = 200; 
-						$new_width = 200; 
+				$this->settings->set_flashdata('success','Reference Details successfully saved.');
 				
-						list($width, $height) = getimagesize($upload);
-						$t_image = imagecreatetruecolor($new_width, $new_height);
-						imagealphablending( $t_image, false );
-						imagesavealpha( $t_image, true );
-						$gdImg = ($type == 'image/png')? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
-						imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-						if($gdImg){
-								if(is_file($dir_path))
-								unlink($dir_path);
-								$uploaded_img = imagepng($t_image,$dir_path);
-								imagedestroy($gdImg);
-								imagedestroy($t_image);
-								if(isset($uploaded_img) && $uploaded_img == true){
-									$qry = $this->conn->query("UPDATE users set avatar = concat('{$fname}','?v=',unix_timestamp(CURRENT_TIMESTAMP)) where id = '$id' ");
-								}
-						}else{
-						$resp['msg']=" But Image failed to upload due to unkown reason.";
-						}
-					}
-					
-				}
 				return 1;
 			}else{
 				return 2;
 			}
 
 		}else{
-			$qry = $this->conn->query("UPDATE users set $data where id = {$id}");
+			$qry = $this->conn->query("UPDATE reference_table set $data where id = {$id}");
 			if($qry){
-				$this->settings->set_flashdata('success','User Details successfully updated.');
+				$this->settings->set_flashdata('success','Reference Details successfully updated.');
 				foreach($_POST as $k => $v){
 					if($k != 'id'){
 						if(!empty($data)) $data .=" , ";
 						$this->settings->set_userdata($k,$v);
 					}
 				}
-				if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-					$fname = 'uploads/avatar-'.($id).'.png';
-					$dir_path =base_app. $fname;
-					$upload = $_FILES['img']['tmp_name'];
-					$type = mime_content_type($upload);
-					$allowed = array('image/png','image/jpeg');
-					if(!in_array($type,$allowed)){
-						$resp['msg']=" But Image failed to upload due to invalid file type.";
-					}else{
-						$new_height = 200; 
-						$new_width = 200; 
-				
-						list($width, $height) = getimagesize($upload);
-						$t_image = imagecreatetruecolor($new_width, $new_height);
-						imagealphablending( $t_image, false );
-						imagesavealpha( $t_image, true );
-						$gdImg = ($type == 'image/png')? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
-						imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-						if($gdImg){
-								if(is_file($dir_path))
-								unlink($dir_path);
-								$uploaded_img = imagepng($t_image,$dir_path);
-								imagedestroy($gdImg);
-								imagedestroy($t_image);
-								if(isset($uploaded_img) && $uploaded_img == true){
-									$qry = $this->conn->query("UPDATE users set avatar = concat('{$fname}','?v=',unix_timestamp(CURRENT_TIMESTAMP)) where id = '$id' ");
-									if($this->settings->userdata('id') == $id && $this->settings->userdata('login_type') == 1)
-										$this->settings->set_userdata('avatar',$fname."?v=".(time()));
-								}
-						}else{
-						$resp['msg']=" But Image failed to upload due to unkown reason.";
-						}
-					}
-					
-				}
-
 				return 1;
 			}else{
 				return "UPDATE users set $data where id = {$id}";
@@ -126,17 +49,15 @@ Class Users extends DBConnection {
 			
 		}
 	}
-	public function delete_users(){
+	public function delete_reference(){
 		extract($_POST);
-		$avatar = $this->conn->query("SELECT avatar FROM users where id = '{$id}'")->fetch_array()['avatar'];
-		$qry = $this->conn->query("DELETE FROM users where id = $id");
-		if($qry){
-			$this->settings->set_flashdata('success','User Details successfully deleted.');
-			if(is_file(base_app.$avatar))
-				unlink(base_app.$avatar);
+		$del = $this->conn->query("DELETE FROM `reference_table` where id = '{$id}'");
+		if($del){
 			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success'," Reference successfully deleted.");
 		}else{
 			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
 		}
 		return json_encode($resp);
 	}
@@ -396,10 +317,10 @@ $users = new users();
 $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
 switch ($action) {
 	case 'save':
-		echo $users->save_users();
+		echo $users->save_reference();
 	break;
 	case 'delete':
-		echo $users->delete_users();
+		echo $users->delete_reference();
 	break;
 	case 'save_vendor':
 		echo $users->save_vendor();
