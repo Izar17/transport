@@ -81,20 +81,19 @@
                       </a>
                     </li> -->
                     <?php if($_settings->userdata('type') == 1): ?>
-                    <li class="nav-header"></li>
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=shop_types" class="nav-link nav-shop_types">
-                        <i class="nav-icon fas fa-th-list"></i>
-                        <p>
-                          Shop Type list
-                        </p>
-                      </a>
-                    </li> -->
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           Admin List
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=maintenance" class="nav-link nav-maintenance">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>
+                          Maintenance
                         </p>
                       </a>
                     </li>
