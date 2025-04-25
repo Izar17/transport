@@ -33,6 +33,7 @@
 		<h3 class="card-title">Booking Transfer</h3>
 	</div>
 	<div class="card-body">
+	<div id="msg"></div>
     <form id="frmBooking" action="" method="post">
         <input type="hidden" name="id">
         <div class="row">
@@ -42,24 +43,24 @@
 					<!-- First Row -->
                     <div class="form-group col-md-3">
                         <label for="lastname" class="control-label">Last Name: <span class="required">*</span></label>
-                        <input type="text" id="lastname" autofocus name="lastname" class="form-control form-control-sm form-control-border" required>
+                        <input type="text" id="lastname" autofocus name="last_name" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="firstname" class="control-label">First Name: <span class="required">*</span></label>
-                        <input type="text" id="firstname" name="firstname" class="form-control form-control-sm form-control-border" required>
+                        <input type="text" id="firstname" name="first_name" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="contact" class="control-label">Contact #: <span class="required">*</span></label>
-                        <input type="number" id="contact" name="contact" class="form-control form-control-sm form-control-border" required>
+                        <input type="number" id="contact" name="contact_no" class="form-control form-control-sm form-control-border" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="email" class="control-label">Email Address: <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" class="form-control form-control-sm form-control-border" required>
+                        <input type="email" id="email" name="email_address" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()" required>
                     </div>
 					<!-- 2nd row -->
 					<div class="form-group col-md-3">
 						<label for="transferType" class="control-label">Transfer Type: <span class="required">*</span></label>
-						<select type="text" id="transferType" name="transferType" class="form-control form-control-sm form-control-border select2" required>
+						<select type="text" id="transferType" name="transfer_type" class="form-control form-control-sm form-control-border select2" required>
 							<option selected>Arrival</option>
 							<option>Departure</option>
 							<option>Roundtrip</option>
@@ -67,18 +68,16 @@
 					</div>
 					<div class="form-group col-md-3">
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
-						<select type="text" id="modeOfTransfer" name="modeOfTransfer" class="form-control form-control-sm form-control-border select2" required>
+						<select type="text" id="modeOfTransfer" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected></option>
-							<option>Departure</option>
-							<option>Roundtrip</option>
 						</select>
+						<input type="hidden" id="hdModeOfTransfer" name="transfer_mode">
+						<input type="hidden" id="modeOfTransferPrice" name="transfer_mode_price">
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
-						<select type="text" id="paymentType" name="paymentType" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="paymentType" name="payment_type" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected></option>
-							<option>Departure</option>
-							<option>Roundtrip</option>
 						</select>
 					</div>
 					
@@ -89,121 +88,90 @@
 					<div class="form-group col-md-12 col-sm-3 clsArrival">
 						<h6>Arrival Details</h6>
 					</div>
-					<div class="form-group col-md-3 clsArrival">
-						<label for="arrOrigin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
-						<select type="text" id="arrOrigin" name="arrOrigin" class="form-control form-control-sm form-control-border select2 clsArrival">
-							<option value="" disabled selected></option>
-							<option>Departure</option>
-							<option>Roundtrip</option>
+					<div class="form-group col-md-6 clsArrival">
+						<label for="arrOriginDropOff" class="control-label">Origin and Drop-Off Locations: <span class="required">*</span></label>
+						<select type="text" id="arrOriginDropOff" class="form-control form-control-sm form-control-border select2 clsArrival">
+							<option value="" hidden selected></option>
 						</select>
-					</div>
-					<div class="form-group col-md-3 clsArrival">
-						<label for="arrDropOff" class="control-label">Drop Off: <span class="required">*</span></label>
-						<select type="text" id="arrDropOff" name="arrDropOff" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-						</select>
+						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off">
+						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price">
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="arrDate" name="arrDate" class="form-control form-control-sm form-control-border">
+						<input type="date" id="arrDate" name="arr_date" class="form-control form-control-sm form-control-border">
 					</div>
 					<div class="form-group col-md-3"></div>
 
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
-						<select type="text" id="arrAirport" name="arrAirport" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-							<option>CATICLAN AIRPORT (MPH)</option>
-							<option>KALIBO AIRPORT (KLO)</option>
-							<option>N/A</option>
+						<select type="text" id="arrAirport" name="arr_airport" class="form-control form-control-sm form-control-border select2">
+							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<select type="text" id="arrFlightNumber" name="arrFlightNumber" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-						</select>
+						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border">
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
-						<select type="text" id="arrHotelResort" name="arrHotelResort" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-							<option>FAIRWAYS & BLUEWATER RESORT</option>
-							<option>OTHER HOTEL</option>
+						<select type="text" id="arrHotelResort" name="arr_hotel" class="form-control form-control-sm form-control-border select2">
+							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="eta" lang="en-GB" class="form-control form-control-sm form-control-border">
+						<input type="time" id="eta" autofocus name="arr_eta" lang="en-GB" class="form-control form-control-sm form-control-border">
 					</div>
 					<!-- Departure Details -->
 					<div class="form-group col-md-12 col-sm-3 clsDeparture">
 						<h6>Departure Details</h6>
 					</div>
-					<div class="form-group col-md-3 clsDeparture">
-						<label for="depOrigin" class="control-label">Origin/Pick up Location: <span class="required">*</span></label>
-						<select type="text" id="depOrigin" name="depOrigin" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-							<option>Departure</option>
-							<option>Roundtrip</option>
+					<div class="form-group col-md-6 clsDeparture">
+						<label for="depOriginDropOff" class="control-label">Origin and Drop-Off Locations: <span class="required">*</span></label>
+						<select type="text" id="depOriginDropOff" class="form-control form-control-sm form-control-border select2">
+							<option value="" hidden selected></option>
 						</select>
-					</div>
-					<div class="form-group col-md-3 clsDeparture">
-						<label for="depDropOff" class="control-label">Drop Off: <span class="required">*</span></label>
-						<select type="text" id="depDropOff" name="depDropOff" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-						</select>
+						<input type="hidden" id="hdDepOriginDropOff" name="dep_origin_drop_off">
+						<input type="hidden" id="depOriginDropOffPrice" name="dep_origin_drop_off_price">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="depDate" name="depDate" class="form-control form-control-sm form-control-border">
+						<input type="date" id="depDate" name="dep_date" class="form-control form-control-sm form-control-border">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
-						<input type="time" id="estpickup" autofocus name="estpickup" class="form-control form-control-sm form-control-border" disabled>
+						<input type="time" id="estpickup" autofocus class="form-control form-control-sm form-control-border" readonly>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
-						<select type="text" id="depAirport" name="depAirport" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-							<option>CATICLAN AIRPORT (MPH)</option>
-							<option>KALIBO AIRPORT (KLO)</option>
-							<option>N/A</option>
+						<select type="text" id="depAirport" name="dep_airport" class="form-control form-control-sm form-control-border select2">
+							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<select type="text" id="depFlightNumber" name="depFlightNumber" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-						</select>
+						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
-						<select type="text" id="depHotelResort" name="depHotelResort" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
-							<option>FAIRWAYS & BLUEWATER RESORT</option>
-							<option>OTHER HOTEL</option>
+						<select type="text" id="depHotelResort" name="dep_hotel" class="form-control form-control-sm form-control-border select2">
+							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="etd" lang="en-GB" class="form-control form-control-sm form-control-border">
+						<input type="time" id="etd" autofocus name="dep_etd" lang="en-GB" class="form-control form-control-sm form-control-border">
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6">
                         <label for="otherNames" class="control-label">Other Names:</label>
-                        <textarea id="otherNames" autofocus name="otherNames" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
+                        <textarea id="otherNames" autofocus name="other_names" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="remarks" class="control-label clsDeparture">Remarks:</label>
                         <textarea id="remarks" autofocus name="remarks" class="form-control form-control-sm form-control-border clsDeparture" style="height:100px;"></textarea>
                     </div>
-					<div class="form-group col-md-3"></div>
-					<div class="form-group col-md-3"></div>
-					<div class="form-group col-md-3"></div>
-					<div class="form-group col-md-3">
-						<button type="submit" class="btn btn-flat btn-primary w-100">Submit Booking</button>
-					</div>
+					
                 </div>
             </div>
             
@@ -218,6 +186,9 @@
                     <input type="number" class="transfercharges"/> Adult (Local) 0.00 <br>
                     <input type="number" class="transfercharges"/> Adult (Local) 0.00
                 </div>
+				<div>
+					<button type="submit" class="btn btn-flat btn-primary w-100">Submit Booking</button>
+				</div>
             </div>
 			
         </div>
@@ -229,29 +200,45 @@
 	$(document).ready(function() {
 		$('.clsDeparture').hide();
 
-		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this vendor permanently?","delete_vendor",[$(this).attr('data-id')])
-		})
-
-		$('.table').dataTable();
-
+		populateDropdowns(1);
+		
 		$('#transferType').on('change', function() {
 			if ($('#transferType').val().toUpperCase() === "ARRIVAL")
 			{
 				$('.clsArrival').show();
 				$('.clsDeparture').hide();
+				populateDropdowns(1);
 			}
 			else if ($('#transferType').val().toUpperCase() === "DEPARTURE")
 			{
 				$('.clsArrival').hide();
 				$('.clsDeparture').show();
+				populateDropdowns(2);
 			}
 			else if ($('#transferType').val().toUpperCase() === "ROUNDTRIP")
 			{
 				$('.clsArrival').show();
 				$('.clsDeparture').show();
+				populateDropdowns(3);
 			}
         });
+
+		$('#modeOfTransfer').on('change', function() {
+			$('#hdModeOfTransfer').val($('#modeOfTransfer option:selected').text());
+			$('#arrOriginDropOffPrice').val($(this).val());
+		});
+
+		$('#arrOriginDropOff').on('change', function() {
+			$('#hdArrOriginDropOff').val($('#arrOriginDropOff option:selected').text());
+			$('#arrOriginDropOffPrice').val($(this).val());
+			alert($(this).val());
+		});
+
+		$('#depOriginDropOff').on('change', function() {
+			$('#hdDepOriginDropOff').val($('#depOriginDropOff option:selected').text());
+			$('#depOriginDropOffPrice').val($(this).val());
+			alert($(this).val());
+		});
 
 		$('#etd').on('change', function() {
 			let etdTime = $(this).val();
@@ -275,8 +262,14 @@
 		$('#frmBooking').on('submit', function(e) {
 			e.preventDefault(); // prevent default form submit
 
-			var formData = new FormData(this);
+			start_loader()
 
+			const formData = new FormData(this);
+			
+			for (let [key, value] of formData.entries()) {
+				console.log(key, value); // See what’s actually being sent
+			}
+			
 			$.ajax({
 				url: _base_url_+"classes/Booking.php?f=save_booking",
 				type: 'POST',
@@ -289,13 +282,22 @@
 					end_loader();
 				},
 				success: function(response) {
-					console.log('Server response:', response);
+					if(response == "success"){
+						$('#msg').html('<div class="alert alert-success">Booking Transfer successfully added</div>')
+						$("html, body").animate({ scrollTop: 0 }, "fast");
+					}else{
+						$('#msg').html('<div class="alert alert-danger">Error encountered</div>')
+						$("html, body").animate({ scrollTop: 0 }, "fast");
+					}
+					end_loader() 
 				}
 			});
+			/* $('#msg').html('<div class="alert alert-success">Booking successfully added</div>')
+			$("html, body").animate({ scrollTop: 0 }, "fast");
+			end_loader(); */
 		});
-
-
-	})
+	});
+	
 	function delete_vendor($id){
 		start_loader();
 		$.ajax({
@@ -318,4 +320,124 @@
 			}
 		})
 	}
+
+	function populateDropdowns(transferType){
+		$.ajax({
+			url: _base_url_+"classes/Booking.php?f=get_reference_table",
+			type: 'GET',
+			success: function(response) {
+				// console.log(response);
+				let data = JSON.parse(response);
+
+				let arrPaymentModes = [];
+				let arrPaymentTypes = [];
+				let arrOriginDropOffs = [];
+				let arrAirports = [];
+				let arrHotelResorts = [];
+				let depOriginDropOffs = [];
+				// let depAirports = [];
+				// let depHotelResorts = [];
+
+				$.each(data, function(index, item) {
+					if (parseInt(item.type) === 1)
+					{
+						/* if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description});
+						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
+						
+						if (item.code == 'ODL') arrOriginDropOffs.push({amount: item.amount, description: item.description});
+						/* else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
+						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description}); */
+					}
+
+					if (parseInt(item.type) === 2)
+					{
+						/* if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description});
+						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
+						
+						if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
+						/* else if (item.code == 'AP') depAirports.push({title: item.title, description: item.description});
+						else if (item.code == 'HR') depHotelResorts.push({title: item.title, description: item.description}); */
+					}
+
+					if (parseInt(item.type) === 3)
+					{
+						if (item.code == 'MOT') arrPaymentModes.push({title: item.amount, description: item.description});
+						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
+						else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
+						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description});
+					}
+
+
+				});
+
+				//Reset dropdowns
+				$('#modeOfTransfer').empty();
+				$('#paymentType').empty();
+				$('#arrAirport').empty();
+				$('#arrHotelResort').empty();
+
+				//Adding default value
+				$('#modeOfTransfer').append('<option value="" disabled selected></option>');
+				$('#paymentType').append('<option value="" disabled selected></option>');
+
+				//Populating dropdowns
+				$.each(arrPaymentModes, function(index, item) {
+					$('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.description + '</option>');
+				});
+
+				$.each(arrPaymentTypes, function(index, item) {
+					$('#paymentType').append('<option value="' + item.title + '">' + item.description + '</option>');
+				});
+
+				if (transferType === 1 || transferType === 3) {
+
+					$('#arrOriginDropOff').empty();
+					
+					$('#arrOriginDropOff').append('<option value="" disabled selected></option>');
+					$('#arrAirport').append('<option value="" disabled selected></option>');
+					$('#arrHotelResort').append('<option value="" disabled selected></option>');
+
+					$.each(arrOriginDropOffs, function(index, item) {
+						$('#arrOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
+					});
+
+					$.each(arrAirports, function(index, item) {
+						$('#arrAirport').append('<option value="' + item.title + '">' + item.description + '</option>');
+					});
+
+					$.each(arrHotelResorts, function(index, item) {
+						$('#arrHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
+					});
+
+				}
+				
+				if (transferType === 2 || transferType === 3) {
+
+					$('#depOriginDropOff').empty();
+					$('#depAirport').empty();
+					$('#depHotelResort').empty();
+					$('#depOriginDropOff').append('<option value="" disabled selected></option>');
+					$('#depAirport').append('<option value="" disabled selected></option>');
+					$('#depHotelResort').append('<option value="" disabled selected></option>');
+
+					$.each(depOriginDropOffs, function(index, item) {
+						$('#depOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
+					});
+
+					$.each(arrAirports, function(index, item) {
+						$('#depAirport').append('<option value="' + item.title + '">' + item.description + '</option>');
+					});
+
+					$.each(arrHotelResorts, function(index, item) {
+						$('#depHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
+					});
+				}
+
+			},
+			error: function() {
+				alert("Error loading data.");
+			}
+		});
+	}
+
 </script>
