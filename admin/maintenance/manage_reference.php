@@ -22,21 +22,21 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 					<label for="type">Transfer Type</label>
 					<select name="type" id="type" class="custom-select" required>
 						<option></option>
-						<option value="1" <?php echo isset($meta['type']) && $meta['type'] == 1 ? 'selected' : '' ?>>Arrival</option>
-						<option value="2" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected' : '' ?>>Departure</option>
-						<option value="3" <?php echo isset($meta['type']) && $meta['type'] == 3 ? 'selected' : '' ?>>Default</option>
+						<option value="1" <?php echo isset($meta['type']) && $meta['type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
+						<option value="2" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
+						<option value="3" <?php echo isset($meta['type']) && $meta['type'] == 3 ? 'selected' : '' ?>>SAME</option>
 					</select>
 				</div>
 				<div class="form-group col-6">
 					<label for="code">Code</label>
 					<select name="code" id="code" class="custom-select" required>
 						<option></option>
-						<option value="MOT" <?php echo isset($meta['code']) && $meta['code'] == 'MOT' ? 'selected' : '' ?>>Mode of Transfer</option>
-						<option value="PT" <?php echo isset($meta['code']) && $meta['code'] == 'PT' ? 'selected' : '' ?>>Payment Type</option>
-						<option value="ODL" <?php echo isset($meta['code']) && $meta['code'] == 'ODL' ? 'selected' : '' ?>>Origin Pick-up & Drop-off Location</option>
-						<option value="AP" <?php echo isset($meta['code']) && $meta['code'] == 'AP' ? 'selected' : '' ?>>Airport</option>
-						<option value="HR" <?php echo isset($meta['code']) && $meta['code'] == 'HR' ? 'selected' : '' ?>>Hotel/Resort</option>
-						<option value="TC" <?php echo isset($meta['code']) && $meta['code'] == 'TC' ? 'selected' : '' ?>>Transfer Charge</option>
+						<option value="MOT" <?php echo isset($meta['code']) && $meta['code'] == 'MOT' ? 'selected' : '' ?>>MODE OF TRANSFER</option>
+						<option value="PT" <?php echo isset($meta['code']) && $meta['code'] == 'PT' ? 'selected' : '' ?>>PAYMENT TYPE</option>
+						<option value="ODL" <?php echo isset($meta['code']) && $meta['code'] == 'ODL' ? 'selected' : '' ?>>ORIGIN PICK-UP AND DROP OFF LOCATION</option>
+						<option value="AP" <?php echo isset($meta['code']) && $meta['code'] == 'AP' ? 'selected' : '' ?>>AIRPORT</option>
+						<option value="HR" <?php echo isset($meta['code']) && $meta['code'] == 'HR' ? 'selected' : '' ?>>HOTEL/RESORT</option>
+						<option value="TC" <?php echo isset($meta['code']) && $meta['code'] == 'TC' ? 'selected' : '' ?>>TRANSFER CHARGE</option>
 					</select>	
 				</div>
 				<div class="form-group col-6">
