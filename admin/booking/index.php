@@ -41,6 +41,12 @@
             <div class="col-md-10">
                 <div class="row">
 					<!-- First Row -->
+					<div class="form-group col-md-5 d-flex align-items-center">
+						<label for="reserveNum" class="me-3 mb-0" style="min-width: 180px;font-size: 0.8rem;">Reservation Number:</label>
+						<input type="text" id="reserveNum" name="reserve_num" class="form-control form-control-sm form-control-border" readonly>
+					</div>
+					<div class="form-group col-md-5"></div>
+					<!-- <div class="form-group col-md-4"></div> -->
                     <div class="form-group col-md-3">
                         <label for="lastname" class="control-label">Last Name: <span class="required">*</span></label>
                         <input type="text" id="lastname" autofocus name="last_name" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
@@ -176,19 +182,19 @@
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2" style="border: 1px solid #000; border-radius:10px; padding: 10px;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
 				<hr>
-                <div id="charges">
-                    <input type="number" class="transfercharges"/> Adult (Local) 0.00 <br>
-                    <input type="number" class="transfercharges"/> Adult (Local) 0.00 <br>
-                    <input type="number" class="transfercharges"/> Adult (Local) 0.00 <br>
-                    <input type="number" class="transfercharges"/> Adult (Local) 0.00 <br>
-                    <input type="number" class="transfercharges"/> Adult (Local) 0.00
-                </div>
-				<div>
-					<button type="submit" class="btn btn-flat btn-primary w-100">Submit Booking</button>
+                <div id="charges" class="flex-grow-1">
+                    <input type="number" id="qtyadult" name="qty_guest_1" class="transfercharges"/> Adult (Local) <input type="hidden" id="priceAdultLocal" name="price_guest_1" class="transfercharges" value="0.00" readonly/><br>
+					<input type="number" id="qtyadult" name="qty_guest_2" class="transfercharges"/> Adult (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_2" class="transfercharges" value="0.00" readonly/><br>
+                    <input type="number" id="qtyadult" name="qty_guest_3" class="transfercharges"/> Senior/PWD <input type="hidden" id="priceAdultLocal" name="price_guest_3" class="transfercharges" value="0.00" readonly/><br>
+                    <input type="number" id="qtyadult" name="qty_guest_4" class="transfercharges"/> Kid (Local) <input type="hidden" id="priceAdultLocal" name="price_guest_4" class="transfercharges" value="0.00" readonly/><br>
+                    <input type="number" id="qtyadult" name="qty__guest_5" class="transfercharges"/> Kid (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_5" class="transfercharges" value="0.00" readonly/><br>
+					
+					
 				</div>
+				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
             </div>
 			
         </div>
@@ -197,8 +203,11 @@
 </div>
 </div>
 <script>
+	//1
 	$(document).ready(function() {
 		$('.clsDeparture').hide();
+
+		$('#reserveNum').val(generateReservationID());
 
 		populateDropdowns(1);
 		
@@ -231,13 +240,11 @@
 		$('#arrOriginDropOff').on('change', function() {
 			$('#hdArrOriginDropOff').val($('#arrOriginDropOff option:selected').text());
 			$('#arrOriginDropOffPrice').val($(this).val());
-			alert($(this).val());
 		});
 
 		$('#depOriginDropOff').on('change', function() {
 			$('#hdDepOriginDropOff').val($('#depOriginDropOff option:selected').text());
 			$('#depOriginDropOffPrice').val($(this).val());
-			alert($(this).val());
 		});
 
 		$('#etd').on('change', function() {
@@ -321,6 +328,18 @@
 		})
 	}
 
+	function generateReservationID() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        return `${year}${month}${day}${hours}${minutes}${seconds}`;
+    }
+
 	function populateDropdowns(transferType){
 		$.ajax({
 			url: _base_url_+"classes/Booking.php?f=get_reference_table",
@@ -361,7 +380,7 @@
 
 					if (parseInt(item.type) === 3)
 					{
-						if (item.code == 'MOT') arrPaymentModes.push({title: item.amount, description: item.description});
+						if (item.code == 'MOT') arrPaymentModes.push({amount: item.amount, description: item.description});
 						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
 						else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
 						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description});
