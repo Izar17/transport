@@ -12,13 +12,10 @@ input[type="number"],
 input[type="date"], 
 select.form-control {
     height: 20px; /* Adjust as needed */
-    padding: 0px; /* Reduce padding */
+    padding: 2px; /* Reduce padding */
     font-size: 12px; /* Make text smaller */
 }
-.form-group {
-    margin-bottom: 0px; /* Reduces space between form fields */
-    padding: 3px;
-}
+
 
 .control-label {
     font-size: 0.8em; /* Adjust font size to make it smaller */
@@ -115,10 +112,6 @@ select.form-control {
 							<option value="" disabled selected></option>
 						</select>
 					</div>
-					<div class="form-group col-md-3">
-						<label for="paymentRemarks" class="control-label">Payment Remarks: <span class="required">*</span></label>
-						<textarea id="paymentRemarks" name="paymentRemarks" class="form-control form-control-sm form-control-border"></textarea>
-					</div>
 					
 					
 					<div class="form-group col-md-3"></div>
@@ -128,7 +121,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-6 clsArrival">
 						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label>
-						<select type="text" id="arrOriginDropOff" class="form-control form-control-sm form-control-border select2 clsArrival w-75">
+						<select type="text" id="arrOriginDropOff" class="form-control form-control-sm form-control-border select2 clsArrival">
 							<option value="" hidden selected></option>
 						</select>
 						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off">
@@ -136,12 +129,9 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="arrDate" name="arr_date" class="form-control form-control-sm form-control-border w-50">
+						<input type="date" id="arrDate" name="arr_date" class="form-control form-control-sm form-control-border">
 					</div>
-					<div class="form-group col-md-3 clsArrival">
-						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="arr_eta" lang="en-GB" class="form-control form-control-sm form-control-border w-50">
-					</div>
+					<div class="form-group col-md-3"></div>
 
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
@@ -166,13 +156,17 @@ select.form-control {
 							<option value="" hidden selected></option>
 						</select>
 					</div>
+					<div class="form-group col-md-3 clsArrival">
+						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
+						<input type="time" id="eta" autofocus name="arr_eta" lang="en-GB" class="form-control form-control-sm form-control-border">
+					</div>
 					<!-- Departure Details -->
 					<div class="form-group col-md-12 col-sm-3 clsDeparture">
 						<h6>Departure Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsDeparture">
 						<label for="depOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label>
-						<select type="text" id="depOriginDropOff" class="form-control form-control-sm form-control-border select2 w-75">
+						<select type="text" id="depOriginDropOff" class="form-control form-control-sm form-control-border select2">
 							<option value="" hidden selected></option>
 						</select>
 						<input type="hidden" id="hdDepOriginDropOff" name="dep_origin_drop_off">
@@ -180,11 +174,11 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="depDate" name="dep_date" class="form-control form-control-sm form-control-border w-50">
+						<input type="date" id="depDate" name="dep_date" class="form-control form-control-sm form-control-border">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
-						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="dep_etd" lang="en-GB" class="form-control form-control-sm form-control-border w-50">
+						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
+						<input type="time" id="estpickup" autofocus class="form-control form-control-sm form-control-border" readonly>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
@@ -210,8 +204,8 @@ select.form-control {
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
-						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
-						<input type="time" id="estpickup" autofocus class="form-control form-control-sm form-control-border w-50" readonly>
+						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
+						<input type="time" id="etd" autofocus name="dep_etd" lang="en-GB" class="form-control form-control-sm form-control-border">
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6">
@@ -227,82 +221,22 @@ select.form-control {
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:500px;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:500px;font-size:14px;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
                 <div id="charges" class="flex-grow-1">
-				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
-					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
-					</tr>
-					<tr>
-						<td>Adult (Local)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td style="text-align:right;">
-							<label id="lblGuest1">0.00</label>
-							<input type="hidden" id="priceGuest1" name="price_guest_1"/>
-						</td>
-					</tr>
-					<!-- Repeat for other guest types -->
-					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest2" name="qty_guest_2" class="transfercharges"/></td>
-					</tr>
-					<tr>
-						<td>Adult (Foreigner)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td style="text-align:right;">
-							<label id="lblGuest2">0.00</label>
-							<input type="hidden" id="priceGuest2" name="price_guest_2"/>
-						</td>
-					</tr>
-					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest3" name="qty_guest_3" class="transfercharges"/></td>
-					</tr>
-					<tr>
-						<td>Senior/PWD</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td style="text-align:right;">
-							<label id="lblGuest3">0.00</label>
-							<input type="hidden" id="priceGuest3" name="price_guest_3"/>
-						</td>
-					</tr>
-					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest4" name="qty_guest_4" class="transfercharges"/></td>
-					</tr>
-					<tr>
-						<td>Kid (Local)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td style="text-align:right;">
-							<label id="lblGuest4">0.00</label>
-							<input type="hidden" id="priceGuest4" name="price_guest_4"/>
-						</td>
-					</tr>
-					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/></td>
-					</tr>
-					<tr>
-						<td>Kid (Foreigner)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td style="text-align:right;">
-							<label id="lblGuest5">0.00</label>
-							<input type="hidden" id="priceGuest5" name="price_guest_5"/>
-						</td>
-					</tr>
-				</table><br>
+                    <input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/> Adult (Local)  <label id="lblGuest1"> 0.00</label> <input type="hidden" id="priceGuest1" name="price_guest_1"/><br>
+					<input type="number" id="qtyGuest2" name="qty_guest_2" class="transfercharges"/> Adult (Foreigner) <label id="lblGuest2"> 0.00</label> <input type="hidden" id="priceGuest2" name="price_guest_2"/><br>
+                    <input type="number" id="qtyGuest3" name="qty_guest_3" class="transfercharges"/> Senior/PWD <label id="lblGuest3"> 0.00</label> <input type="hidden" id="priceGuest3" name="price_guest_3"/><br>
+                    <input type="number" id="qtyGuest4" name="qty_guest_4" class="transfercharges"/> Kid (Local) <label id="lblGuest4"> 0.00</label> <input type="hidden" id="priceGuest4" name="price_guest_4"/><br>
+                    <input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/> Kid (Foreigner) <label id="lblGuest5"> 0.00</label> <input type="hidden" id="priceGuest5" name="price_guest_5"/><br>
+					<br>
+					
                     <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal</label> <label id="lblTerminalFee"> 0.00</label> <input type="hidden" id="terminalFee" name="terminal_fee"/><br>
-                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/>
-				
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/><br>
+					<br>
 				</div>
-					<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
+					<hr>
+					<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/><br>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
             </div>
 			
