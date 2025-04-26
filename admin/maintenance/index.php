@@ -87,7 +87,7 @@
 										case 'HR':
 											echo 'HOTEL/RESORT';
 											break;
-										case 'TR':
+										case 'TC':
 											echo 'TRANSFER CHARGE';
 											break;
 										default:
