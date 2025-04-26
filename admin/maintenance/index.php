@@ -21,16 +21,15 @@
 		</div>
 	</div>
 	<div class="card-body">
-		<div class="container-fluid">
         <div class="container-fluid">
-			<table class="table table-bordered table-stripped">
+			<table class="table table-bordered table-striped" style="font-size: 12px;">
 				<colgroup>
+					<col width="3%">
 					<col width="10%">
-					<col width="15%">
-					<col width="25%">
-					<col width="25%">
-					<col width="15%">
-					<col width="10%">
+					<col width="20%">
+					<col width="30%">
+					<col width="30%">
+					<col width="7%">
 				</colgroup>
 				<thead>
 					<tr>
@@ -51,27 +50,87 @@
 					?>
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
-							<td><?php echo ($row['type'] == 1) ? 'Arrival' : 'Departure' ?></td>
-							<td ><p class="m-0 truncate-1"><?php echo $row['code'] ?></p></td>
+							<td>
+								<?php 
+										switch($row['type']){
+											case 1:
+												echo 'ARRIVAL';
+												break;
+											case 2:
+												echo 'DEPARTURE';
+												break;
+											case 3:
+												echo 'N/A';
+												break;
+											default:
+												break;
+												echo '';
+												break;
+										}
+									?>
+							</td>
+							<td ><p class="m-0 truncate-1">
+								<?php 
+									switch($row['code']){
+										case 'MOT':
+											echo 'MODE OF TRANSFER';
+											break;
+										case 'PT':
+											echo 'PAYMENT TYPE';
+											break;
+										case 'ODL':
+											echo 'ORIGIN PICK-UP & DROP OFF';
+											break;
+										case 'AP':
+											echo 'AIRPORT';
+											break;
+										case 'HR':
+											echo 'HOTEL/RESORT';
+											break;
+										case 'TR':
+											echo 'TRANSFER CHARGE';
+											break;
+										default:
+											break;
+											echo '';
+											break;
+									}
+								?>
+							</p></td>
 							<td ><p class="m-0 truncate-1"><?php echo $row['title'] ?></p></td>
 							<td ><p class="m-0 truncate-1"><?php echo $row['description'] ?></p></td>
 							<td ><p class="m-0 truncate-1"><?php echo $row['amount'] ?></p></td>
-							<td align="center">
-								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
-				                  		Action
-				                    <span class="sr-only">Toggle Dropdown</span>
-				                  </button>
-				                  <div class="dropdown-menu" role="menu">
-				                    <a class="dropdown-item" href="?page=maintenance/manage_reference&id=<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
-				                    <div class="dropdown-divider"></div>
-				                    <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
-				                  </div>
+							<td>
+							<style>
+							.small-button {
+								height: 18px;
+								padding: 5px 10px; /* Adjust padding to control spacing */
+								font-size: 10px; /* Make text smaller */
+								display: flex;
+								align-items: center;
+								justify-content: center;
+							}
+							</style>
+
+							<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
+								Action &nbsp;
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+
+							<div class="dropdown-menu" role="menu">
+								<a class="dropdown-item" href="?page=maintenance/manage_reference&id=<?php echo $row['id'] ?>">
+									<span class="fa fa-edit text-primary"></span> Edit
+								</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+									<span class="fa fa-trash text-danger"></span> Delete
+								</a>
+							</div>
 							</td>
 						</tr>
 					<?php endwhile; ?>
 				</tbody>
 			</table>
-		</div>
 		</div>
 	</div>
 </div>

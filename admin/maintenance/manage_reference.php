@@ -24,9 +24,10 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 						<option></option>
 						<option value="1" <?php echo isset($meta['type']) && $meta['type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
 						<option value="2" <?php echo isset($meta['type']) && $meta['type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
-						<option value="3" <?php echo isset($meta['type']) && $meta['type'] == 3 ? 'selected' : '' ?>>SAME</option>
+						<option value="3" <?php echo isset($meta['type']) && $meta['type'] == 3 ? 'selected' : '' ?>>N/A</option>
 					</select>
 				</div>
+
 				<div class="form-group col-6">
 					<label for="code">Code</label>
 					<select name="code" id="code" class="custom-select" required>
