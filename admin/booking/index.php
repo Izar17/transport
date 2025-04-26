@@ -78,6 +78,7 @@ select.form-control {
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post">
 		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
+		<input type="hidden" name="updated_by" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname'); ?>"/>
         <div class="row">
             <!-- First Panel (10 columns) --> 
             <div class="col-md-10">

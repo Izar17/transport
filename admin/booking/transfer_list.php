@@ -105,8 +105,8 @@
 								?></td>
 							<td><?php echo $row['transfer_mode'] ?></td>
 							<td><?php echo $row['other_names'] . '<br><br>' . $row['remarks'];?></td>
-							<td></td>
-							<td></td>
+							<td>BOOKED BY: <br><?php echo $row['updated_by'] ?></td>
+							<td><?php echo $row['created_date'] ?></td>
 							<td><?php echo $row['payment_type'] .'<br> Remarks: ' . $row['payment_remarks']?><br>
 								<?php 
 									switch($row['status']){
