@@ -45,8 +45,7 @@
 						<th>TRANSFER TYPE</th>
 						<th>MODE OF TRANSFER</th>
 						<th>PICK-UP & DROP OFF</th>
-						<th>DATE</th>
-						<th>ETA</th>
+						<th>DATE & TIME</th>
 						<th>AIRPORT & FLIGHT</th>
 						<th>HOTEL/RESORT</th>
 						<th>OTHER NAMES</th>
@@ -68,13 +67,74 @@
 							<td ><?php echo $row['email_address'] ?></td>
 							<td ><p class="m-0 truncate-1"><?php echo $row['transfer_type'] ?></p></td>
 							<td ><?php echo $row['transfer_mode'] ?></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+								<?php 
+									switch($row['transfer_type']){
+										case 'Arrival':       
+											echo "<td>" . $row['arr_origin_drop_off'] . "</td>";
+											echo "<td>" . $row['arr_date'] . " " . $row['arr_eta']. "</td>";
+											echo "<td>" . $row['arr_airport'] . " <br>" . $row['arr_flight_no'] . "</td>";
+											echo "<td>" . $row['arr_hotel'] . "</td>";
+											break;
+										case 'Departure':
+											echo "<td>" . $row['dep_origin_drop_off'] . "</td>";
+											echo "<td>" . $row['dep_date'] . " " . $row['dep_etd']. "</td>";
+											echo "<td>" . $row['dep_airport'] . "<br>" . $row['dep_flight_no'] . "</td>";
+											echo "<td>" . $row['dep_hotel'] . "</td>";
+											break;
+										case 'Roundtrip':
+											echo "<td colspan='4'>
+												<table style='100%;'>
+													<tr><td colspan='4'><b>ARRIVAL</b></td></tr>
+													<tr>";
+													echo "<td>" . $row['arr_origin_drop_off'] . "</td>";
+													echo "<td>" . $row['arr_date'] . " " . $row['arr_eta']. "</td>";
+													echo "<td>" . $row['arr_airport'] . " <br>" . $row['arr_flight_no'] . "</td>";
+													echo "<td>" . $row['arr_hotel'] . "</td>";
+													echo"</tr>
+													<tr><td colspan='4'><b>DEPARTURE | Estimated Pick-up Time: " . date("H:i", strtotime($row['dep_etd']) - (3 * 3600)) . "</b> </td></tr>
+													<tr>";
+													echo "<td>" . $row['dep_origin_drop_off'] . "</td>";
+													echo "<td>" . $row['dep_date'] . " " . $row['dep_etd']. "</td>";
+													echo "<td>" . $row['dep_airport'] . "<br>" . $row['dep_flight_no'] . "</td>";
+													echo "<td>" . $row['dep_hotel'] . "</td>";
+													echo "</tr>
+												</table>
+												</td>";
+											break;
+										default:
+											break;
+											echo '';
+											break;
+									}
+								?>
 							<td><?php echo $row['other_names'] ?></td>
-							<td ><p class="m-0 truncate-1"><?php echo $row['payment_type'] ?></p></td>
+							<td ><?php echo $row['payment_type'] ?>
+							<?php 
+                                switch($row['status']){
+                                    case 0:
+                                        echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Unpaid</span>';
+                                        break;
+                                    case 1:
+                                        echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Confirmed</span>';
+                                        break;
+                                    case 2:
+                                        echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Packed</span>';
+                                        break;
+                                    case 3:
+                                        echo '<span class="badge badge-warning bg-gradient-warning px-3 rounded-pill">Out for Delivery</span>';
+                                        break;
+                                    case 4:
+                                        echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Delivered</span>';
+                                        break;
+                                    case 5:
+                                        echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Cancelled</span>';
+                                        break;
+                                    default:
+                                        echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">N/A</span>';
+                                        break;
+                                }
+                            ?>
+							</td>
 							<td>
 							<style>
 							.small-button {
