@@ -56,7 +56,7 @@
 				<tbody>
 					<?php
 					$i = 1;
-						$qry = $conn->query("SELECT * from booking");
+						$qry = $conn->query("SELECT * from booking order by id desc");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>

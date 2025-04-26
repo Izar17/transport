@@ -57,7 +57,7 @@
 					<!-- First Row -->
 					<div class="form-group col-md-5 d-flex align-items-center">
 						<label for="reserveNum" class="me-3 mb-0" style="min-width: 180px;font-size: 0.8rem;">Reservation Number:</label>
-						<input type="text" id="reserveNum" name="reserve_num" class="form-control form-control-sm form-control-border" readonly>
+						<input type="text" id="reserveNum" name="reserve_num" class="form-control form-control-sm form-control-border" style="width:125px;" readonly>
 					</div>
 					<div class="form-group col-md-5"></div>
 					<!-- <div class="form-group col-md-4"></div> -->
@@ -103,13 +103,12 @@
 					
 					
 					<div class="form-group col-md-3"></div>
-					<div class="form-group col-md-3"></div>
 					<!-- Arrival Details -->
 					<div class="form-group col-md-12 col-sm-3 clsArrival">
 						<h6>Arrival Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsArrival">
-						<label for="arrOriginDropOff" class="control-label">Origin and Drop-Off Locations: <span class="required">*</span></label>
+						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label>
 						<select type="text" id="arrOriginDropOff" class="form-control form-control-sm form-control-border select2 clsArrival">
 							<option value="" hidden selected></option>
 						</select>
@@ -154,7 +153,7 @@
 						<h6>Departure Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsDeparture">
-						<label for="depOriginDropOff" class="control-label">Origin and Drop-Off Locations: <span class="required">*</span></label>
+						<label for="depOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label>
 						<select type="text" id="depOriginDropOff" class="form-control form-control-sm form-control-border select2">
 							<option value="" hidden selected></option>
 						</select>
