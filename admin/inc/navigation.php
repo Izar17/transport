@@ -35,6 +35,14 @@
                       <a href="<?php echo base_url ?>admin/?page=booking" class="nav-link nav-booking">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
+                          Create Booking
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=booking/reports" class="nav-link nav-booking_reports">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
                           Booking Transfers
                         </p>
                       </a>
@@ -63,14 +71,14 @@
                         </p>
                       </a>
                     </li> -->
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=clients" class="nav-link nav-clients">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>
                           Guest List
                         </p>
                       </a>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=reports/order_reports" class="nav-link nav-reports_order_reports">
