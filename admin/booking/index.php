@@ -210,7 +210,7 @@
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:400px;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
 				<hr>
                 <div id="charges" class="flex-grow-1">
@@ -219,8 +219,7 @@
                     <input type="number" id="qtyadult" name="qty_guest_3" class="transfercharges"/> Senior/PWD <input type="hidden" id="priceAdultLocal" name="price_guest_3" class="transfercharges" value="0.00" readonly/><br>
                     <input type="number" id="qtyadult" name="qty_guest_4" class="transfercharges"/> Kid (Local) <input type="hidden" id="priceAdultLocal" name="price_guest_4" class="transfercharges" value="0.00" readonly/><br>
                     <input type="number" id="qtyadult" name="qty__guest_5" class="transfercharges"/> Kid (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_5" class="transfercharges" value="0.00" readonly/><br>
-					
-					
+										
 				</div>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
             </div>
