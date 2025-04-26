@@ -9,7 +9,7 @@
     font-size: 0.8em; /* Adjust font size to make it smaller */
 }
 .transfercharges {
-    width: 50px;
+    width: 32px;
     border: none; /* Remove all borders */
     border-bottom: 1px solid #000; /* Add a bottom border */
     outline: none; /* Remove focus outline */
@@ -210,9 +210,8 @@
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:400px;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:500px;font-size:14px;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
-				<hr>
                 <div id="charges" class="flex-grow-1">
                     <input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/> Adult (Local)  <label id="lblGuest1"> 0.00</label> <input type="hidden" id="priceGuest1" name="price_guest_1"/><br>
 					<input type="number" id="qtyGuest2" name="qty_guest_2" class="transfercharges"/> Adult (Foreigner) <label id="lblGuest2"> 0.00</label> <input type="hidden" id="priceGuest2" name="price_guest_2"/><br>
@@ -221,12 +220,12 @@
                     <input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/> Kid (Foreigner) <label id="lblGuest5"> 0.00</label> <input type="hidden" id="priceGuest5" name="price_guest_5"/><br>
 					<br>
 					
-                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbspTerminal Fee</label> <label id="lblTerminalFee"> 0.00</label> <input type="hidden" id="terminalFee" name="terminal_fee"/><br>
-                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbspEnvironmental Fee</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/><br>
+                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal</label> <label id="lblTerminalFee"> 0.00</label> <input type="hidden" id="terminalFee" name="terminal_fee"/><br>
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/><br>
 					<br>
+				</div>
 					<hr>
 					<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/><br>
-				</div>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
             </div>
 			
@@ -353,6 +352,7 @@
 					if(response == "success"){
 						$('#msg').html('<div class="alert alert-success">Booking Transfer successfully added</div>')
 						$("html, body").animate({ scrollTop: 0 }, "fast");
+						location.reload();
 					}else{
 						$('#msg').html('<div class="alert alert-danger">Error encountered</div>')
 						$("html, body").animate({ scrollTop: 0 }, "fast");
@@ -366,28 +366,6 @@
 		});
 	});
 	
-	function delete_vendor($id){
-		start_loader();
-		$.ajax({
-			url:_base_url_+"classes/Booking.php?f=save_booking",
-			method:"POST",
-			data:{id: $id},
-			dataType:"json",
-			error:err=>{
-				console.log(err)
-				alert_toast("An error occured.",'error');
-				end_loader();
-			},
-			success:function(resp){
-				if(typeof resp== 'object' && resp.status == 'success'){
-					location.reload();
-				}else{
-					alert_toast("An error occured.",'error');
-					end_loader();
-				}
-			}
-		})
-	}
 
 	function generateReservationID() {
 		$.ajax({
