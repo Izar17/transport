@@ -488,21 +488,22 @@
 	}
 
 
-	const inputField = document.querySelector(".airport-input");
-	const dropdown = document.querySelector(".airport-list");
+document.querySelectorAll(".airport-input").forEach(inputField => {
+inputField.addEventListener("click", function() {
+	const dropdown = this.nextElementSibling; // Get the next sibling (dropdown)
+	dropdown.style.display = "block";
+});
 
-	inputField.addEventListener("click", function() {
-		dropdown.style.display = "block";
-	});
-
-	document.addEventListener("click", function(event) {
-		if (!inputField.contains(event.target) && !dropdown.contains(event.target)) {
-			dropdown.style.display = "none";
-		}
-	});
-
-	function selectAirport(fullName, code) {
-		inputField.value = code; // Show only the airport code after selection
-		dropdown.style.display = "none";
+document.addEventListener("click", function(event) {
+	if (!inputField.contains(event.target) && !inputField.nextElementSibling.contains(event.target)) {
+		inputField.nextElementSibling.style.display = "none";
 	}
+});
+});
+
+function selectAirport(fullName, code, event) {
+    const inputField = event.target.closest(".form-group").querySelector(".airport-input");
+    inputField.value = code; // Show only the airport code after selection
+    event.target.parentElement.style.display = "none"; // Hide dropdown
+}
 </script>
