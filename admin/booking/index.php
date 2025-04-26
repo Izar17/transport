@@ -132,11 +132,11 @@
 						<label for="arrFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
 						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
 						<div class="airport-list">
-							<div onclick="selectAirport('PAL (PR)', 'PR')">PAL (PR)</div>
-							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J')">CEBU PACIFIC (5J)</div>
-							<div onclick="selectAirport('AIRASIA (Z2)', 'Z2')">AIRASIA (Z2)</div>
-							<div onclick="selectAirport('ROYAL AIR (RW)', 'RW')">ROYAL AIR (RW)</div>
-							<div onclick="selectAirport('TWAY AIR (TW)', 'TW')">TWAY AIR (TW)</div>
+							<div onclick="selectAirport('PAL (PR)', 'PR', event)">PAL (PR)</div>
+							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J', event)">CEBU PACIFIC (5J)</div>
+							<div onclick="selectAirport('AIRASIA (Z2)', 'Z2', event)">AIRASIA (Z2)</div>
+							<div onclick="selectAirport('ROYAL AIR (RW)', 'RW', event)">ROYAL AIR (RW)</div>
+							<div onclick="selectAirport('TWAY AIR (TW)', 'TW', event)">TWAY AIR (TW)</div>
 						</div>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
@@ -179,11 +179,11 @@
 						<label for="depFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
 						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
 						<div class="airport-list">
-							<div onclick="selectAirport('PAL (PR)', 'PR')">PAL (PR)</div>
-							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J')">CEBU PACIFIC (5J)</div>
-							<div onclick="selectAirport('AIRASIA (Z2)', 'Z2')">AIRASIA (Z2)</div>
-							<div onclick="selectAirport('ROYAL AIR (RW)', 'RW')">ROYAL AIR (RW)</div>
-							<div onclick="selectAirport('TWAY AIR (TW)', 'TW')">TWAY AIR (TW)</div>
+							<div onclick="selectAirport('PAL (PR)', 'PR', event)">PAL (PR)</div>
+							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J', event)">CEBU PACIFIC (5J)</div>
+							<div onclick="selectAirport('AIRASIA (Z2)', 'Z2', event)">AIRASIA (Z2)</div>
+							<div onclick="selectAirport('ROYAL AIR (RW)', 'RW', event)">ROYAL AIR (RW)</div>
+							<div onclick="selectAirport('TWAY AIR (TW)', 'TW', event)">TWAY AIR (TW)</div>
 						</div>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
@@ -489,20 +489,23 @@
 
 document.querySelectorAll(".airport-input").forEach(inputField => {
 inputField.addEventListener("click", function() {
-	const dropdown = this.nextElementSibling; // Get the next sibling (dropdown)
+	const dropdown = this.nextElementSibling; // Get the matching dropdown
 	dropdown.style.display = "block";
 });
 
-document.addEventListener("click", function(event) {
-	if (!inputField.contains(event.target) && !inputField.nextElementSibling.contains(event.target)) {
-		inputField.nextElementSibling.style.display = "none";
-	}
-});
+    document.addEventListener("click", function(event) {
+        document.querySelectorAll(".airport-list").forEach(dropdown => {
+            if (!dropdown.previousElementSibling.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+    });
 });
 
 function selectAirport(fullName, code, event) {
-    const inputField = event.target.closest(".form-group").querySelector(".airport-input");
-    inputField.value = code; // Show only the airport code after selection
-    event.target.parentElement.style.display = "none"; // Hide dropdown
+    const dropdown = event.target.closest(".airport-list");
+    const inputField = dropdown.previousElementSibling; // Get the corresponding input field
+    inputField.value = code; // Set only the airport code in the input field
+    dropdown.style.display = "none"; // Hide the dropdown
 }
 </script>
