@@ -21,6 +21,24 @@ Class Booking extends DBConnection {
 		}
 	}
 
+	function get_seq_no() {
+
+		$query = "SELECT MAX(reserve_num) as max_reserve FROM booking";
+		$result = $this->conn->query($query);
+
+		// Array to store the data
+		$data = 0;
+
+		if ($result && $result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+			if (!empty($row['max_reserve'])) {
+				$data = $row['max_reserve'];
+			}
+		}
+
+		echo $data;
+	}
+
 	function get_reference_table() {
 		// SQL query to fetch specific fields (e.g., 'id' and 'product_name')
 		$query = "SELECT type, code, title, description, amount FROM reference_table"; // Adjust the query to suit your table
@@ -88,6 +106,9 @@ $Booking = new Booking();
 $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
 $sysset = new SystemSettings();
 switch ($action) {
+	case 'get_seq_no':
+		echo $Booking->get_seq_no();
+	break;
 	case 'get_reference_table':
 		echo $Booking->get_reference_table();
 	break;

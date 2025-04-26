@@ -218,7 +218,7 @@
 					<input type="number" id="qtyadult" name="qty_guest_2" class="transfercharges"/> Adult (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_2" class="transfercharges" value="0.00" readonly/><br>
                     <input type="number" id="qtyadult" name="qty_guest_3" class="transfercharges"/> Senior/PWD <input type="hidden" id="priceAdultLocal" name="price_guest_3" class="transfercharges" value="0.00" readonly/><br>
                     <input type="number" id="qtyadult" name="qty_guest_4" class="transfercharges"/> Kid (Local) <input type="hidden" id="priceAdultLocal" name="price_guest_4" class="transfercharges" value="0.00" readonly/><br>
-                    <input type="number" id="qtyadult" name="qty__guest_5" class="transfercharges"/> Kid (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_5" class="transfercharges" value="0.00" readonly/><br>
+                    <input type="number" id="qtyadult" name="qty_guest_5" class="transfercharges"/> Kid (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_5" class="transfercharges" value="0.00" readonly/><br>
 										
 				</div>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
@@ -234,7 +234,7 @@
 	$(document).ready(function() {
 		$('.clsDeparture').hide();
 
-		$('#reserveNum').val(generateReservationID());
+		generateReservationID();
 
 		populateDropdowns(1);
 		
@@ -356,16 +356,36 @@
 	}
 
 	function generateReservationID() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
+		$.ajax({
+			url: _base_url_+"classes/Booking.php?f=get_seq_no",
+			type: 'GET',
+			success: function(response) {
+				let generatedID = 0;
 
-        return `${year}${month}${day}${hours}${minutes}${seconds}`;
-    }
+				let data = parseInt(response);
+				console.log(data);
+				if (data === 0)
+				{
+					const now = new Date();
+					const year = now.getFullYear();
+					const month = String(now.getMonth() + 1).padStart(2, '0');
+					const day = String(now.getDate()).padStart(2, '0');
+
+					console.log(`${year}${month}${day}000001`);
+					generatedID = `${year}${month}${day}000001`
+				}
+				else
+				{
+					data += 1;
+					generatedID = data.toString();
+				}
+
+				console.log("generatedID >",generatedID);
+				// return generatedID;
+				$('#reserveNum').val(generatedID);
+			}
+		});
+	};
 
 	function populateDropdowns(transferType){
 		$.ajax({
