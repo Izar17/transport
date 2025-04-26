@@ -1,3 +1,11 @@
+<?php 
+if(isset($_GET['id']) && $_GET['id'] > 0){
+    $user = $conn->query("SELECT * FROM booking where id ='{$_GET['id']}'");
+    foreach($user->fetch_array() as $k =>$v){
+        $meta[$k] = $v;
+    }
+}
+?>
 <?php if($_settings->chk_flashdata('success')): ?>
 <script>
 	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
@@ -59,6 +67,8 @@ select.form-control {
 .airport-list div:hover {
 	background-color: #f0f0f0;
 }
+
+
 </style>
 <div class="card card-outline card-primary">
 	<div class="card-header">
@@ -67,66 +77,67 @@ select.form-control {
 	<div class="card-body">
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post">
-        <input type="hidden" name="id">
+		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
         <div class="row">
-            <!-- First Panel (10 columns) -->
+            <!-- First Panel (10 columns) --> 
             <div class="col-md-10">
                 <div class="row">
 					<!-- First Row -->
 					<div class="form-group col-md-5 d-flex align-items-center">
 						<label for="reserveNum" class="me-3 mb-0" style="min-width: 180px;font-size: 0.8rem;">Reservation Number:</label>
-						<input type="text" id="reserveNum" name="reserve_num" class="form-control form-control-sm form-control-border" style="width:125px;" readonly>
+						<input type="text" id="reserveNum" name="reserve_num"  value="<?php echo isset($meta['reserve_num']) ? $meta['reserve_num']: '' ?>" class="form-control form-control-sm form-control-border" style="width:125px;" readonly>
 					</div>
 					<div class="form-group col-md-5"></div>
 					<!-- <div class="form-group col-md-4"></div> -->
                     <div class="form-group col-md-3">
                         <label for="lastname" class="control-label">Last Name: <span class="required">*</span></label>
-                        <input type="text" id="lastname" autofocus name="last_name" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
+                        <input type="text" id="lastname" autofocus name="last_name" class="form-control form-control-sm form-control-border"  value="<?php echo isset($meta['last_name']) ? $meta['last_name']: '' ?>" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="firstname" class="control-label">First Name: <span class="required">*</span></label>
-                        <input type="text" id="firstname" name="first_name" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
+                        <input type="text" id="firstname" name="first_name" value="<?php echo isset($meta['first_name']) ? $meta['first_name']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="contact" class="control-label">Contact #: <span class="required">*</span></label>
-                        <input type="number" id="contact" name="contact_no" class="form-control form-control-sm form-control-border" required>
+                        <input type="number" id="contact" name="contact_no" value="<?php echo isset($meta['contact_no']) ? $meta['contact_no']: '' ?>" class="form-control form-control-sm form-control-border" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="email" class="control-label">Email Address: <span class="required">*</span></label>
-                        <input type="email" id="email" name="email_address" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()" required>
+                        <input type="email" id="email" name="email_address" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()" required>
                     </div>
 					<!-- 2nd row -->
 					<div class="form-group col-md-3">
 						<label for="transferType" class="control-label">Transfer Type: <span class="required">*</span></label>
 						<select type="text" id="transferType" name="transfer_type" class="form-control form-control-sm form-control-border select2" required>
-							<option selected>Arrival</option>
-							<option>Departure</option>
-							<option>Roundtrip</option>
+							<option value="" disabled selected>Select Transfer Type</option>
+							<option value="1" <?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
+							<option value="2"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
+							<option value="3"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 3 ? 'selected' : '' ?>>ROUNDTRIP</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
 						<select type="text" id="modeOfTransfer" class="form-control form-control-sm form-control-border select2" required>
-							<option value="" disabled selected></option>
+							<option value="" disabled selected><?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: 'Select Mode of Transfer' ?></option>
 						</select>
-						<input type="hidden" id="hdModeOfTransfer" name="transfer_mode">
-						<input type="hidden" id="modeOfTransferPrice" name="transfer_mode_price">
+						<input type="hidden" id="hdModeOfTransfer" name="transfer_mode" value="<?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: '' ?>">
+						<input type="hidden" id="modeOfTransferPrice" name="transfer_mode_price" value="<?php echo isset($meta['transfer_mode_price']) ? $meta['transfer_mode_price']: '' ?>">
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
 						<select type="text" id="paymentType" name="payment_type" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected></option>
+							<option value="" disabled selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentRemarks" class="control-label">Payment Remarks: <span class="required">*</span></label>
-						<textarea id="paymentRemarks" name="paymentRemarks" class="form-control form-control-sm form-control-border w-100 h-100" ></textarea>
+						<textarea id="paymentRemarks" name="payment_remarks" class="form-control form-control-sm form-control-border w-100"><?php 
+							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : 'Input Payment Remarks'; 
+						?></textarea>
 					</div>
 					
-					
-					<div class="form-group col-md-3"></div>
 					<!-- Arrival Details -->
-					<div class="form-group col-md-12 col-sm-3 clsArrival">
+					<div class="form-group col-md-12 col-sm-3 clsArrival"><br>
 						<h6>Arrival Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsArrival">
@@ -170,7 +181,7 @@ select.form-control {
 						</select>
 					</div>
 					<!-- Departure Details -->
-					<div class="form-group col-md-12 col-sm-3 clsDeparture">
+					<div class="form-group col-md-12 col-sm-3 clsDeparture"><br>
 						<h6>Departure Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsDeparture">
@@ -217,7 +228,7 @@ select.form-control {
 						<input type="time" id="estpickup" autofocus class="form-control form-control-sm form-control-border w-50" readonly>
 					</div>
 					<!-- Fifth Row -->
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 clsRemarks">
                         <label for="otherNames" class="control-label">Other Names:</label>
                         <textarea id="otherNames" autofocus name="other_names" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
                     </div>
@@ -317,30 +328,52 @@ select.form-control {
 <script>
 	//1
 	$(document).ready(function() {
+		$('.clsArrival').hide();
 		$('.clsDeparture').hide();
+		$('.clsRemarks').hide();
 
 		generateReservationID();
 
 		populateDropdowns(1);
 		
 		$('#transferType').on('change', function() {
-			if ($('#transferType').val().toUpperCase() === "ARRIVAL")
+			
+			//Reset dropdowns
+			$('#modeOfTransfer').empty();
+			$('#paymentType').empty();
+			$('#arrAirport').empty();
+			$('#arrHotelResort').empty();
+
+			//Adding default value
+			$('#modeOfTransfer').append('<option value="" disabled selected></option>');
+			$('#paymentType').append('<option value="" disabled selected></option>');
+
+			if ($('#transferType').val().toUpperCase() === '1')
 			{
 				$('.clsArrival').show();
 				$('.clsDeparture').hide();
+				$('.clsRemarks').show();
 				populateDropdowns(1);
 			}
-			else if ($('#transferType').val().toUpperCase() === "DEPARTURE")
+			else if ($('#transferType').val().toUpperCase() === '2')
 			{
 				$('.clsArrival').hide();
 				$('.clsDeparture').show();
+				$('.clsRemarks').show();
 				populateDropdowns(2);
 			}
-			else if ($('#transferType').val().toUpperCase() === "ROUNDTRIP")
+			else if ($('#transferType').val().toUpperCase() === '3')
 			{
 				$('.clsArrival').show();
 				$('.clsDeparture').show();
+				$('.clsRemarks').show();
 				populateDropdowns(3);
+			}
+			else
+			{
+				$('.clsArrival').hide();
+				$('.clsDeparture').hide();
+				$('.clsRemarks').hide();
 			}
         });
 
@@ -517,8 +550,8 @@ select.form-control {
 		console.log("terminalFee>>",terminalFee);
 		console.log("envFee>>",envFee);
 		const total = parseInt(totalGuestPrice) + parseInt(terminalFee) + parseInt(envFee);
-
-		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2)}`);
+		
+		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`);
 		$("#totalPrice").val(`${parseFloat(total).toFixed(2)}`);
 	};
 
@@ -587,15 +620,7 @@ select.form-control {
 
 				});
 
-				//Reset dropdowns
-				$('#modeOfTransfer').empty();
-				$('#paymentType').empty();
-				$('#arrAirport').empty();
-				$('#arrHotelResort').empty();
 
-				//Adding default value
-				$('#modeOfTransfer').append('<option value="" disabled selected></option>');
-				$('#paymentType').append('<option value="" disabled selected></option>');
 
 				//Populating dropdowns
 				$.each(arrPaymentModes, function(index, item) {

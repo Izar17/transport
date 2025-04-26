@@ -35,15 +35,15 @@
                       <a href="<?php echo base_url ?>admin/?page=booking" class="nav-link nav-booking">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                          Create Booking
+                          Booking Transfer
                         </p>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=booking/reports" class="nav-link nav-booking_reports">
+                      <a href="<?php echo base_url ?>admin/?page=booking/transfer_list" class="nav-link nav-booking_transfer_list">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
-                          Booking Transfers
+                          Transfer List
                         </p>
                       </a>
                     </li>

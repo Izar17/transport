@@ -15,7 +15,7 @@
 </style>
 <div class="card card-outline card-primary">
 	<div class="card-header">
-		<h3 class="card-title">Maintenance</h3>
+		<h3 class="card-title">Transfer List</h3>
 		<div class="card-tools">
 			<a href="?page=booking" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
@@ -64,24 +64,26 @@
 							<td class="text-center"><?php echo $row['reserve_num'] ?></td>
 							<td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
 							<td><?php echo $row['contact_no'] ?></td>
-							<td ><?php echo $row['email_address'] ?></td>
-							<td ><p class="m-0 truncate-1"><?php echo $row['transfer_type'] ?></p></td>
+							<td ><p class="m-0 truncate-1"><?php echo $row['email_address'] ?></p></td>
 							<td ><?php echo $row['transfer_mode'] ?></td>
 								<?php 
 									switch($row['transfer_type']){
-										case 'Arrival':       
+										case 1:       
+											echo "<td>ARRIVAL</td>";
 											echo "<td>" . $row['arr_origin_drop_off'] . "</td>";
 											echo "<td>" . $row['arr_date'] . " " . $row['arr_eta']. "</td>";
 											echo "<td>" . $row['arr_airport'] . " <br>" . $row['arr_flight_no'] . "</td>";
 											echo "<td>" . $row['arr_hotel'] . "</td>";
 											break;
-										case 'Departure':
+										case 2:
+											echo "<td>DEPARTURE</td>";
 											echo "<td>" . $row['dep_origin_drop_off'] . "</td>";
 											echo "<td>" . $row['dep_date'] . " " . $row['dep_etd']. "</td>";
 											echo "<td>" . $row['dep_airport'] . "<br>" . $row['dep_flight_no'] . "</td>";
 											echo "<td>" . $row['dep_hotel'] . "</td>";
 											break;
-										case 'Roundtrip':
+										case 3:
+											echo "<td>ROUNDTRIP</td>";
 											echo "<td colspan='4'>
 												<table style='100%;'>
 													<tr><td colspan='4'><b>ARRIVAL</b></td></tr>
@@ -153,12 +155,12 @@
 							</button>
 
 							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" href="?page=maintenance/manage_reference&id=<?php echo $row['id'] ?>">
+								<a class="dropdown-item" href="?page=booking&id=<?php echo $row['id'] ?>">
 									<span class="fa fa-edit text-primary"></span> Edit
 								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-									<span class="fa fa-trash text-danger"></span> Delete
+									<span class="fa fa-trash text-danger"></span> Cancel
 								</a>
 							</div>
 							</td>
@@ -179,7 +181,7 @@
 	function delete_reference($id){
 		start_loader();
 		$.ajax({
-			url:_base_url_+"classes/Maintenance.php?f=delete",
+			url:_base_url_+"classes/booking.php?f=delete",
 			method:"POST",
 			data:{id: $id},
 			dataType:"json",
