@@ -26,7 +26,21 @@
 	margin-bottom: 20px;
 }
 
-
+.airport-list {
+    display: none;
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 250px;
+    z-index: 999; /* Ensure it appears above other elements */
+}
+.airport-list div {
+	padding: 8px;
+	cursor: pointer;
+}
+.airport-list div:hover {
+	background-color: #f0f0f0;
+}
 </style>
 <div class="card card-outline card-primary">
 	<div class="card-header">
@@ -116,7 +130,14 @@
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border">
+						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
+						<div class="airport-list">
+							<div onclick="selectAirport('PAL (PR)', 'PR')">PAL (PR)</div>
+							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J')">CEBU PACIFIC (5J)</div>
+							<div onclick="selectAirport('AIRASIA (Z2)', 'Z2')">AIRASIA (Z2)</div>
+							<div onclick="selectAirport('ROYAL AIR (RW)', 'RW')">ROYAL AIR (RW)</div>
+							<div onclick="selectAirport('TWAY AIR (TW)', 'TW')">TWAY AIR (TW)</div>
+						</div>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
@@ -156,7 +177,14 @@
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border">
+						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
+						<div class="airport-list">
+							<div onclick="selectAirport('PAL (PR)', 'PR')">PAL (PR)</div>
+							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J')">CEBU PACIFIC (5J)</div>
+							<div onclick="selectAirport('AIRASIA (Z2)', 'Z2')">AIRASIA (Z2)</div>
+							<div onclick="selectAirport('ROYAL AIR (RW)', 'RW')">ROYAL AIR (RW)</div>
+							<div onclick="selectAirport('TWAY AIR (TW)', 'TW')">TWAY AIR (TW)</div>
+						</div>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
@@ -459,4 +487,22 @@
 		});
 	}
 
+
+	const inputField = document.querySelector(".airport-input");
+	const dropdown = document.querySelector(".airport-list");
+
+	inputField.addEventListener("click", function() {
+		dropdown.style.display = "block";
+	});
+
+	document.addEventListener("click", function(event) {
+		if (!inputField.contains(event.target) && !dropdown.contains(event.target)) {
+			dropdown.style.display = "none";
+		}
+	});
+
+	function selectAirport(fullName, code) {
+		inputField.value = code; // Show only the airport code after selection
+		dropdown.style.display = "none";
+	}
 </script>
