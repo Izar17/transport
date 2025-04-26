@@ -214,12 +214,18 @@
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
 				<hr>
                 <div id="charges" class="flex-grow-1">
-                    <input type="number" id="qtyadult" name="qty_guest_1" class="transfercharges"/> Adult (Local) <input type="hidden" id="priceAdultLocal" name="price_guest_1" class="transfercharges" value="0.00" readonly/><br>
-					<input type="number" id="qtyadult" name="qty_guest_2" class="transfercharges"/> Adult (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_2" class="transfercharges" value="0.00" readonly/><br>
-                    <input type="number" id="qtyadult" name="qty_guest_3" class="transfercharges"/> Senior/PWD <input type="hidden" id="priceAdultLocal" name="price_guest_3" class="transfercharges" value="0.00" readonly/><br>
-                    <input type="number" id="qtyadult" name="qty_guest_4" class="transfercharges"/> Kid (Local) <input type="hidden" id="priceAdultLocal" name="price_guest_4" class="transfercharges" value="0.00" readonly/><br>
-                    <input type="number" id="qtyadult" name="qty_guest_5" class="transfercharges"/> Kid (Foreigner) <input type="hidden" id="priceAdultLocal" name="price_guest_5" class="transfercharges" value="0.00" readonly/><br>
-										
+                    <input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/> Adult (Local)  <label id="lblGuest1"> 0.00</label> <input type="hidden" id="priceGuest1" name="price_guest_1"/><br>
+					<input type="number" id="qtyGuest2" name="qty_guest_2" class="transfercharges"/> Adult (Foreigner) <label id="lblGuest2"> 0.00</label> <input type="hidden" id="priceGuest2" name="price_guest_2"/><br>
+                    <input type="number" id="qtyGuest3" name="qty_guest_3" class="transfercharges"/> Senior/PWD <label id="lblGuest3"> 0.00</label> <input type="hidden" id="priceGuest3" name="price_guest_3"/><br>
+                    <input type="number" id="qtyGuest4" name="qty_guest_4" class="transfercharges"/> Kid (Local) <label id="lblGuest4"> 0.00</label> <input type="hidden" id="priceGuest4" name="price_guest_4"/><br>
+                    <input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/> Kid (Foreigner) <label id="lblGuest5"> 0.00</label> <input type="hidden" id="priceGuest5" name="price_guest_5"/><br>
+					<br>
+					
+                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbspTerminal Fee</label> <label id="lblTerminalFee"> 0.00</label> <input type="hidden" id="terminalFee" name="terminal_fee"/><br>
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbspEnvironmental Fee</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/><br>
+					<br>
+					<hr>
+					<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/><br>
 				</div>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
             </div>
@@ -261,7 +267,7 @@
 
 		$('#modeOfTransfer').on('change', function() {
 			$('#hdModeOfTransfer').val($('#modeOfTransfer option:selected').text());
-			$('#arrOriginDropOffPrice').val($(this).val());
+			$('#modeOfTransferPrice').val($(this).val());
 		});
 
 		$('#arrOriginDropOff').on('change', function() {
@@ -272,6 +278,34 @@
 		$('#depOriginDropOff').on('change', function() {
 			$('#hdDepOriginDropOff').val($('#depOriginDropOff option:selected').text());
 			$('#depOriginDropOffPrice').val($(this).val());
+		});
+
+		$('#qtyGuest1').on('change', function() {
+			computePrice(`#lblGuest1`,`#priceGuest1`,$(this).val());
+		});
+
+		$('#qtyGuest2').on('change', function() {
+			computePrice(`#lblGuest2`,`#priceGuest2`,$(this).val());
+		});
+
+		$('#qtyGuest3').on('change', function() {
+			computePrice(`#lblGuest3`,`#priceGuest3`,$(this).val());
+		});
+
+		$('#qtyGuest4').on('change', function() {
+			computePrice(`#lblGuest4`,`#priceGuest4`,$(this).val());
+		});
+
+		$('#qtyGuest5').on('change', function() {
+			computePrice(`#lblGuest5`,`#priceGuest5`,$(this).val());
+		});
+
+		$('#chkTerminalFee').change(function() {
+			computeTotal();
+		});
+
+		$('#chkEnvFee').change(function() {
+			computeTotal();
 		});
 
 		$('#etd').on('change', function() {
@@ -387,6 +421,49 @@
 		});
 	};
 
+	function computePrice(targetField, hiddenField, quantity) {
+		const transType = $('#transferType').val().toUpperCase();
+		const arrOriginDropOffPrice = parseInt($('#arrOriginDropOffPrice').val()) || 0;
+		const depOriginDropOffPrice = parseInt($('#depOriginDropOffPrice').val()) || 0;
+		let originPrice = 0;
+
+		if (transType === "ARRIVAL") originPrice = arrOriginDropOffPrice;
+		else if (transType === "DEPARTURE") originPrice = depOriginDropOffPrice;
+		else if (transType === "ROUNDTRIP") originPrice = arrOriginDropOffPrice + depOriginDropOffPrice;
+
+		const modeOfTransferPrice = parseInt($('#modeOfTransferPrice').val()) || 0;
+
+		const total = (originPrice + modeOfTransferPrice) * parseInt(quantity);
+		
+		$(targetField).text(`P${total.toFixed(2)}`);
+		$(hiddenField).val(`${total.toFixed(2)}`);
+
+		computeTotal();
+	};
+
+	function computeTotal() {
+		const guest1 = parseFloat($("#priceGuest1").val()) || 0;
+		const guest2 = parseFloat($("#priceGuest2").val()) || 0;
+		const guest3 = parseFloat($("#priceGuest3").val()) || 0;
+		const guest4 = parseFloat($("#priceGuest4").val()) || 0;
+		const guest5 = parseFloat($("#priceGuest5").val()) || 0;
+
+		const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5);
+		// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
+
+		console.log("totalGuestPrice>>",totalGuestPrice);
+		let terminalFee = 0;
+		let envFee = 0;
+		if ($('#chkTerminalFee').is(':checked')) terminalFee = $("#terminalFee").val();
+		if ($('#chkEnvFee').is(':checked')) envFee = $("#envFee").val();
+		console.log("terminalFee>>",terminalFee);
+		console.log("envFee>>",envFee);
+		const total = parseInt(totalGuestPrice) + parseInt(terminalFee) + parseInt(envFee);
+
+		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2)}`);
+		$("#totalPrice").val(`${parseFloat(total).toFixed(2)}`);
+	};
+
 	function populateDropdowns(transferType){
 		$.ajax({
 			url: _base_url_+"classes/Booking.php?f=get_reference_table",
@@ -433,6 +510,22 @@
 						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description});
 					}
 
+					if (item.code == 'TC')
+					{
+						if (item.title == 'TERMINAL')
+						{
+							const amount = parseFloat(item.amount);
+							$("#lblTerminalFee").text(`P${amount.toFixed(2)}`);
+							$("#terminalFee").val(`${amount.toFixed(2)}`);
+						}
+						if (item.title == 'ENVIRONMENT')
+						{
+							const amount = parseFloat(item.amount);
+							$("#lblEnvFee").text(`P${amount.toFixed(2)}`);
+							$("#envFee").val(`${amount.toFixed(2)}`);
+						}
+
+					}
 
 				});
 
