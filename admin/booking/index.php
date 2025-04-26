@@ -10,10 +10,13 @@ input[type="email"],
 input[type="time"], 
 input[type="number"], 
 input[type="date"], 
+textarea.form-control,
 select.form-control {
     height: 20px; /* Adjust as needed */
     padding: 0px; /* Reduce padding */
     font-size: 12px; /* Make text smaller */
+	width:75%;
+	border: 1px solid;
 }
 .form-group {
     margin-bottom: 0px; /* Reduces space between form fields */
@@ -24,7 +27,7 @@ select.form-control {
     font-size: 0.8em; /* Adjust font size to make it smaller */
 }
 .transfercharges {
-    width: 32px;
+    width: 10px;
     border: none; /* Remove all borders */
     border-bottom: 1px solid #000; /* Add a bottom border */
     outline: none; /* Remove focus outline */
@@ -117,7 +120,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentRemarks" class="control-label">Payment Remarks: <span class="required">*</span></label>
-						<textarea id="paymentRemarks" name="paymentRemarks" class="form-control form-control-sm form-control-border"></textarea>
+						<textarea id="paymentRemarks" name="paymentRemarks" class="form-control form-control-sm form-control-border w-100 h-100" ></textarea>
 					</div>
 					
 					
@@ -232,7 +235,7 @@ select.form-control {
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
+						<td rowspan="2" width="40%"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Local)</td>
@@ -655,11 +658,11 @@ select.form-control {
 	}
 
 
-document.querySelectorAll(".airport-input").forEach(inputField => {
-inputField.addEventListener("click", function() {
-	const dropdown = this.nextElementSibling; // Get the matching dropdown
-	dropdown.style.display = "block";
-});
+	document.querySelectorAll(".airport-input").forEach(inputField => {
+    inputField.addEventListener("click", function() {
+        const dropdown = this.nextElementSibling; // Get the matching dropdown
+        dropdown.style.display = "block";
+    });
 
     document.addEventListener("click", function(event) {
         document.querySelectorAll(".airport-list").forEach(dropdown => {
@@ -674,6 +677,7 @@ function selectAirport(fullName, code, event) {
     const dropdown = event.target.closest(".airport-list");
     const inputField = dropdown.previousElementSibling; // Get the corresponding input field
     inputField.value = code; // Set only the airport code in the input field
+    inputField.focus(); // Focus on the input field so the user can continue typing
     dropdown.style.display = "none"; // Hide the dropdown
 }
 </script>
