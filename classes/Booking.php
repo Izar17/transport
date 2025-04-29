@@ -20,19 +20,72 @@ Class Booking extends DBConnection {
 			exit;
 		}
 	}
-	function save_booking(){
-		extract($_POST);
-		$data = "";
-		$sql = "INSERT INTO `booking` set {$data} ";
-		$result = "";
 
-		$save = $this->conn->query($sql);
-		if($save){
-			$result = "success"
+	function get_seq_no() {
+
+		$query = "SELECT MAX(reserve_num) as max_reserve FROM booking";
+		$result = $this->conn->query($query);
+
+		// Array to store the data
+		$data = 0;
+
+		if ($result && $result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+			if (!empty($row['max_reserve'])) {
+				$data = $row['max_reserve'];
+			}
 		}
-	
-		return json_encode("success");
+
+		echo $data;
 	}
+
+	function get_reference_table() {
+		// SQL query to fetch specific fields (e.g., 'id' and 'product_name')
+		$query = "SELECT type, code, title, description, amount FROM reference_table"; // Adjust the query to suit your table
+		$result = $this->conn->query($query);
+
+		// Array to store the data
+		$data = [];
+
+		if ($result->num_rows > 0) {
+			while ($row = $result->fetch_assoc()) {
+				$data[] = $row;  // Store each row in the array
+			}
+		}
+
+		echo json_encode($data);
+
+		// Close the connection
+		// $conn->close();
+	}
+
+	function save_booking() {
+		extract($_POST);
+		$data = '';
+		
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id'))){
+				if(!empty($data)) $data .=",";
+				$data .= " `{$k}`='{$this->conn->real_escape_string($v)}' ";
+			}
+		}
+
+		$data .= (!empty($data) ? "," : "");
+		$data .= " `created_date`=NOW(), `created_by`='admin' ";
+
+		$result = "";
+		$qry = $this->conn->query("INSERT INTO booking set {$data}");
+
+		if($qry) { 
+			$result="success";
+			$this->settings->set_flashdata('success','Booking Transfer successfully saved.');
+		}
+		else $result="failed";
+
+		echo $result;
+		exit;
+	}
+
 	function delete_shop_type(){
 		extract($_POST);
 		$del = $this->conn->query("UPDATE `shop_type_list` set delete_flag = 1 where id = '{$id}'");
@@ -53,6 +106,12 @@ $Booking = new Booking();
 $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
 $sysset = new SystemSettings();
 switch ($action) {
+	case 'get_seq_no':
+		echo $Booking->get_seq_no();
+	break;
+	case 'get_reference_table':
+		echo $Booking->get_reference_table();
+	break;
 	case 'save_booking':
 		echo $Booking->save_booking();
 	break;

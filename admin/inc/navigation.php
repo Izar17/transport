@@ -35,7 +35,15 @@
                       <a href="<?php echo base_url ?>admin/?page=booking" class="nav-link nav-booking">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                          Booking Transfers
+                          Booking Transfer
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=booking/transfer_list" class="nav-link nav-booking_transfer_list">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                          Transfer List
                         </p>
                       </a>
                     </li>
@@ -63,14 +71,14 @@
                         </p>
                       </a>
                     </li> -->
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=clients" class="nav-link nav-clients">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>
                           Guest List
                         </p>
                       </a>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=reports/order_reports" class="nav-link nav-reports_order_reports">
@@ -81,20 +89,19 @@
                       </a>
                     </li> -->
                     <?php if($_settings->userdata('type') == 1): ?>
-                    <li class="nav-header"></li>
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=shop_types" class="nav-link nav-shop_types">
-                        <i class="nav-icon fas fa-th-list"></i>
-                        <p>
-                          Shop Type list
-                        </p>
-                      </a>
-                    </li> -->
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           Admin List
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=maintenance" class="nav-link nav-maintenance">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>
+                          Maintenance
                         </p>
                       </a>
                     </li>
