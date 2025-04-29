@@ -77,7 +77,8 @@
 											echo $row['arr_hotel'];
 											break;
 										case 2:
-											echo "<b>DEPARTURE";
+											echo "<b>DEPARTURE <br>";
+											echo '<b>Estimated Pick-up Time: '.$row['est_pickup'].'</b>';
 											echo '<br>'. $row['dep_date'] .' '. $row['dep_etd'] .'</b><br>';
 											echo $row['dep_origin_drop_off'] .'<br>';
 											echo $row['dep_airport'] . '<br>' . $row['dep_flight_no'].'<br>';
@@ -91,7 +92,7 @@
 											echo $row['arr_hotel'] .'<br>';
 
 											
-											echo '<br><b>(DEP) Estimated Pick-up Time: '.date("H:i", strtotime($row['dep_etd']) - (3 * 3600)).
+											echo '<br><b>(DEP) Estimated Pick-up Time: '.$row['est_pickup'].
 												'<br>'. $row['dep_date'] .' '. $row['dep_etd'] .'</b><br>';
 											echo $row['dep_origin_drop_off'] .'<br>';
 											echo $row['dep_airport'] . '<br>' . $row['dep_flight_no'].'<br>';

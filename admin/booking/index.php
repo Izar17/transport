@@ -226,7 +226,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
-						<input type="time" id="estpickup" autofocus class="form-control form-control-sm form-control-border w-50" readonly>
+						<input type="time" id="estpickup" name="est_pickup" autofocus class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6 clsRemarks">
