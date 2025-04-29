@@ -79,8 +79,9 @@
                         </p>
                       </a>
                     </li> -->
-                    <!-- <li class="nav-header">Maintenance</li>
-                    <li class="nav-item dropdown">
+                    <?php if($_settings->userdata('type') == 1): ?>
+                    <li class="nav-header">Maintenance</li>
+                    <!-- <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=reports/order_reports" class="nav-link nav-reports_order_reports">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
@@ -88,20 +89,19 @@
                         </p>
                       </a>
                     </li> -->
-                    <?php if($_settings->userdata('type') == 1): ?>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=maintenance" class="nav-link nav-maintenance">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>
+                          General
+                        </p>
+                      </a>
+                    </li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           Admin List
-                        </p>
-                      </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=maintenance" class="nav-link nav-maintenance">
-                        <i class="nav-icon fas fa-th-list"></i>
-                        <p>
-                          Maintenance
                         </p>
                       </a>
                     </li>
