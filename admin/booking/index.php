@@ -12,6 +12,10 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 </script>
 <?php endif;?>
 
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.js"></script>
+
 <style>
 input[type="text"], 
 input[type="email"], 
@@ -86,30 +90,30 @@ select.form-control {
 					<!-- First Row -->
 					<div class="form-group col-md-5 d-flex align-items-center">
 						<label for="reserveNum" class="me-3 mb-0" style="min-width: 180px;font-size: 0.8rem;">Reservation Number:</label>
-						<input type="text" id="reserveNum" name="reserve_num"  value="<?php echo isset($meta['reserve_num']) ? $meta['reserve_num']: '' ?>" class="form-control form-control-sm form-control-border" style="width:125px;" readonly>
+						<input type="text" id="reserveNum" name="reserve_num"  autocomplete="off" value="<?php echo isset($meta['reserve_num']) ? $meta['reserve_num']: '' ?>" class="form-control form-control-sm form-control-border" style="width:125px;" readonly>
 					</div>
 					<div class="form-group col-md-5"></div>
 					<!-- <div class="form-group col-md-4"></div> -->
                     <div class="form-group col-md-3">
                         <label for="lastname" class="control-label">Last Name: <span class="required">*</span></label>
-                        <input type="text" id="lastname" autofocus name="last_name" class="form-control form-control-sm form-control-border"  value="<?php echo isset($meta['last_name']) ? $meta['last_name']: '' ?>" oninput="this.value = this.value.toUpperCase()" required>
+                        <input type="text" id="lastname" autofocus name="last_name" autocomplete="off" class="form-control form-control-sm form-control-border"  value="<?php echo isset($meta['last_name']) ? $meta['last_name']: '' ?>" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="firstname" class="control-label">First Name: <span class="required">*</span></label>
-                        <input type="text" id="firstname" name="first_name" value="<?php echo isset($meta['first_name']) ? $meta['first_name']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
+                        <input type="text" id="firstname" name="first_name" autocomplete="off" value="<?php echo isset($meta['first_name']) ? $meta['first_name']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="contact" class="control-label">Contact #: <span class="required">*</span></label>
-                        <input type="number" id="contact" name="contact_no" value="<?php echo isset($meta['contact_no']) ? $meta['contact_no']: '' ?>" class="form-control form-control-sm form-control-border" required>
+                        <input type="number" id="contact" name="contact_no" autocomplete="off" value="<?php echo isset($meta['contact_no']) ? $meta['contact_no']: '' ?>" class="form-control form-control-sm form-control-border" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="email" class="control-label">Email Address: <span class="required">*</span></label>
-                        <input type="email" id="email" name="email_address" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()" required>
+                        <input type="email" id="email" name="email_address" autocomplete="off" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()" required>
                     </div>
 					<!-- 2nd row -->
 					<div class="form-group col-md-3">
 						<label for="transferType" class="control-label">Transfer Type: <span class="required">*</span></label>
-						<select type="text" id="transferType" name="transfer_type" class="form-control form-control-sm form-control-border select2" required>
+						<select type="text" id="transferType" name="transfer_type" autocomplete="off" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled selected>Select Transfer Type</option>
 							<option value="1" <?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
 							<option value="2"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
@@ -118,7 +122,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3">
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
-						<select type="text" id="modeOfTransfer" class="form-control form-control-sm form-control-border select2" required>
+						<select type="text" id="modeOfTransfer" class="form-control form-control-sm form-control-border select2" autocomplete="off" required>
 							<option value="" disabled selected><?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: 'Select Mode of Transfer' ?></option>
 						</select>
 						<input type="hidden" id="hdModeOfTransfer" name="transfer_mode" value="<?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: '' ?>">
@@ -126,14 +130,14 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
-						<select type="text" id="paymentType" name="payment_type" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="paymentType" name="payment_type" autocomplete="off" class="form-control form-control-sm form-control-border select2">
 							<option value="" disabled selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentRemarks" class="control-label">Payment Remarks: <span class="required">*</span></label>
-						<textarea id="paymentRemarks" name="payment_remarks" class="form-control form-control-sm form-control-border w-100"><?php 
-							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : 'Input Payment Remarks'; 
+						<textarea id="paymentRemarks" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks"><?php 
+							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : ''; 
 						?></textarea>
 					</div>
 					
@@ -142,8 +146,8 @@ select.form-control {
 						<h6>Arrival Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsArrival">
-						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label>
-						<select type="text" id="arrOriginDropOff" class="form-control form-control-sm form-control-border select2 clsArrival w-75">
+						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
+						<select type="text" id="arrOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2 clsArrival" style="width:90%">
 							<option value="" hidden selected></option>
 						</select>
 						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off">
@@ -151,22 +155,22 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="arrDate" name="arr_date" class="form-control form-control-sm form-control-border w-50">
+						<input type="date" id="arrDate" name="arr_date" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="arr_eta" lang="en-GB" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="eta" autofocus name="arr_eta" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
-						<select type="text" id="arrAirport" name="arr_airport" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="arrAirport" name="arr_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
 							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
+						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" autocomplete="off" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
 						<div class="airport-list">
 							<div onclick="selectAirport('PAL (PR)', 'PR', event)">PAL (PR)</div>
 							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J', event)">CEBU PACIFIC (5J)</div>
@@ -177,7 +181,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
-						<select type="text" id="arrHotelResort" name="arr_hotel" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="arrHotelResort" name="arr_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
 							<option value="" hidden selected></option>
 						</select>
 					</div>
@@ -186,8 +190,8 @@ select.form-control {
 						<h6>Departure Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsDeparture">
-						<label for="depOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label>
-						<select type="text" id="depOriginDropOff" class="form-control form-control-sm form-control-border select2 w-75">
+						<label for="depOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
+						<select type="text" id="depOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2" style="width:90%">
 							<option value="" hidden selected></option>
 						</select>
 						<input type="hidden" id="hdDepOriginDropOff" name="dep_origin_drop_off">
@@ -195,21 +199,21 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="depDate" name="dep_date" class="form-control form-control-sm form-control-border w-50">
+						<input type="date" id="depDate" name="dep_date" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="dep_etd" lang="en-GB" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="etd" autofocus name="dep_etd" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
-						<select type="text" id="depAirport" name="dep_airport" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="depAirport" name="dep_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
 							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
+						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" autocomplete="off" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
 						<div class="airport-list">
 							<div onclick="selectAirport('PAL (PR)', 'PR', event)">PAL (PR)</div>
 							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J', event)">CEBU PACIFIC (5J)</div>
@@ -220,29 +224,29 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
-						<select type="text" id="depHotelResort" name="dep_hotel" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="depHotelResort" name="dep_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
 							<option value="" hidden selected></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
-						<input type="time" id="estpickup" name="est_pickup" autofocus class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="estpickup" name="est_pickup" autofocus autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6 clsRemarks">
                         <label for="otherNames" class="control-label">Other Names:</label>
-                        <textarea id="otherNames" autofocus name="other_names" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
+                        <textarea id="otherNames" autofocus name="other_names" autocomplete="off" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="remarks" class="control-label clsDeparture">Remarks:</label>
-                        <textarea id="remarks" autofocus name="remarks" class="form-control form-control-sm form-control-border clsDeparture" style="height:100px;"></textarea>
+                        <textarea id="remarks" autofocus name="remarks" autocomplete="off" class="form-control form-control-sm form-control-border clsDeparture" style="height:100px;"></textarea>
                     </div>
 					
                 </div>
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:500px;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:90vh;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
@@ -290,7 +294,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest4" name="qty_guest_4" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>Kid (Local)</td>
+						<td>Child Local ( 6-12 yo)</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -303,7 +307,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>Kid (Foreigner)</td>
+						<td>Child Foreigner ( 6-12 yo )</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -312,12 +316,37 @@ select.form-control {
 							<input type="hidden" id="priceGuest5" name="price_guest_5"/>
 						</td>
 					</tr>
+					<tr>
+						<td rowspan="2"><input type="number" id="qtyGuest6" name="qty_guest_6" class="transfercharges"/></td>
+					</tr>
+					<tr>
+						<td>Child ( 3-5 yo )</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align:right;">
+							<label id="lblGuest6">0.00</label>
+							<input type="hidden" id="priceGuest5" name="price_guest_6"/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2"><input type="number" id="qtyGuest7" name="qty_guest_7" class="transfercharges"/></td>
+					</tr>
+					<tr>
+						<td>2 yo and below </td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align:right;">
+							<label id="lblGuest7">0.00</label>
+							<input type="hidden" id="priceGuest7" name="price_guest_7"/>
+						</td>
+					</tr>
 				</table><br>
                     <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal</label> <label id="lblTerminalFee"> 0.00</label> <input type="hidden" id="terminalFee" name="terminal_fee"/><br>
                     <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/>
-				
 				</div>
-					<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
+				<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
             </div>
 			
@@ -393,6 +422,9 @@ select.form-control {
 			$('#depOriginDropOffPrice').val($(this).val());
 		});
 
+		$('#arrOriginDropOff').select2();
+		$('#depOriginDropOff').select2();
+
 		$('#qtyGuest1').on('change', function() {
 			computePrice(`#lblGuest1`,`#priceGuest1`,$(this).val());
 		});
@@ -411,6 +443,14 @@ select.form-control {
 
 		$('#qtyGuest5').on('change', function() {
 			computePrice(`#lblGuest5`,`#priceGuest5`,$(this).val());
+		});
+
+		$('#qtyGuest6').on('change', function() {
+			computePrice(`#lblGuest6`,`#priceGuest6`,$(this).val());
+		});
+
+		$('#qtyGuest5').on('change', function() {
+			computePrice(`#lblGuest7`,`#priceGuest7`,$(this).val());
 		});
 
 		$('#chkTerminalFee').change(function() {
@@ -439,18 +479,61 @@ select.form-control {
 			}
 		});
 
-
+		//Save booking
 		$('#frmBooking').on('submit', function(e) {
-			e.preventDefault(); // prevent default form submit
+			e.preventDefault();
 
 			start_loader()
 
 			const formData = new FormData(this);
 			
 			for (let [key, value] of formData.entries()) {
-				console.log(key, value); // See what’s actually being sent
+				console.log(key, value);
+			}
+
+			let save = true;
+
+			//ARRIVAL VALIDATIONS
+			if ( $('#transferType').val() === "1" || $('#transferType').val() === "3")
+			{
+				if ($('#arrOriginDropOff').val() === '' || $('#arrOriginDropOff').val() === null) save = false;
+				if ($('#arrDate').val() === '' || $('#arrDate').val() === null) save = false;
+				if ($('#eta').val() === '' || $('#eta').val() === null) save = false;
+				if ($('#arrAirport').val() === '' || $('#arrAirport').val() === null) save = false;
+				if ($('#arrFlightNumber').val() === '' || $('#arrFlightNumber').val() === null) save = false;
+				if ($('#arrHotelResort').val() === '' || $('#arrHotelResort').val() === null) save = false;
+				
 			}
 			
+			//DEPARTURE VALIDATIONS
+			if ( $('#transferType').val() === "2" || $('#transferType').val() === "3")
+			{
+				if ($('#depOriginDropOff').val() === '' || $('#depOriginDropOff').val() === null) save = false;
+				if ($('#depDate').val() === '' || $('#depDate').val() === null) save = false;
+				if ($('#etd').val() === '' || $('#etd').val() === null) save = false;
+				if ($('#depAirport').val() === '' || $('#depAirport').val() === null) save = false;
+				if ($('#depFlightNumber').val() === '' || $('#depFlightNumber').val() === null) save = false;
+				if ($('#depHotelResort').val() === '' || $('#depHotelResort').val() === null) save = false;
+				if ($('#estpickup').val() === '' || $('#estpickup').val() === null) save = false;
+				if ($('#remarks').val() === '' || $('#remarks').val() === null) save = false;
+			}
+
+			if ($('#otherNames').val() === '' || $('#otherNames').val() === null) save = false;
+
+			let hasQty = false;
+
+			for(let x = 1; x<8; x++)
+			{
+				if ($('#qtyGuest' + x).val() !== '' && $('#qtyGuest' + x).val() > 0) hasQty = true;
+			}
+
+			if (save === false || hasQty === false)
+			{
+				$('#msg').html('<div class="alert alert-danger">Please complete all the required fields</div>')
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+				return;
+			}
+
 			$.ajax({
 				url: _base_url_+"classes/Booking.php?f=save_booking",
 				type: 'POST',
@@ -474,9 +557,6 @@ select.form-control {
 					end_loader() 
 				}
 			});
-			/* $('#msg').html('<div class="alert alert-success">Booking successfully added</div>')
-			$("html, body").animate({ scrollTop: 0 }, "fast");
-			end_loader(); */
 		});
 	});
 	
@@ -494,11 +574,14 @@ select.form-control {
 				{
 					const now = new Date();
 					const year = now.getFullYear();
+					const lastTwoDigits = year.toString().slice(-2);
 					const month = String(now.getMonth() + 1).padStart(2, '0');
 					const day = String(now.getDate()).padStart(2, '0');
+					const hours = String(now.getHours()).padStart(2, '0');
+					const minutes = String(now.getMinutes()).padStart(2, '0');
+					const seconds = String(now.getSeconds()).padStart(2, '0');
 
-					console.log(`${year}${month}${day}000001`);
-					generatedID = `${year}${month}${day}000001`
+					generatedID = `${lastTwoDigits}${month}${day}${hours}${minutes}${seconds}0001`
 				}
 				else
 				{
@@ -506,8 +589,6 @@ select.form-control {
 					generatedID = data.toString();
 				}
 
-				console.log("generatedID >",generatedID);
-				// return generatedID;
 				$('#reserveNum').val(generatedID);
 			}
 		});
