@@ -36,15 +36,9 @@ Class Users extends DBConnection {
 			$qry = $this->conn->query("UPDATE reference_table set $data where id = {$id}");
 			if($qry){
 				$this->settings->set_flashdata('success','Reference Details successfully updated.');
-				foreach($_POST as $k => $v){
-					if($k != 'id'){
-						if(!empty($data)) $data .=" , ";
-						$this->settings->set_userdata($k,$v);
-					}
-				}
 				return 1;
 			}else{
-				return "UPDATE users set $data where id = {$id}";
+				return 2;
 			}
 			
 		}
