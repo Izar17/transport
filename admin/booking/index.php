@@ -246,7 +246,7 @@ select.form-control {
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:100vh;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:500px;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
