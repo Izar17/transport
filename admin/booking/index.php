@@ -246,7 +246,7 @@ select.form-control {
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:90vh;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:100vh;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
@@ -326,7 +326,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest6">0.00</label>
-							<input type="hidden" id="priceGuest5" name="price_guest_6"/>
+							<input type="hidden" id="priceGuest6" name="price_guest_6"/>
 						</td>
 					</tr>
 					<tr>
@@ -343,8 +343,17 @@ select.form-control {
 						</td>
 					</tr>
 				</table><br>
-                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal</label> <label id="lblTerminalFee"> 0.00</label> <input type="hidden" id="terminalFee" name="terminal_fee"/><br>
-                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental</label> <label id="lblEnvFee"> 0.00</label> <input type="hidden" id="envFee" name="environment_fee"/>
+					<label id="priceTitle">Price</label> <label id="lblPrice">P0.00</label><br>
+					<input type="hidden" id="chargePrice" name="price"/>
+					<input type="hidden" id="chargePriceHolder"/>
+					<input type="hidden" id="envFee" name="environment_fee"/>
+					<input type="hidden" id="envFeeHolder"/>
+                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
+					<input type="hidden" id="terminalFee" name="terminal_fee"/><br>
+					<input type="hidden" id="terminalFeeHolder"/>
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
+					<input type="hidden" id="envFee" name="environment_fee"/>
+					<input type="hidden" id="envFeeHolder"/>
 				</div>
 				<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
@@ -358,6 +367,9 @@ select.form-control {
 <script>
 	//1
 	$(document).ready(function() {
+
+		let globalMOT = [];
+
 		$('.clsArrival').hide();
 		$('.clsDeparture').hide();
 		$('.clsRemarks').hide();
@@ -407,9 +419,33 @@ select.form-control {
 			}
         });
 
-		$('#modeOfTransfer').on('change', function() {
+		$('#modeOfTransfer').on('change', function()
+		{
 			$('#hdModeOfTransfer').val($('#modeOfTransfer option:selected').text());
 			$('#modeOfTransferPrice').val($(this).val());
+
+			const str = $('#modeOfTransfer option:selected').text();
+
+			if (str.includes("PRIVATE"))
+			{
+				$('#priceTitle').text(`Private Price: `);
+				$('#lblPrice').text(`P${$(this).val()}`);
+				$('#chargePriceHolder').val($(this).val());
+			}
+			else if (str.includes("CHARTERED"))
+			{
+				$('#priceTitle').text(`Chartered Price: `);
+				$('#lblPrice').text(`P${$(this).val()}`);
+				$('#chargePriceHolder').val($(this).val());
+			}
+			else if (str.includes("SHARED"))
+			{
+				$('#priceTitle').text(`Price: `);
+				$('#lblPrice').text(`P0.00`);
+				$('#chargePriceHolder').val("0");
+			}
+
+			computeTotal();
 		});
 
 		$('#arrOriginDropOff').on('change', function() {
@@ -426,38 +462,57 @@ select.form-control {
 		$('#depOriginDropOff').select2();
 
 		$('#qtyGuest1').on('change', function() {
-			computePrice(`#lblGuest1`,`#priceGuest1`,$(this).val());
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest1`,`#priceGuest1`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 
 		$('#qtyGuest2').on('change', function() {
-			computePrice(`#lblGuest2`,`#priceGuest2`,$(this).val());
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest2`,`#priceGuest2`,$(this).val());
 		});
 
 		$('#qtyGuest3').on('change', function() {
-			computePrice(`#lblGuest3`,`#priceGuest3`,$(this).val());
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest3`,`#priceGuest3`,$(this).val());
 		});
 
 		$('#qtyGuest4').on('change', function() {
-			computePrice(`#lblGuest4`,`#priceGuest4`,$(this).val());
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest4`,`#priceGuest4`,$(this).val());
 		});
 
 		$('#qtyGuest5').on('change', function() {
-			computePrice(`#lblGuest5`,`#priceGuest5`,$(this).val());
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest5`,`#priceGuest5`,$(this).val());
 		});
 
 		$('#qtyGuest6').on('change', function() {
-			computePrice(`#lblGuest6`,`#priceGuest6`,$(this).val());
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest6`,`#priceGuest6`,$(this).val());
 		});
 
-		$('#qtyGuest5').on('change', function() {
-			computePrice(`#lblGuest7`,`#priceGuest7`,$(this).val());
+		$('#qtyGuest7').on('change', function() {
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest7`,`#priceGuest7`,$(this).val());
 		});
+		
 
 		$('#chkTerminalFee').change(function() {
+			if ($(this).is(':checked')) {
+				$("#terminalFee").val($("#terminalFeeHolder").val());
+			} else {
+				$("#terminalFee").val("0");
+			}
 			computeTotal();
 		});
 
 		$('#chkEnvFee').change(function() {
+			if ($(this).is(':checked')) {
+				$("#envFee").val($("#envFeeHolder").val());
+			} else {
+				$("#envFee").val("0");
+			}
 			computeTotal();
 		});
 
@@ -594,8 +649,9 @@ select.form-control {
 		});
 	};
 
-	function computePrice(targetField, hiddenField, quantity) {
-		const transType = $('#transferType').val().toUpperCase();
+	function computePrice(targetField, hiddenField, quantity)
+	{
+		/* const transType = $('#transferType').val().toUpperCase();
 		const arrOriginDropOffPrice = parseInt($('#arrOriginDropOffPrice').val()) || 0;
 		const depOriginDropOffPrice = parseInt($('#depOriginDropOffPrice').val()) || 0;
 		let originPrice = 0;
@@ -603,10 +659,43 @@ select.form-control {
 		if (transType === "ARRIVAL") originPrice = arrOriginDropOffPrice;
 		else if (transType === "DEPARTURE") originPrice = depOriginDropOffPrice;
 		else if (transType === "ROUNDTRIP") originPrice = arrOriginDropOffPrice + depOriginDropOffPrice;
-
+ */
 		const modeOfTransferPrice = parseInt($('#modeOfTransferPrice').val()) || 0;
 
-		const total = (originPrice + modeOfTransferPrice) * parseInt(quantity);
+		const modeOfTransfers = globalMOT;
+
+		let selectedMode = modeOfTransfers.find(t => t.title === $('#modeOfTransfer option:selected').text());
+
+		let guestPrice = 0;
+		
+		//lblGuest1
+		switch (targetField){
+			case "#lblGuest1":
+				guestPrice = selectedMode.guestPrice1;
+				break;
+			case "#lblGuest2":
+				guestPrice = selectedMode.guestPrice2;
+				break;
+			case "#lblGuest3":
+				guestPrice = selectedMode.guestPrice3;
+				break;
+			case "#lblGuest4":
+				guestPrice = selectedMode.guestPrice4;
+				break;
+			case "#lblGuest5":
+				guestPrice = selectedMode.guestPrice5;
+				break;
+			case "#lblGuest6":
+				guestPrice = selectedMode.guestPrice6;
+				break;
+			case "#lblGuest7":
+				guestPrice = selectedMode.guestPrice7;
+				break;
+			default:
+				guestPrice = 0;
+		}
+
+		const total = guestPrice * parseInt(quantity);
 		
 		$(targetField).text(`P${total.toFixed(2)}`);
 		$(hiddenField).val(`${total.toFixed(2)}`);
@@ -614,30 +703,74 @@ select.form-control {
 		computeTotal();
 	};
 
-	function computeTotal() {
-		const guest1 = parseFloat($("#priceGuest1").val()) || 0;
-		const guest2 = parseFloat($("#priceGuest2").val()) || 0;
-		const guest3 = parseFloat($("#priceGuest3").val()) || 0;
-		const guest4 = parseFloat($("#priceGuest4").val()) || 0;
-		const guest5 = parseFloat($("#priceGuest5").val()) || 0;
+	function computeTotal()
+	{
 
-		const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5);
-		// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
+		let totalQty = 0;
+		let privatePrice = 0;
+		let price = 0;
+		const str = $('#modeOfTransfer option:selected').text();
 
-		console.log("totalGuestPrice>>",totalGuestPrice);
-		let terminalFee = 0;
-		let envFee = 0;
-		if ($('#chkTerminalFee').is(':checked')) terminalFee = $("#terminalFee").val();
-		if ($('#chkEnvFee').is(':checked')) envFee = $("#envFee").val();
+		if (str.includes("SHARED"))
+		{
+			const guest1 = parseFloat($("#priceGuest1").val()) || 0;
+			const guest2 = parseFloat($("#priceGuest2").val()) || 0;
+			const guest3 = parseFloat($("#priceGuest3").val()) || 0;
+			const guest4 = parseFloat($("#priceGuest4").val()) || 0;
+			const guest5 = parseFloat($("#priceGuest5").val()) || 0;
+			const guest6 = parseFloat($("#priceGuest6").val()) || 0;
+			const guest7 = parseFloat($("#priceGuest7").val()) || 0;
+
+			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5);
+			// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
+			console.log("totalGuestPrice>>",totalGuestPrice);
+
+			$('#priceTitle').text(`Price: `);
+			$('#lblPrice').text(`P${totalGuestPrice}`);
+			// $('#chargePrice').val(`${totalGuestPrice}`);
+			price = totalGuestPrice;
+		}
+		else if (str.includes("PRIVATE"))
+		{
+			const guest1 = parseInt($("#qtyGuest1").val()) || 0;
+			const guest2 = parseInt($("#qtyGuest2").val()) || 0;
+			const guest3 = parseInt($("#qtyGuest3").val()) || 0;
+			const guest4 = parseInt($("#qtyGuest4").val()) || 0;
+			const guest5 = parseInt($("#qtyGuest5").val()) || 0;
+			const guest6 = parseInt($("#qtyGuest6").val()) || 0;
+
+			totalQty = guest1 + guest2 + guest3 + guest4 + guest5 + guest6;
+
+			// if (totalQty < 1) alert("NOPE");
+			console.log("totalQty>>",totalQty);
+			const transferType = $('#transferType').val();
+			let chargePrice = parseFloat($('#chargePriceHolder').val());
+
+			if (transferType !== 3) chargePrice = chargePrice/2;
+
+			privatePrice = chargePrice * totalQty;
+			price = privatePrice;
+		}
+		else if (str.includes("CHARTERED")) price = $('#chargePriceHolder').val();
+
+		let terminalFee = $("#terminalFee").val() || 0;
+		let envFee = $("#envFee").val() || 0;
 		console.log("terminalFee>>",terminalFee);
 		console.log("envFee>>",envFee);
-		const total = parseInt(totalGuestPrice) + parseInt(terminalFee) + parseInt(envFee);
 		
+		console.log("price>>",price);
+
+		const total = parseFloat(price) + parseFloat(terminalFee) + parseFloat(envFee);
+
+		console.log("price>>",total);
+
+		$('#chargePrice').val(price);
 		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`);
 		$("#totalPrice").val(`${parseFloat(total).toFixed(2)}`);
 	};
 
-	function populateDropdowns(transferType){
+	function populateDropdowns(transferType)
+	{
 		$.ajax({
 			url: _base_url_+"classes/Booking.php?f=get_reference_table",
 			type: 'GET',
@@ -655,11 +788,16 @@ select.form-control {
 				// let depHotelResorts = [];
 
 				$.each(data, function(index, item) {
+
+					if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description, amount: item.amount, guestPrice1: item.price_guest_1, guestPrice2: item.price_guest_2, guestPrice3: item.price_guest_3, guestPrice4: item.price_guest_4, guestPrice5: item.price_guest_5, guestPrice6: item.price_guest_6, guestPrice7: item.price_guest_7});
+
+					if (transferType === 1) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("DEPARTURE") && !mode.title.includes("ROUNDTRIP"));
+					else if (transferType === 2) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("ROUNDTRIP"));
+					else if (transferType === 3) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
+
 					if (parseInt(item.type) === 1)
 					{
-						/* if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description});
-						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
-						
+						/* else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
 						if (item.code == 'ODL') arrOriginDropOffs.push({amount: item.amount, description: item.description});
 						/* else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
 						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description}); */
@@ -667,18 +805,16 @@ select.form-control {
 
 					if (parseInt(item.type) === 2)
 					{
-						/* if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description});
-						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
-						
-						if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
+						/* else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
+						if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description});
+						else if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
 						/* else if (item.code == 'AP') depAirports.push({title: item.title, description: item.description});
 						else if (item.code == 'HR') depHotelResorts.push({title: item.title, description: item.description}); */
 					}
 
 					if (parseInt(item.type) === 3)
 					{
-						if (item.code == 'MOT') arrPaymentModes.push({amount: item.amount, description: item.description});
-						else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
+						if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
 						else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
 						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description});
 					}
@@ -689,24 +825,24 @@ select.form-control {
 						{
 							const amount = parseFloat(item.amount);
 							$("#lblTerminalFee").text(`P${amount.toFixed(2)}`);
-							$("#terminalFee").val(`${amount.toFixed(2)}`);
+							$("#terminalFeeHolder").val(`${amount.toFixed(2)}`);
 						}
 						if (item.title == 'ENVIRONMENT')
 						{
 							const amount = parseFloat(item.amount);
 							$("#lblEnvFee").text(`P${amount.toFixed(2)}`);
-							$("#envFee").val(`${amount.toFixed(2)}`);
+							$("#envFeeHolder").val(`${amount.toFixed(2)}`);
 						}
 
 					}
 
 				});
 
-
-
+				globalMOT = arrPaymentModes;
+				
 				//Populating dropdowns
 				$.each(arrPaymentModes, function(index, item) {
-					$('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.description + '</option>');
+					$('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.title + '</option>');
 				});
 
 				$.each(arrPaymentTypes, function(index, item) {
@@ -732,7 +868,6 @@ select.form-control {
 					$.each(arrHotelResorts, function(index, item) {
 						$('#arrHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
 					});
-
 				}
 				
 				if (transferType === 2 || transferType === 3) {
