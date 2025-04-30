@@ -71,7 +71,7 @@ Class Booking extends DBConnection {
 		}
 
 		$data .= (!empty($data) ? "," : "");
-		$data .= " `created_date`=NOW(), `created_by`='admin' ";
+		$data .= " `created_date`=NOW()";
 
 		$result = "";
 		$qry = $this->conn->query("INSERT INTO booking set {$data}");

@@ -27,7 +27,7 @@ select.form-control {
     height: 20px; /* Adjust as needed */
     padding: 0px; /* Reduce padding */
     font-size: 12px; /* Make text smaller */
-	width:75%;
+	width:90%;
 	border: 1px solid;
 }
 .form-group {
@@ -82,7 +82,7 @@ select.form-control {
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post">
 		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
-		<input type="hidden" name="updated_by" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname'); ?>"/>
+		<input type="hidden" name="created_by" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname'); ?>"/>
         <div class="row">
             <!-- First Panel (10 columns) --> 
             <div class="col-md-10">

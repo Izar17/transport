@@ -65,11 +65,20 @@
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td class="text-center"><?php echo $row['reserve_num'] ?></td>
 							<td><?php echo $row['last_name'] .','. $row['first_name'] .'<br>'.$row['contact_no'].'<br>'.$row['email_address']; ?></td>
-							<td><?php echo $row['qty_guest_1'] + $row['qty_guest_2']  + $row['qty_guest_3']  + $row['qty_guest_4']  + $row['qty_guest_5'] ?></td>
+							<td><?php echo array_sum([
+									$row['qty_guest_1'],
+									$row['qty_guest_2'],
+									$row['qty_guest_3'],
+									$row['qty_guest_4'],
+									$row['qty_guest_5'],
+									$row['qty_guest_6'],
+									$row['qty_guest_7']
+								]); ?>
+							</td>
 							<td style="width:250px;">
 							<?php 
 									switch($row['transfer_type']){
-										case 1:       
+										case 1:      
 											echo "<b>ARRIVAL";
 											echo '<br>'. $row['arr_date'] .' '. $row['arr_eta'] .'</b><br>';
 											echo $row['arr_origin_drop_off'] .'<br>';
@@ -106,7 +115,7 @@
 								?></td>
 							<td><?php echo $row['transfer_mode'] ?></td>
 							<td><?php echo $row['other_names'] . '<br><br>' . $row['remarks'];?></td>
-							<td>BOOKED BY: <br><?php echo $row['updated_by'] ?></td>
+							<td>BOOKED BY: <br><?php echo $row['created_by'] ?></td>
 							<td><?php echo $row['created_date'] ?></td>
 							<td><?php echo $row['payment_type'] .'<br> Remarks: ' . $row['payment_remarks']?><br>
 								<?php 
