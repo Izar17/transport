@@ -250,7 +250,7 @@ select.form-control {
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; margin-top: -55px;background-color:#E0DD06;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; margin-top: -55px;background-color:#D4FEFD;">
                 <label for="transfercharges" class="control-label" style="text-align:center;font-size:18px;"><u>&nbsp;&nbsp;&nbsp; TRANSFER CHARGES &nbsp;&nbsp;&nbsp;</u></label>
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:14px;padding:0px;font-weight:bold;">
@@ -362,7 +362,7 @@ select.form-control {
 					<h5 style="color:red;">
 						<label>Total:</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
 					</h5>
-				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
+				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100" style="border-radius:10px;">Submit Booking</button>
 				</div>
             </div>
 			
