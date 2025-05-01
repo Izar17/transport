@@ -163,7 +163,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="arr_eta" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="eta" autofocus name="arr_eta"  value="06:00" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 
 					<div class="form-group col-md-3 clsArrival">
@@ -207,7 +207,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="dep_etd" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="etd" autofocus name="dep_etd" value="06:00" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
@@ -337,7 +337,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest7" name="qty_guest_7" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>2 yo and below </td>
+						<td>2 yo and below /<br> <span style="color:red">FOC Employee</span></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -346,17 +346,30 @@ select.form-control {
 							<input type="hidden" id="priceGuest7" name="price_guest_7"/>
 						</td>
 					</tr>
+					<tr>
+						<td rowspan="2"><input type="number" id="qtyGuest8" name="qty_guest_8" class="transfercharges"/></td>
+					</tr>
+					<tr>
+						<td>Resident (<span style="color:grey">No Terminal & Environment Fee</span>)</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align:right;">
+							<label id="lblGuest8">0.00</label>
+							<input type="hidden" id="priceGuest8" name="price_guest_8"/>
+						</td>
+					</tr>
 				</table><hr>
 					<label id="priceTitle">Price</label> <label id="lblPrice">P0.00</label><br>
 					<input type="hidden" id="chargePrice" name="price"/>
 					<input type="hidden" id="chargePriceHolder"/>
 					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
-                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
+                    <!-- <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
 					<input type="hidden" id="terminalFee" name="terminal_fee"/><br>
 					<input type="hidden" id="terminalFeeHolder"/>
                     <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
-					<input type="hidden" id="envFee" name="environment_fee"/>
+					<input type="hidden" id="envFee" name="environment_fee"/> -->
 					<input type="hidden" id="envFeeHolder"/>
 					<hr>
 					<h5 style="color:red;">
@@ -435,8 +448,13 @@ select.form-control {
 
 			if (str.includes("PRIVATE"))
 			{
-				$('#priceTitle').text(`Private Price: `);
-				$('#lblPrice').text(`P${$(this).val()}`);
+				if($('#transferType').val() == 3){
+					$privatePrice = $(this).val();
+				}else{
+					$privatePrice = $(this).val()/2;
+				}
+				$('#priceTitle').text(`Private Price/Head: `);
+				$('#lblPrice').text(`P${$privatePrice}`);
 				$('#chargePriceHolder').val($(this).val());
 			}
 			else if (str.includes("CHARTERED"))
@@ -477,31 +495,43 @@ select.form-control {
 		$('#qtyGuest2').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest2`,`#priceGuest2`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 
 		$('#qtyGuest3').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest3`,`#priceGuest3`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 
 		$('#qtyGuest4').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest4`,`#priceGuest4`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 
 		$('#qtyGuest5').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest5`,`#priceGuest5`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 
 		$('#qtyGuest6').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest6`,`#priceGuest6`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 
 		$('#qtyGuest7').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest7`,`#priceGuest7`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
+		});
+
+		$('#qtyGuest8').on('change', function() {
+			const str = $('#modeOfTransfer option:selected').text();
+			if (str.includes("SHARED")) computePrice(`#lblGuest8`,`#priceGuest8`,$(this).val());
+			else if (str.includes("PRIVATE")) computeTotal(); 
 		});
 		
 
@@ -698,6 +728,9 @@ select.form-control {
 			case "#lblGuest7":
 				guestPrice = selectedMode.guestPrice7;
 				break;
+			case "#lblGuest8":
+				guestPrice = selectedMode.guestPrice8;
+				break;
 			default:
 				guestPrice = 0;
 		}
@@ -727,8 +760,9 @@ select.form-control {
 			const guest5 = parseFloat($("#priceGuest5").val()) || 0;
 			const guest6 = parseFloat($("#priceGuest6").val()) || 0;
 			const guest7 = parseFloat($("#priceGuest7").val()) || 0;
+			const guest8 = parseFloat($("#priceGuest8").val()) || 0;
 
-			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5) + parseFloat(guest6) + parseFloat(guest7);
+			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5) + parseFloat(guest6) + parseFloat(guest7) + parseFloat(guest8);
 			// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
 			console.log("totalGuestPrice>>",totalGuestPrice);
 
@@ -745,16 +779,17 @@ select.form-control {
 			const guest4 = parseInt($("#qtyGuest4").val()) || 0;
 			const guest5 = parseInt($("#qtyGuest5").val()) || 0;
 			const guest6 = parseInt($("#qtyGuest6").val()) || 0;
+			const guest8 = parseInt($("#qtyGuest8").val()) || 0;
 
-			totalQty = guest1 + guest2 + guest3 + guest4 + guest5 + guest6;
+			totalQty = guest1 + guest2 + guest3 + guest4 + guest5 + guest6 + guest8;
 
 			// if (totalQty < 1) alert("NOPE");
 			console.log("totalQty>>",totalQty);
 			const transferType = $('#transferType').val();
 			let chargePrice = parseFloat($('#chargePriceHolder').val());
 
-			if (transferType !== 3) chargePrice = chargePrice/2;
-
+			if (transferType != 3) chargePrice = chargePrice/2;
+			
 			privatePrice = chargePrice * totalQty;
 			price = privatePrice;
 		}
@@ -796,7 +831,7 @@ select.form-control {
 
 				$.each(data, function(index, item) {
 
-					if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description, amount: item.amount, guestPrice1: item.price_guest_1, guestPrice2: item.price_guest_2, guestPrice3: item.price_guest_3, guestPrice4: item.price_guest_4, guestPrice5: item.price_guest_5, guestPrice6: item.price_guest_6, guestPrice7: item.price_guest_7});
+					if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description, amount: item.amount, guestPrice1: item.price_guest_1, guestPrice2: item.price_guest_2, guestPrice3: item.price_guest_3, guestPrice4: item.price_guest_4, guestPrice5: item.price_guest_5, guestPrice6: item.price_guest_6, guestPrice7: item.price_guest_7, guestPrice8: item.price_guest_8});
 
 					if (transferType === 1) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("DEPARTURE") && !mode.title.includes("ROUNDTRIP"));
 					else if (transferType === 2) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("ROUNDTRIP"));
