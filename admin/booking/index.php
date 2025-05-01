@@ -143,6 +143,7 @@ select.form-control {
 						<textarea id="paymentRemarks" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks"><?php 
 							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : ''; 
 						?></textarea>
+						<input type="hidden" id="paymentStatus" name="status"/>
 					</div>
 					
 					<!-- Arrival Details -->
@@ -467,6 +468,12 @@ select.form-control {
 			}
 
 			computeTotal();
+		});
+		
+		$('#paymentType').on('change', function() {
+			const str = $('#paymentType option:selected').text();
+			if (str.includes("FREE")) $('#paymentStatus').val('1');
+			else $('#paymentStatus').val('0');
 		});
 
 		$('#arrOriginDropOff').on('change', function() {
