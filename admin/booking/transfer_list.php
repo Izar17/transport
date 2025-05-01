@@ -348,16 +348,15 @@
 
 
 	$('.paid_data').click(function(){
-		let user = document.getElementById('user').value;
-		_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id'), `"${user}"`])
+		_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id')])
 	})
 		
-	function paid_booking($id,$user){
+	function paid_booking($id){
 		start_loader();
 		$.ajax({
 			url:_base_url_+"classes/booking.php?f=paid_booking",
 			method:"POST",
-			data:{id: $id, user: $user},
+			data:{id: $id},
 			dataType:"json",
 			error:err=>{
 				console.log(err)
