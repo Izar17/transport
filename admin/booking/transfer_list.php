@@ -195,7 +195,22 @@
 										<span class="fa fa-trash text-danger"></span> Cancel
 									</a>
 								</div>
-							<?php } else if($row['status'] == 2){
+							<?php } else if($row['status'] == 2){ ?>
+								<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
+								Action &nbsp;
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+								<input type="hidden" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname');?>" id="user"/>
+								<div class="dropdown-menu" role="menu">
+                                	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
+                                    <span class="fa fa-eye text-dark"></span> View</a>
+									<div class="dropdown-divider"></div>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+										<span class="fa fa-print text-secondary"></span> Print
+									</a>
+								</div>
+							<?php
 								echo 'Updated by: <br>' .$row['updated_by'];
 							 } else {
 								echo '<span >Cancelled</span>';
