@@ -77,7 +77,8 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                             'price_guest_4' => 'Child Local (6-12 yo)',
                             'price_guest_5' => 'Child Foreign (6-12 yo)',
                             'price_guest_6' => 'Child (3-5 yo)',
-                            'price_guest_7' => 'Child 2 yo and below'
+                            'price_guest_7' => 'Child 2 yo and below / FOC Employee',
+                            'price_guest_8' => 'Resident (No Terminal and Environment Fee)'
                         ];
                         foreach($fields as $key => $label): ?>
                         <div class="form-group">
