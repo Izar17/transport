@@ -21,7 +21,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 <div class="row">
                     <!-- Left Panel -->
                     <div class="col-md-6">
-                        <h4>Left Panel</h4>
+                        <!-- <h4>Left Panel</h4> -->
                         <div class="form-group">
                             <label for="code">Select Dropdown</label>
                             <select name="code" id="code" class="custom-select" required onchange="toggleFields()">
@@ -36,7 +36,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         </div>
                         <div id="motTypeContainer" class="form-group" style="display: none;">
                             <label for="mot_type">Mode of Transfer Type</label>
-                            <select name="mot_type" id="mot_type" class="custom-select">
+                            <select name="mot_type" id="mot_type" class="custom-select" onchange="showGuest(this.value)">
                                 <option></option>
                                 <option value="1" <?php echo isset($meta['mot_type']) && $meta['mot_type'] == 1 ? 'selected' : '' ?>>SHARED</option>
                                 <option value="2" <?php echo isset($meta['mot_type']) && $meta['mot_type'] == 2 ? 'selected' : '' ?>>PRIVATE</option>
@@ -68,7 +68,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 
                     <!-- Right Panel -->
                     <div id="rightPanel" class="col-md-6" style="display: none;">
-                        <h4>Right Panel</h4>
+                        <!-- <h4>Right Panel</h4> -->
                         <?php 
                         $fields = [
                             'price_guest_1' => 'Adult (Local)',
@@ -139,16 +139,9 @@ function toggleFields() {
 
     if (dropdown === "MOT") {
         motTypeContainer.style.display = "block";
-        rightPanel.style.display = "block";
         amountContainer.style.display = "none";
         amountField.removeAttribute("required");
-
-        // Add required attribute to guest fields
-        guestFields.forEach(field => {
-            document.getElementById(field).setAttribute("required", "required");
-        });
-
-    } else if (dropdown === "ODL" || dropdown === "TC") {
+    } else if (dropdown === "TC") {
         amountContainer.style.display = "block";
         motTypeContainer.style.display = "none";
         rightPanel.style.display = "none";
@@ -165,6 +158,30 @@ function toggleFields() {
         amountContainer.style.display = "none";
         amountField.removeAttribute("required");
 
+        // Remove required attribute from guest fields
+        guestFields.forEach(field => {
+            document.getElementById(field).removeAttribute("required");
+        });
+    }
+}
+function showGuest(id){
+    let rightPanel = document.getElementById('rightPanel');
+    let amountContainer = document.getElementById('amountContainer');
+    let amountField = document.getElementById('amount');
+
+    // Get all guest price fields
+    let guestFields = [
+        'price_guest_1', 'price_guest_2', 'price_guest_3',
+        'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7'
+    ];
+
+    if(id == 1){
+        rightPanel.style.display = "block";
+    }else{
+
+        rightPanel.style.display = "none";
+        amountContainer.style.display = "block";
+        amountField.setAttribute("required", "required");
         // Remove required attribute from guest fields
         guestFields.forEach(field => {
             document.getElementById(field).removeAttribute("required");
