@@ -138,4 +138,3 @@
     $('.wrapper>.content-wrapper').css("min-height",$(window).height() - $('#top-Nav').height() - $('#login-nav').height() - $("footer.main-footer").height())
   })
 </script>
-<script src="../scriptchat.js"></script>

@@ -348,8 +348,7 @@
 
 
 	$('.paid_data').click(function(){
-		let user = document.getElementById('user').value;
-		_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id'), `"${user}"`])
+		_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id')])
 	})
 		
 	function paid_booking($id,$user){
@@ -377,20 +376,19 @@
 
 	
 	$('.cancel_data').click(function(){    
-		let user = document.getElementById('user').value;
 		let cancelReason = prompt("Please enter the reason for cancellation:");
 		if (cancelReason !== null && cancelReason.trim() !== "") {
-			_conf(`Are you sure you want to cancel this booking?`, "cancel_booking", [$(this).attr('data-id'), `"${cancelReason}"`, `"${user}"`]);
+			_conf(`Are you sure you want to cancel this booking?`, "cancel_booking", [$(this).attr('data-id')]);
 		} 
 
 	})
 		
-	function cancel_booking($id,$reason,$user){
+	function cancel_booking($id){
 		start_loader();
 		$.ajax({
 			url:_base_url_+"classes/booking.php?f=cancel_booking",
 			method:"POST",
-			data:{id: $id, reason: $reason, user: $user},
+			data:{id: $id},
 			dataType:"json",
 			error:err=>{
 				console.log(err)
