@@ -365,11 +365,11 @@ select.form-control {
 					<input type="hidden" id="chargePriceHolder"/>
 					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
-                    <!-- <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
+                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; with Shopping:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
 					<input type="hidden" id="terminalFee" name="terminal_fee"/><br>
 					<input type="hidden" id="terminalFeeHolder"/>
-                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
-					<input type="hidden" id="envFee" name="environment_fee"/> -->
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Others:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
+					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
 					<hr>
 					<h5 style="color:red;">
