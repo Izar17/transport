@@ -86,12 +86,26 @@ Class Booking extends DBConnection {
 		exit;
 	}
 
-	function delete_shop_type(){
+	function paid_booking(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `shop_type_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `booking` set status = 2, updated_by = '$user' where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," Shop Type successfully deleted.");
+			$this->settings->set_flashdata('success',"Booking has been successfully marked as paid!");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+	function cancel_booking(){
+		extract($_POST);
+		// $updated_by = $_settings->userdata('lastname');
+		$del = $this->conn->query("UPDATE `booking` set delete_flag = 1, status = 3, status_remarks = '$reason', updated_by = '$user' where id = '{$id}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success',"Booking successfully cancelled!");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -115,8 +129,11 @@ switch ($action) {
 	case 'save_booking':
 		echo $Booking->save_booking();
 	break;
-	case 'delete_shop_type':
-		echo $Booking->delete_shop_type();
+	case 'paid_booking':
+		echo $Booking->paid_booking();
+	break;
+	case 'cancel_booking':
+		echo $Booking->cancel_booking();
 	break;
 	default:
 		// echo $sysset->index();
