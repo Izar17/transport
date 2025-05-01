@@ -97,8 +97,8 @@ Class Booking extends DBConnection {
 			$resp['error'] = $this->conn->error;
 		}
 		return json_encode($resp);
-
 	}
+	
 	function cancel_booking(){
 		extract($_POST);
 		// $updated_by = $_settings->userdata('lastname');

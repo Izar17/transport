@@ -346,9 +346,9 @@
 		});
 	})
 
-	let user = document.getElementById('user').value;
 
 	$('.paid_data').click(function(){
+		let user = document.getElementById('user').value;
 		_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id'), `"${user}"`])
 	})
 		
@@ -377,9 +377,10 @@
 
 	
 	$('.cancel_data').click(function(){    
+		let user = document.getElementById('user').value;
 		let cancelReason = prompt("Please enter the reason for cancellation:");
 		if (cancelReason !== null && cancelReason.trim() !== "") {
-			_conf(`Are you sure you want to cancel this booking?\nReason: ${cancelReason}`, "cancel_booking", [$(this).attr('data-id'), `"${cancelReason}"`, `"${user}"`]);
+			_conf(`Are you sure you want to cancel this booking?`, "cancel_booking", [$(this).attr('data-id'), `"${cancelReason}"`, `"${user}"`]);
 		} 
 
 	})
