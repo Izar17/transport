@@ -246,12 +246,12 @@ select.form-control {
             </div>
             
             <!-- Second Panel (2 columns) -->
-            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:100vh;">
+            <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; height:89vh; margin-top: -55px;background-color:#E0DD06;">
                 <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
 					<tr>
-						<td rowspan="2" width="40%"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
+						<td rowspan="2" width="25%"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Local)</td>
@@ -268,7 +268,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest2" name="qty_guest_2" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>Adult (Foreigner)</td>
+						<td>Adult (Foreign)</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -294,7 +294,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest4" name="qty_guest_4" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>Child Local ( 6-12 yo)</td>
+						<td>Child Local (6-12 yo)</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -307,7 +307,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>Child Foreigner ( 6-12 yo )</td>
+						<td>Child Foreign (6-12 yo)</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -320,7 +320,7 @@ select.form-control {
 						<td rowspan="2"><input type="number" id="qtyGuest6" name="qty_guest_6" class="transfercharges"/></td>
 					</tr>
 					<tr>
-						<td>Child ( 3-5 yo )</td>
+						<td>Child (3-5 yo)</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -342,7 +342,7 @@ select.form-control {
 							<input type="hidden" id="priceGuest7" name="price_guest_7"/>
 						</td>
 					</tr>
-				</table><br>
+				</table><hr>
 					<label id="priceTitle">Price</label> <label id="lblPrice">P0.00</label><br>
 					<input type="hidden" id="chargePrice" name="price"/>
 					<input type="hidden" id="chargePriceHolder"/>
@@ -354,9 +354,12 @@ select.form-control {
                     <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environmental:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
 					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
-				</div>
-				<label>Total</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
+					<hr>
+					<h5 style="color:red;">
+						<label>Total:</label> <label id="lblTotalPrice"> 0.00</label> <input type="hidden" id="totalPrice" name="total_price"/>
+					</h5>
 				<button type="submit" class="btn btn-flat btn-primary mt-2 w-100">Submit Booking</button>
+				</div>
             </div>
 			
         </div>
@@ -721,7 +724,7 @@ select.form-control {
 			const guest6 = parseFloat($("#priceGuest6").val()) || 0;
 			const guest7 = parseFloat($("#priceGuest7").val()) || 0;
 
-			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5);
+			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5) + parseFloat(guest6) + parseFloat(guest7);
 			// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
 			console.log("totalGuestPrice>>",totalGuestPrice);
 
@@ -900,7 +903,7 @@ select.form-control {
 	}
 
 
-	document.querySelectorAll(".airport-input").forEach(inputField => {
+document.querySelectorAll(".airport-input").forEach(inputField => {
     inputField.addEventListener("click", function() {
         const dropdown = this.nextElementSibling; // Get the matching dropdown
         dropdown.style.display = "block";
