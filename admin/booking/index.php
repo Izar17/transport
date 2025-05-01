@@ -24,9 +24,9 @@ input[type="number"],
 input[type="date"], 
 textarea.form-control,
 select.form-control {
-    height: 20px; /* Adjust as needed */
+    height: 25px; /* Adjust as needed */
     padding: 0px; /* Reduce padding */
-    font-size: 12px; /* Make text smaller */
+    font-size: 14px; /* Make text smaller */
 	width:90%;
 	border: 1px solid;
 }
@@ -82,17 +82,21 @@ select.form-control {
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post">
 		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
-		<input type="hidden" name="created_by" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname'); ?>"/>
         <div class="row">
             <!-- First Panel (10 columns) --> 
             <div class="col-md-10">
                 <div class="row">
 					<!-- First Row -->
-					<div class="form-group col-md-5 d-flex align-items-center">
-						<label for="reserveNum" class="me-3 mb-0" style="min-width: 180px;font-size: 0.8rem;">Reservation Number:</label>
-						<input type="text" id="reserveNum" name="reserve_num"  autocomplete="off" value="<?php echo isset($meta['reserve_num']) ? $meta['reserve_num']: '' ?>" class="form-control form-control-sm form-control-border" style="width:125px;" readonly>
+					<div class="form-group col-md-12 d-flex align-items-center">
+						<label for="reserveNum" class="me-3 mb-0" style="min-width: 180px;font-size: 17px;color:blue;">Reservation Number:</label>
+						<input type="text" id="reserveNum" name="reserve_num"  autocomplete="off" value="<?php echo isset($meta['reserve_num']) ? $meta['reserve_num']: '' ?>" class="form-control form-control-sm form-control-border" style="font-size:16px;color:blue; border:none;background-color:#fff;" readonly>
 					</div>
-					<div class="form-group col-md-5"></div>
+					<div class="form-group col-md-8 d-flex align-items-center">
+						<b>Processed by:</b> &nbsp;
+						<input type="text" name="created_by" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname'); ?>" class="form-control form-control-sm form-control-border" style="width:140px;border:none;background-color:#fff;" readonly/>
+					<hr>
+					</div>
+					<div class="form-group col-md-3"></div>
 					<!-- <div class="form-group col-md-4"></div> -->
                     <div class="form-group col-md-3">
                         <label for="lastname" class="control-label">Last Name: <span class="required">*</span></label>
@@ -247,9 +251,9 @@ select.form-control {
             
             <!-- Second Panel (2 columns) -->
             <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; margin-top: -55px;background-color:#E0DD06;">
-                <label for="transfercharges" class="control-label">TRANSFER CHARGES</label>
+                <label for="transfercharges" class="control-label" style="text-align:center;font-size:18px;"><u>&nbsp;&nbsp;&nbsp; TRANSFER CHARGES &nbsp;&nbsp;&nbsp;</u></label>
                 <div id="charges" class="flex-grow-1">
-				<table style="width:100%;font-size:12px;padding:0px;font-weight:bold;">
+				<table style="width:100%;font-size:14px;padding:0px;font-weight:bold;">
 					<tr>
 						<td rowspan="2" width="25%"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
 					</tr>
