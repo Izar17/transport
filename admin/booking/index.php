@@ -400,11 +400,7 @@ select.form-control {
 		
 		$('#transferType').on('change', function() {
 			
-			//Reset dropdowns
-			$('#modeOfTransfer').empty();
-			$('#paymentType').empty();
-			$('#arrAirport').empty();
-			$('#arrHotelResort').empty();
+			reset();
 
 			//Adding default value
 			$('#modeOfTransfer').append('<option value="" disabled selected></option>');
@@ -652,6 +648,18 @@ select.form-control {
 		});
 	});
 	
+	function reset() {
+		// Reset dropdowns
+		$('#modeOfTransfer, #paymentType, #arrAirport, #arrHotelResort').empty();
+
+		// Reset number input fields
+		$('#qtyGuest1, #qtyGuest2, #qtyGuest3, #qtyGuest4, #qtyGuest5, #qtyGuest6, #qtyGuest7, #qtyGuest8').val('');
+		$('#priceGuest1, #priceGuest2, #priceGuest3, #priceGuest4, #priceGuest5, #priceGuest6, #priceGuest7, #priceGuest8, #totalPrice').val('0');
+
+		// Reset labels
+		$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
+		$('#lblPrice, #lblTotalPrice').text('P0.00');
+	}
 
 	function generateReservationID() {
 		$.ajax({
