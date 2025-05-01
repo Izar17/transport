@@ -59,30 +59,29 @@
   </div> -->
   <div class="col-12 col-sm-4 col-md-4">
     <div class="info-box">
+      <span class="info-box-icon bg-gradient-maroon elevation-1"><i class="fas fa-user-friends"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">Booking Transfer</span>
+        <span class="iinfo-box-number text-right h4">
+          <?php 
+            $total = $conn->query("SELECT count(id) as total FROM booking where delete_flag = 0 ")->fetch_assoc()['total'];
+            echo format_num($total);
+          ?>
+          <?php ?>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-4 col-md-4">
+    <div class="info-box">
       <span class="info-box-icon bg-gradient-light border elevation-1"><i class="fas fa-users"></i></span>
 
       <div class="info-box-content">
         <span class="info-box-text">Users</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM vendor_list where delete_flag = 0 ")->fetch_assoc()['total'];
-            echo format_num($total);
-          ?>
-          <?php ?>
-        </span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-    <!-- /.info-box -->
-  </div><div class="col-12 col-sm-4 col-md-4">
-    <div class="info-box">
-      <span class="info-box-icon bg-gradient-maroon elevation-1"><i class="fas fa-user-friends"></i></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Guest</span>
-        <span class="iinfo-box-number text-right h4">
-          <?php 
-            $total = $conn->query("SELECT count(id) as total FROM client_list where delete_flag = 0 ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM users")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
