@@ -73,22 +73,22 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="confirm_modal" role='dialog'>
-    <div class="modal-dialog modal-md modal-dialog-centered rounded-0" role="document">
+  <div class="modal fade rounded-0" id="confirm_modal" role="dialog" aria-hidden="true" inert>
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header rounded-0">
-        <h5 class="modal-title">Confirmation</h5>
-      </div>
-      <div class="modal-body rounded-0">
-        <div id="delete_content"></div>
-      </div>
-      <div class="modal-footer rounded-0">
-        <button type="button" class="btn btn-sm btn-flat btn-primary" id='confirm' onclick="">Continue</button>
-        <button type="button" class="btn btn-sm btn-flat btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+          <h5 class="modal-title">Confirmation</h5>
+        </div>
+        <div class="modal-body rounded-0">
+          <div id="delete_content"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="confirm" onclick="">Continue</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
-  </div>
+</div>
       </div>
       <!-- /.content-wrapper -->
       <?php require_once('inc/footer.php') ?>

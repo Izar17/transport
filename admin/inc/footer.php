@@ -48,11 +48,31 @@
             }
         })
     }
-    window._conf = function($msg='',$func='',$params = []){
-       $('#confirm_modal #confirm').attr('onclick',$func+"("+$params.join(',')+")")
-       $('#confirm_modal .modal-body').html($msg)
-       $('#confirm_modal').modal('show')
-    }
+    window._conf = function($msg='', $func='', $params = []){
+    let modal = $('#confirm_modal');
+
+        // Ensure aria-hidden is removed & inert is disabled when modal is shown
+        modal.removeAttr('aria-hidden'); 
+        modal.removeAttr('inert'); 
+
+        // Set the message inside modal
+        modal.find('.modal-body').html($msg);
+
+        // Set the function on confirmation button
+        modal.find('#confirm').attr('onclick', $func + "(" + $params.join(',') + ")");
+
+        // Show the modal
+        modal.modal('show');
+
+        // Set initial focus on confirm button for accessibility
+        modal.find('#confirm').focus();
+
+        // When modal is hidden, restore accessibility attributes
+        modal.on('hidden.bs.modal', function () {
+            modal.attr('aria-hidden', 'true');
+            modal.attr('inert', 'true');
+        });
+    };
   })
 </script>
 <footer class="main-footer text-sm">
