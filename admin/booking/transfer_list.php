@@ -349,9 +349,17 @@
 		let user = document.getElementById('user').value;
 
 		$('.paid_data').click(function(){
-			_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id')])
+			_conf("Are you sure you want to mark this booking as paid?","paid_booking",[$(this).attr('data-id'), `"${user}"`])
 		})
 			
+		
+		$('.cancel_data').click(function(){    
+			let cancelReason = prompt("Please enter the reason for cancellation:");
+			if (cancelReason !== null && cancelReason.trim() !== "") {
+				_conf(`Are you sure you want to cancel this booking?`, "cancel_booking", [$(this).attr('data-id'), `"${cancelReason}"`, `"${user}"`]);
+			} 
+
+		})
 		
 	})
 
@@ -360,7 +368,7 @@
 		$.ajax({
 			url: _base_url_ + "classes/Booking.php?f=paid_booking",
 			method: "POST",
-			data: { id: $id},
+			data: { id: $id, user: $user },
 			dataType: "json", // Expect JSON response
 			error: function(err) {
 				console.log("Error: ", err.responseText); // Log responseText to inspect the server output
@@ -378,5 +386,27 @@
 			}
 		});
 	}
-
+	
+	function cancel_booking($id,$reason,$user){
+		start_loader();
+		$.ajax({
+			url:_base_url_+"classes/Booking.php?f=cancel_booking",
+			method:"POST",
+			data:{id: $id, reason: $reason, user: $user},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
 </script>
