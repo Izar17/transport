@@ -358,7 +358,7 @@
 	function paid_booking($id){
 		start_loader();
 		$.ajax({
-			url: _base_url_ + "classes/booking.php?f=paid_booking",
+			url: _base_url_ + "classes/Booking.php?f=paid_booking",
 			method: "POST",
 			data: { id: $id},
 			dataType: "json", // Expect JSON response
