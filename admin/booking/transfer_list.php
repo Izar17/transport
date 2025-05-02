@@ -175,6 +175,7 @@
 								<span class="sr-only">Toggle Dropdown</span>
 							</button>
 								<input type="hidden" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname');?>" id="user"/>
+								
 								<div class="dropdown-menu" role="menu">
                                 	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
                                     <span class="fa fa-eye text-dark"></span> View</a>
