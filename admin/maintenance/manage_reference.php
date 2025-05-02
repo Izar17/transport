@@ -135,7 +135,7 @@ function toggleFields() {
     // Get all guest price fields
     let guestFields = [
         'price_guest_1', 'price_guest_2', 'price_guest_3',
-        'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7'
+        'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7', 'price_guest_8'
     ];
 
     if (dropdown === "MOT") {
@@ -173,7 +173,7 @@ function showGuest(id){
     // Get all guest price fields
     let guestFields = [
         'price_guest_1', 'price_guest_2', 'price_guest_3',
-        'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7'
+        'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7', 'price_guest_8'
     ];
 
     if(id == 1){
