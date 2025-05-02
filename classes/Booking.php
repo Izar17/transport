@@ -86,7 +86,7 @@ Class Booking extends DBConnection {
 		exit;
 	}
 
-	function paid_booking(){
+	public function paid_booking(){
 		extract($_POST);
 		$del = $this->conn->query("UPDATE `booking` set status = 2, updated_by = '$user' where id = '{$id}'");
 		if($del){
@@ -99,7 +99,7 @@ Class Booking extends DBConnection {
 		return json_encode($resp);
 	}
 	
-	function cancel_booking(){
+	public function cancel_booking(){
 		extract($_POST);
 		// $updated_by = $_settings->userdata('lastname');
 		$del = $this->conn->query("UPDATE `booking` set delete_flag = 1, status = 3, status_remarks = '$reason', updated_by = '$user' where id = '{$id}'");
