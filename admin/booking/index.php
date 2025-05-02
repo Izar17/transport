@@ -112,7 +112,7 @@ select.form-control {
                     </div>
                     <div class="form-group col-md-3">
                         <label for="email" class="control-label">Email Address: <span class="required">*</span></label>
-                        <input type="email" id="email" name="email_address" autocomplete="off" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()" required>
+                        <input type="email" id="email" name="email_address" autocomplete="off" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()">
                     </div>
 					<!-- 2nd row -->
 					<div class="form-group col-md-3">
