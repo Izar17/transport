@@ -88,7 +88,7 @@ Class Booking extends DBConnection {
 
 	function paid_booking(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `booking` set status = 2 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `booking` set status = 2, updated_by = '$user' where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success',"Booking has been successfully marked as paid!");
@@ -102,7 +102,7 @@ Class Booking extends DBConnection {
 	function cancel_booking(){
 		extract($_POST);
 		// $updated_by = $_settings->userdata('lastname');
-		$del = $this->conn->query("UPDATE `booking` set delete_flag = 1, status = 3 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `booking` set delete_flag = 1, status = 3, status_remarks = '$reason', updated_by = '$user' where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success',"Booking successfully cancelled!");
