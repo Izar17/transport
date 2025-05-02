@@ -88,7 +88,7 @@ Class Booking extends DBConnection {
 
 	public function paid_booking(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `booking` set status = 2, updated_by = '$user' where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `booking` set status = 2 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success',"Booking has been successfully marked as paid!");
