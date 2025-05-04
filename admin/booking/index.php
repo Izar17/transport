@@ -705,8 +705,9 @@ select.form-control {
 					data += 1;
 					generatedID = data.toString();
 				}
-
-				$('#reserveNum').val(generatedID);
+				
+				var idss = document.getElementById('id').value;
+				if(idss==0)$('#reserveNum').val(generatedID);
 			}
 		});
 	};
