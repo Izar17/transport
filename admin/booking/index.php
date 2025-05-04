@@ -80,8 +80,8 @@ select.form-control {
 	</div>
 	<div class="card-body">
 	<div id="msg"></div>
-    <form id="frmBooking" action="" method="post">
-		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
+    <form id="frmBooking" action="" method="post"  autocomplete="off">
+		<input type="hidden" name="id" id="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
         <div class="row">
             <!-- First Panel (10 columns) --> 
             <div class="col-md-10">
@@ -100,7 +100,7 @@ select.form-control {
 					<!-- <div class="form-group col-md-4"></div> -->
                     <div class="form-group col-md-3">
                         <label for="lastname" class="control-label">Last Name: <span class="required">*</span></label>
-                        <input type="text" id="lastname" autofocus name="last_name" autocomplete="off" class="form-control form-control-sm form-control-border"  value="<?php echo isset($meta['last_name']) ? $meta['last_name']: '' ?>" oninput="this.value = this.value.toUpperCase()" required>
+                        <input type="text" id="lastname" autofocus autocomplete="off" name="last_name" autocomplete="off" class="form-control form-control-sm form-control-border"  value="<?php echo isset($meta['last_name']) ? $meta['last_name']: '' ?>" oninput="this.value = this.value.toUpperCase()" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="firstname" class="control-label">First Name: <span class="required">*</span></label>
@@ -118,7 +118,7 @@ select.form-control {
 					<div class="form-group col-md-3">
 						<label for="transferType" class="control-label">Transfer Type: <span class="required">*</span></label>
 						<select type="text" id="transferType" name="transfer_type" autocomplete="off" class="form-control form-control-sm form-control-border select2" required>
-							<option value="" disabled selected>Select Transfer Type</option>
+							<option selected>Select Transfer Type</option>
 							<option value="1" <?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
 							<option value="2"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
 							<option value="3"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 3 ? 'selected' : '' ?>>ROUNDTRIP</option>
@@ -127,7 +127,7 @@ select.form-control {
 					<div class="form-group col-md-3">
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
 						<select type="text" id="modeOfTransfer" class="form-control form-control-sm form-control-border select2" autocomplete="off" required>
-							<option value="" disabled selected><?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: 'Select Mode of Transfer' ?></option>
+							<option selected><?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: 'Select Mode of Transfer' ?></option>
 						</select>
 						<input type="hidden" id="hdModeOfTransfer" name="transfer_mode" value="<?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: '' ?>">
 						<input type="hidden" id="modeOfTransferPrice" name="transfer_mode_price" value="<?php echo isset($meta['transfer_mode_price']) ? $meta['transfer_mode_price']: '' ?>">
@@ -135,12 +135,12 @@ select.form-control {
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
 						<select type="text" id="paymentType" name="payment_type" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option value="" disabled selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option>
+							<option selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentRemarks" class="control-label">Payment Remarks: <span class="required">*</span></label>
-						<textarea id="paymentRemarks" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks"><?php 
+						<textarea id="paymentRemarks" oninput="this.value = this.value.toUpperCase()" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks"><?php 
 							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : ''; 
 						?></textarea>
 						<input type="hidden" id="paymentStatus" name="status"/>
@@ -152,30 +152,33 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-6 clsArrival">
 						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
+						
 						<select type="text" id="arrOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2 clsArrival" style="width:90%">
-							<option value="" hidden selected></option>
+							<option hidden selected><?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: 'Select Origin Pick-up & Drop-off Location' ?></option>
 						</select>
-						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off">
+						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off" value="<?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: '' ?>">
 						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price">
 					</div>
+
+
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="arrDate" name="arr_date" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="date" id="arrDate" name="arr_date" autocomplete="off" value="<?php echo isset($meta['arr_date']) ? $meta['arr_date']: '' ?>" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="arr_eta"  value="06:00" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="eta" autofocus name="arr_eta"  value="<?php echo isset($meta['arr_eta']) ? $meta['arr_eta']: '06:00' ?>" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
 						<select type="text" id="arrAirport" name="arr_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option value="" hidden selected></option>
+							<option hidden selected><?php echo isset($meta['arr_airport']) ? $meta['arr_airport']: 'Select Origin Pick-up & Drop-off Location' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" autocomplete="off" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
+						<input type="text" id="arrFlightNumber" autofocus name="arr_flight_no" autocomplete="off" oninput="this.value = this.value.toUpperCase()" value="<?php echo isset($meta['arr_flight_no']) ? $meta['arr_flight_no']: '' ?>" class="form-control form-control-sm form-control-border airport-input">
 						<div class="airport-list">
 							<div onclick="selectAirport('PAL (PR)', 'PR', event)">PAL (PR)</div>
 							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J', event)">CEBU PACIFIC (5J)</div>
@@ -187,7 +190,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
 						<select type="text" id="arrHotelResort" name="arr_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option value="" hidden selected></option>
+							<option  hidden selected><?php echo isset($meta['arr_hotel']) ? $meta['arr_hotel']: 'Select Hotel/Resort' ?></option>
 						</select>
 					</div>
 					<!-- Departure Details -->
@@ -197,28 +200,28 @@ select.form-control {
 					<div class="form-group col-md-6 clsDeparture">
 						<label for="depOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
 						<select type="text" id="depOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2" style="width:90%">
-							<option value="" hidden selected></option>
+							<option  hidden selected><?php echo isset($meta['dep_origin_drop_off']) ? $meta['dep_origin_drop_off']: 'Select Origin Pick-up & Drop-off Location' ?></option>
 						</select>
-						<input type="hidden" id="hdDepOriginDropOff" name="dep_origin_drop_off">
+						<input type="hidden" id="hdDepOriginDropOff" name="dep_origin_drop_off" value="<?php echo isset($meta['dep_origin_drop_off']) ? $meta['dep_origin_drop_off']: '' ?>">
 						<input type="hidden" id="depOriginDropOffPrice" name="dep_origin_drop_off_price">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depDate" class="control-label">Date: <span class="required">*</span></label>
-						<input type="date" id="depDate" name="dep_date" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="date" id="depDate" name="dep_date" autocomplete="off" value="<?php echo isset($meta['dep_date']) ? $meta['dep_date']: '' ?>" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="dep_etd" value="06:00" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="etd" autofocus name="dep_etd" value="<?php echo isset($meta['dep_etd']) ? $meta['dep_etd']: '06:00' ?>" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
 						<select type="text" id="depAirport" name="dep_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option value="" hidden selected></option>
+							<option  hidden selected><?php echo isset($meta['dep_airport']) ? $meta['dep_airport']: 'Select Airport' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depFlightNumber" class="control-label">Flight No.: <span class="required">*</span></label>
-						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" autocomplete="off" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border airport-input">
+						<input type="text" id="depFlightNumber" autofocus name="dep_flight_no" autocomplete="off" oninput="this.value = this.value.toUpperCase()" value="<?php echo isset($meta['dep_flight_no']) ? $meta['dep_flight_no']: '' ?>" class="form-control form-control-sm form-control-border airport-input">
 						<div class="airport-list">
 							<div onclick="selectAirport('PAL (PR)', 'PR', event)">PAL (PR)</div>
 							<div onclick="selectAirport('CEBU PACIFIC (5J)', '5J', event)">CEBU PACIFIC (5J)</div>
@@ -230,21 +233,26 @@ select.form-control {
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
 						<select type="text" id="depHotelResort" name="dep_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option value="" hidden selected></option>
+							<option  hidden selected><?php echo isset($meta['dep_hotel']) ? $meta['dep_hotel']: 'Select Hotel/Resort' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
-						<input type="time" id="estpickup" name="est_pickup" autofocus autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="time" id="estpickup" name="est_pickup" autofocus autocomplete="off" value="<?php echo isset($meta['est_pickup']) ? $meta['est_pickup']: '' ?>" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<!-- Fifth Row -->
-                    <div class="form-group col-md-6 clsRemarks">
-                        <label for="otherNames" class="control-label">Other Names:</label>
-                        <textarea id="otherNames" autofocus name="other_names" autocomplete="off" oninput="this.value = this.value.toUpperCase()" class="form-control form-control-sm form-control-border" style="height:100px;"></textarea>
-                    </div>
                     <div class="form-group col-md-6">
+                        <label for="otherNames" class="control-label">Other Names:</label>
+                        <textarea id="otherNames" name="other_names" autocomplete="off"
+							oninput="this.value = this.value.toUpperCase()" 
+							class="form-control form-control-sm form-control-border" 
+							style="height:100px;"><?php echo isset($meta['other_names']) ? trim($meta['other_names']) : ''; ?></textarea>
+                    </div>
+                    <div class="form-group col-md-6 clsRemarks">
                         <label for="remarks" class="control-label clsDeparture">Remarks:</label>
-                        <textarea id="remarks" autofocus name="remarks" autocomplete="off" class="form-control form-control-sm form-control-border clsDeparture" style="height:100px;"></textarea>
+                        <textarea id="remarks" autocomplete="off" oninput="this.value = this.value.toUpperCase()" name="remarks" 
+						autocomplete="off" class="form-control form-control-sm form-control-border clsDeparture" 
+						style="height:100px;"><?php echo isset($meta['remarks']) ? trim($meta['remarks']) : ''; ?></textarea>
                     </div>
 					
                 </div>
@@ -256,7 +264,7 @@ select.form-control {
                 <div id="charges" class="flex-grow-1">
 				<table style="width:100%;font-size:14px;padding:0px;font-weight:bold;">
 					<tr>
-						<td rowspan="2" width="25%"><input type="number" id="qtyGuest1" name="qty_guest_1" class="transfercharges"/></td>
+						<td rowspan="2" width="25%"><input type="number" id="qtyGuest1" name="qty_guest_1" value="<?php echo isset($meta['qty_guest_1']) ? $meta['qty_guest_1']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Local)</td>
@@ -270,7 +278,7 @@ select.form-control {
 					</tr>
 					<!-- Repeat for other guest types -->
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest2" name="qty_guest_2" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest2" name="qty_guest_2" value="<?php echo isset($meta['qty_guest_2']) ? $meta['qty_guest_2']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Foreign)</td>
@@ -283,7 +291,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest3" name="qty_guest_3" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest3" name="qty_guest_3" value="<?php echo isset($meta['qty_guest_3']) ? $meta['qty_guest_3']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Senior/PWD</td>
@@ -296,7 +304,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest4" name="qty_guest_4" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest4" name="qty_guest_4" value="<?php echo isset($meta['qty_guest_4']) ? $meta['qty_guest_4']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Child Local (6-12 yo)</td>
@@ -309,7 +317,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest5" name="qty_guest_5" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest5" name="qty_guest_5" value="<?php echo isset($meta['qty_guest_5']) ? $meta['qty_guest_5']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Child Foreign (6-12 yo)</td>
@@ -322,7 +330,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest6" name="qty_guest_6" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest6" name="qty_guest_6" value="<?php echo isset($meta['qty_guest_6']) ? $meta['qty_guest_6']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Child (3-5 yo)</td>
@@ -335,7 +343,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest7" name="qty_guest_7" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest7" name="qty_guest_7" value="<?php echo isset($meta['qty_guest_7']) ? $meta['qty_guest_7']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>2 yo and below /<br> <span style="color:red">FOC Employee</span></td>
@@ -348,7 +356,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest8" name="qty_guest_8" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" id="qtyGuest8" name="qty_guest_8" value="<?php echo isset($meta['qty_guest_8']) ? $meta['qty_guest_8']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Resident (<span style="color:grey">No Terminal & Environment Fee</span>)</td>
@@ -388,7 +396,6 @@ select.form-control {
 <script>
 	//1
 	$(document).ready(function() {
-
 		let globalMOT = [];
 
 		$('.clsArrival').hide();
@@ -396,32 +403,39 @@ select.form-control {
 		$('.clsRemarks').hide();
 
 		generateReservationID();
-
 		populateDropdowns(1);
+
+		setTimeout(function() {
+			$('#transferType').trigger('change'); // Ensures event is triggered after initialization
+		}, 100);
+
+		var id = document.getElementById('id').value;
 		
 		$('#transferType').on('change', function() {
 			
+			if(id == ''){
 			reset();
 
 			//Adding default value
-			$('#modeOfTransfer').append('<option value="" disabled selected></option>');
-			$('#paymentType').append('<option value="" disabled selected></option>');
+			$('#modeOfTransfer').append('<option  disabled selected></option>');
+			$('#paymentType').append('<option  disabled selected></option>');
+			}
 
-			if ($('#transferType').val().toUpperCase() === '1')
+			if ($('#transferType').val() == '1')
 			{
 				$('.clsArrival').show();
 				$('.clsDeparture').hide();
 				$('.clsRemarks').show();
 				populateDropdowns(1);
 			}
-			else if ($('#transferType').val().toUpperCase() === '2')
+			else if ($('#transferType').val() == '2')
 			{
 				$('.clsArrival').hide();
 				$('.clsDeparture').show();
 				$('.clsRemarks').show();
 				populateDropdowns(2);
 			}
-			else if ($('#transferType').val().toUpperCase() === '3')
+			else if ($('#transferType').val() == '3')
 			{
 				$('.clsArrival').show();
 				$('.clsDeparture').show();
@@ -631,17 +645,13 @@ select.form-control {
 
 			$.ajax({
 				url: _base_url_+"classes/Booking.php?f=save_booking",
-				type: 'POST',
-				data: formData,
+				data: new FormData($(this)[0]),
+				cache: false,
 				contentType: false,
 				processData: false,
-				error:err=>{
-					console.log(err)
-					alert_toast("An error occured.",err);
-					end_loader();
-				},
-				success: function(response) {
-					if(response == "success"){
+				method: 'POST',
+				success: function(resp) {
+					if(resp == 1){
 						$('#msg').html('<div class="alert alert-success">Booking Transfer successfully added</div>')
 						$("html, body").animate({ scrollTop: 0 }, "fast");
 						location.reload();
@@ -907,12 +917,14 @@ select.form-control {
 				});
 
 				if (transferType === 1 || transferType === 3) {
-
-					$('#arrOriginDropOff').empty();
 					
-					$('#arrOriginDropOff').append('<option value="" disabled selected></option>');
-					$('#arrAirport').append('<option value="" disabled selected></option>');
-					$('#arrHotelResort').append('<option value="" disabled selected></option>');
+					if(id == 0){
+						$('#arrOriginDropOff').empty();
+						
+						$('#arrOriginDropOff').append('<option  disabled selected></option>');
+						$('#arrAirport').append('<option value="" disabled selected></option>');
+						$('#arrHotelResort').append('<option value="" disabled selected></option>');
+					}
 
 					$.each(arrOriginDropOffs, function(index, item) {
 						$('#arrOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
@@ -929,12 +941,14 @@ select.form-control {
 				
 				if (transferType === 2 || transferType === 3) {
 
+					if(id == 0){
 					$('#depOriginDropOff').empty();
 					$('#depAirport').empty();
 					$('#depHotelResort').empty();
-					$('#depOriginDropOff').append('<option value="" disabled selected></option>');
+					$('#depOriginDropOff').append('<option  disabled selected></option>');
 					$('#depAirport').append('<option value="" disabled selected></option>');
 					$('#depHotelResort').append('<option value="" disabled selected></option>');
+					}
 
 					$.each(depOriginDropOffs, function(index, item) {
 						$('#depOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');

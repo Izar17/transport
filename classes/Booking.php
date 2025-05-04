@@ -68,22 +68,31 @@ Class Booking extends DBConnection {
 				if(!empty($data)) $data .=",";
 				$data .= " `{$k}`='{$this->conn->real_escape_string($v)}' ";
 			}
+		}  
+
+		// $data .= (!empty($data) ? "," : "");
+		// $data .= " `created_date`=NOW()";
+
+		if(empty($id)){
+			$qry = $this->conn->query("INSERT INTO booking set {$data}");
+			if($qry){
+				$id = $this->conn->insert_id;
+				$this->settings->set_flashdata('success','Booking Transfer successfully saved.');
+				
+				return 1;
+			}else{
+				return 2;
+			}
+
+		}else{
+			$qry = $this->conn->query("UPDATE booking set $data where id = {$id}");
+			if($qry){
+				$this->settings->set_flashdata('success','Booking Transfer successfully updated.');
+				return 1;
+			}else{
+				return 2;
+			}
 		}
-
-		$data .= (!empty($data) ? "," : "");
-		$data .= " `created_date`=NOW()";
-
-		$result = "";
-		$qry = $this->conn->query("INSERT INTO booking set {$data}");
-
-		if($qry) { 
-			$result="success";
-			$this->settings->set_flashdata('success','Booking Transfer successfully saved.');
-		}
-		else $result="failed";
-
-		echo $result;
-		exit;
 	}
 
 	public function paid_booking(){

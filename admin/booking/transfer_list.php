@@ -148,9 +148,6 @@
 										case 4:
 											echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Delivered</span>';
 											break;
-										case 5:
-											echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Cancelled</span>';
-											break;
 										default:
 											echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">N/A</span>';
 											break;
@@ -213,7 +210,17 @@
 								</div>
 							<?php
 								echo 'Updated by: <br>' .$row['updated_by'];
-							 } else {
+							 } else { ?>
+								<div class="dropdown-menu" role="menu">
+                                	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
+                                    <span class="fa fa-eye text-dark"></span> View</a>
+									<div class="dropdown-divider"></div>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+										<span class="fa fa-print text-secondary"></span> Print
+									</a>
+								</div>
+							 <?php
 								echo '<span >Cancelled</span>';
 								echo '<br> reason: <br>' .$row['status_remarks'];
 								echo '<br> Cancel by: <br>' .$row['updated_by'];
@@ -228,6 +235,8 @@
 </div>
 <script>
 	$(document).ready(function(){
+
+	
 		$('.view_data').click(function(){
 			var bookingId = $(this).attr('data-id');
 			var mode = "view"; // Define the mode for viewing
@@ -239,6 +248,32 @@
 			var mode = "print"; // Define the mode for printing
 			window.open("booking/print_booking.php?id=" + bookingId + "&mode=" + mode, '_blank');
 		});
+
+    // Function to set default dates
+    function setDefaultDates() {
+		let today = new Date().toISOString().split('T')[0];
+
+		// Calculate the date **one month** from today
+		let oneMonthLater = new Date();
+		oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+		oneMonthLater = oneMonthLater.toISOString().split('T')[0];
+
+		// Apply default values to the input fields
+		$('#startDate').val(today);
+		$('#endDate').val(oneMonthLater);
+    }
+
+    // Function to apply date-based filtering
+    function applyDateFilter() {
+        $('#myTable').DataTable().draw();
+    }
+
+    // Apply default dates on page load
+    setDefaultDates();
+
+		
+		
+    // Initialize DataTable		
 		var table = $('#myTable').DataTable({
                 dom: 'Bfrtip',
 				paging: true,
@@ -311,6 +346,7 @@
             $('#startDate, #endDate').on('change', function () {
                 table.draw();
             });
+
 		$.fn.dataTable.ext.search.push(function (settings, data) {
 			var transferType = $('#transferFilter').val();
 			var paymentStatType = $('#paymentStatFilter').val();
@@ -345,7 +381,7 @@
 
 			return true;
 		});
-		
+
 		let user = document.getElementById('user').value;
 
 		$('.paid_data').click(function(){
@@ -361,9 +397,17 @@
 
 		})
 		
+		
+		// Apply filtering automatically on page load
+		applyDateFilter();
+
+		// Trigger filtering when input changes
+		$('#startDate, #endDate').on('change', function () {
+			applyDateFilter();
+		});
 	})
 
-	function paid_booking($id){
+	function paid_booking($id,$user){
 		start_loader();
 		$.ajax({
 			url: _base_url_ + "classes/Booking.php?f=paid_booking",
