@@ -210,7 +210,17 @@
 								</div>
 							<?php
 								echo 'Updated by: <br>' .$row['updated_by'];
-							 } else {
+							 } else { ?>
+								<div class="dropdown-menu" role="menu">
+                                	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
+                                    <span class="fa fa-eye text-dark"></span> View</a>
+									<div class="dropdown-divider"></div>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+										<span class="fa fa-print text-secondary"></span> Print
+									</a>
+								</div>
+							 <?php
 								echo '<span >Cancelled</span>';
 								echo '<br> reason: <br>' .$row['status_remarks'];
 								echo '<br> Cancel by: <br>' .$row['updated_by'];
@@ -397,7 +407,7 @@
 		});
 	})
 
-	function paid_booking($id){
+	function paid_booking($id,$user){
 		start_loader();
 		$.ajax({
 			url: _base_url_ + "classes/Booking.php?f=paid_booking",
