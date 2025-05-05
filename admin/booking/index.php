@@ -173,7 +173,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
 						<select type="text" id="arrAirport" name="arr_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option hidden selected><?php echo isset($meta['arr_airport']) ? $meta['arr_airport']: 'Select Origin Pick-up & Drop-off Location' ?></option>
+							<option selected><?php echo isset($meta['arr_airport']) ? $meta['arr_airport']: 'Select Airport' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
@@ -190,7 +190,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
 						<select type="text" id="arrHotelResort" name="arr_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option  hidden selected><?php echo isset($meta['arr_hotel']) ? $meta['arr_hotel']: 'Select Hotel/Resort' ?></option>
+							<option selected><?php echo isset($meta['arr_hotel']) ? $meta['arr_hotel']: 'Select Hotel/Resort' ?></option>
 						</select>
 					</div>
 					<!-- Departure Details -->
@@ -216,7 +216,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
 						<select type="text" id="depAirport" name="dep_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option  hidden selected><?php echo isset($meta['dep_airport']) ? $meta['dep_airport']: 'Select Airport' ?></option>
+							<option selected><?php echo isset($meta['dep_airport']) ? $meta['dep_airport']: 'Select Airport' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
@@ -233,7 +233,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
 						<select type="text" id="depHotelResort" name="dep_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option  hidden selected><?php echo isset($meta['dep_hotel']) ? $meta['dep_hotel']: 'Select Hotel/Resort' ?></option>
+							<option selected><?php echo isset($meta['dep_hotel']) ? $meta['dep_hotel']: 'Select Hotel/Resort' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
@@ -273,7 +273,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest1">0.00</label>
-							<input type="hidden" id="priceGuest1" name="price_guest_1"/>
+							<input type="hidden" id="priceGuest1" name="price_guest_1" value="<?php echo isset($meta['price_guest_1']) ? $meta['price_guest_1']: '' ?>"/>
 						</td>
 					</tr>
 					<!-- Repeat for other guest types -->
@@ -287,7 +287,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest2">0.00</label>
-							<input type="hidden" id="priceGuest2" name="price_guest_2"/>
+							<input type="hidden" id="priceGuest2" name="price_guest_2" value="<?php echo isset($meta['price_guest_2']) ? $meta['price_guest_2']: '' ?>"/>
 						</td>
 					</tr>
 					<tr>
@@ -300,7 +300,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest3">0.00</label>
-							<input type="hidden" id="priceGuest3" name="price_guest_3"/>
+							<input type="hidden" id="priceGuest3" name="price_guest_3" value="<?php echo isset($meta['price_guest_3']) ? $meta['price_guest_3']: '' ?>"/>
 						</td>
 					</tr>
 					<tr>
@@ -313,7 +313,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest4">0.00</label>
-							<input type="hidden" id="priceGuest4" name="price_guest_4"/>
+							<input type="hidden" id="priceGuest4" name="price_guest_4" value="<?php echo isset($meta['price_guest_4']) ? $meta['price_guest_4']: '' ?>"/>
 						</td>
 					</tr>
 					<tr>
@@ -326,7 +326,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest5">0.00</label>
-							<input type="hidden" id="priceGuest5" name="price_guest_5"/>
+							<input type="hidden" id="priceGuest5" name="price_guest_5" value="<?php echo isset($meta['price_guest_5']) ? $meta['price_guest_5']: '' ?>"/>
 						</td>
 					</tr>
 					<tr>
@@ -339,7 +339,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest6">0.00</label>
-							<input type="hidden" id="priceGuest6" name="price_guest_6"/>
+							<input type="hidden" id="priceGuest6" name="price_guest_6" value="<?php echo isset($meta['price_guest_6']) ? $meta['price_guest_6']: '' ?>"/>
 						</td>
 					</tr>
 					<tr>
@@ -352,7 +352,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest7">0.00</label>
-							<input type="hidden" id="priceGuest7" name="price_guest_7"/>
+							<input type="hidden" id="priceGuest7" name="price_guest_7" value="<?php echo isset($meta['price_guest_7']) ? $meta['price_guest_7']: '' ?>"/>
 						</td>
 					</tr>
 					<tr>
@@ -363,9 +363,11 @@ select.form-control {
 					</tr>
 					<tr>
 						<td></td>
+
+
 						<td style="text-align:right;">
 							<label id="lblGuest8">0.00</label>
-							<input type="hidden" id="priceGuest8" name="price_guest_8"/>
+							<input type="hidden" id="priceGuest8" name="price_guest_8" value="<?php echo isset($meta['price_guest_8']) ? $meta['price_guest_8']: '' ?>"/>
 						</td>
 					</tr>
 				</table><hr>
@@ -375,10 +377,10 @@ select.form-control {
 					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
                     <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; with Shopping:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
-					<input type="hidden" id="terminalFee" name="terminal_fee"/><br>
+					<input type="hidden" id="terminalFee" name="terminal_fee" value="<?php echo isset($meta['terminal_fee']) ? $meta['terminal_fee']: '' ?>" /><br>
 					<input type="hidden" id="terminalFeeHolder"/>
                     <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Others:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
-					<input type="hidden" id="envFee" name="environment_fee"/>
+					<input type="hidden" id="envFee" name="environment_fee" value="<?php echo isset($meta['environment_fee']) ? $meta['environment_fee']: '' ?>"/>
 					<input type="hidden" id="envFeeHolder"/>
 					<hr>
 					<h5 style="color:red;">
@@ -394,7 +396,6 @@ select.form-control {
 </div>
 </div>
 <script>
-	//1
 	$(document).ready(function() {
 		let globalMOT = [];
 
@@ -405,19 +406,32 @@ select.form-control {
 		generateReservationID();
 		populateDropdowns(1);
 
-		setTimeout(function() {
-			$('#transferType').trigger('change'); // Ensures event is triggered after initialization
-		}, 100);
-
 		var id = document.getElementById('id').value;
 		
+
+		window.onload = function() {
+			
+			if(id){
+				$('#transferType').trigger('change');
+				$('#modeOfTransfer').trigger('change');
+				$('#qtyGuest1').trigger('change');
+				$('#qtyGuest2').trigger('change');
+				$('#qtyGuest3').trigger('change');
+				$('#qtyGuest4').trigger('change');
+				$('#qtyGuest5').trigger('change');
+				$('#qtyGuest6').trigger('change');
+				$('#qtyGuest7').trigger('change');
+				$('#qtyGuest8').trigger('change');
+			}
+		};
+
 		$('#transferType').on('change', function() {
 			
-			if(id == ''){
+			if(!id){
 			reset();
 
 			//Adding default value
-			$('#modeOfTransfer').append('<option  disabled selected></option>');
+			$('#modeOfTransfer').append('<option selected></option>');
 			$('#paymentType').append('<option  disabled selected></option>');
 			}
 
@@ -667,7 +681,7 @@ select.form-control {
 	
 	function reset() {
 		// Reset dropdowns
-		$('#modeOfTransfer, #paymentType, #arrAirport, #arrHotelResort').empty();
+		$('#modeOfTransfer, #paymentType, #arrAirport, #arrHotelResort, #depAirport, #depHotelResort').empty();
 
 		// Reset number input fields
 		$('#qtyGuest1, #qtyGuest2, #qtyGuest3, #qtyGuest4, #qtyGuest5, #qtyGuest6, #qtyGuest7, #qtyGuest8').val('');
@@ -919,7 +933,7 @@ select.form-control {
 
 				if (transferType === 1 || transferType === 3) {
 					
-					if(id == 0){
+					if(!id){
 						$('#arrOriginDropOff').empty();
 						
 						$('#arrOriginDropOff').append('<option  disabled selected></option>');
@@ -942,7 +956,7 @@ select.form-control {
 				
 				if (transferType === 2 || transferType === 3) {
 
-					if(id == 0){
+					if(!id){
 					$('#depOriginDropOff').empty();
 					$('#depAirport').empty();
 					$('#depHotelResort').empty();
