@@ -97,14 +97,14 @@ var _this = $(this)
 		    processData: false,
 		    method: 'POST',
 		    type: 'POST',
-			success:function(resp){
-				if(resp ==1){
+			success: function(resp){
+				if (resp == 1) {
 					location.href = './?page=user/list';
-				}else{
-					$('#msg').html('<div class="alert alert-danger">Username already exist</div>')
+				} else if (resp == 2) {
+					$('#msg').html('<div class="alert alert-danger">Username already exists.</div>');
 					$("html, body").animate({ scrollTop: 0 }, "fast");
 				}
-                end_loader()
+				end_loader();
 			}
 		})
 	})
