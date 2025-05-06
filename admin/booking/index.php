@@ -496,7 +496,7 @@ select.form-control {
 			$('#modeOfTransferPrice').val($(this).val());
 
 			const str = $('#modeOfTransfer option:selected').text();
-			alert("MOD");
+			// alert("MOD");
 
 			if (str.includes("PRIVATE"))
 			{
