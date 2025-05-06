@@ -50,6 +50,10 @@ select.form-control {
     font-weight: bold; /* Optional: Make it bold */
     margin-left: 3px; /* Optional: Add spacing */
 }
+.optional {
+    color: grey; /* Asterisk color */
+    margin-left: 3px; /* Optional: Add spacing */
+}
 
 #charges {
 	font-size: 0.8em;
@@ -111,7 +115,7 @@ select.form-control {
                         <input type="number" id="contact" name="contact_no" autocomplete="off" value="<?php echo isset($meta['contact_no']) ? $meta['contact_no']: '' ?>" class="form-control form-control-sm form-control-border" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="email" class="control-label">Email Address: <span class="required">*</span></label>
+                        <label for="email" class="control-label">Email Address: <span class="optional">(Optional)</span></label>
                         <input type="email" id="email" name="email_address" autocomplete="off" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()">
                     </div>
 					<!-- 2nd row -->
@@ -249,7 +253,7 @@ select.form-control {
 							style="height:100px;"><?php echo isset($meta['other_names']) ? trim($meta['other_names']) : ''; ?></textarea>
                     </div>
                     <div class="form-group col-md-6 clsRemarks">
-                        <label for="remarks" class="control-label clsDeparture">Remarks:</label>
+                        <label for="remarks" class="control-label clsDeparture">Remarks:</label> <span class="optional">(Optional)</span>
                         <textarea id="remarks" autocomplete="off" oninput="this.value = this.value.toUpperCase()" name="remarks" 
 						autocomplete="off" class="form-control form-control-sm form-control-border clsDeparture" 
 						style="height:100px;"><?php echo isset($meta['remarks']) ? trim($meta['remarks']) : ''; ?></textarea>
