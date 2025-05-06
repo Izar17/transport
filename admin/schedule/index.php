@@ -22,7 +22,7 @@
         body {
             height: 100%;
             width: 100%;
-            font-family: Apple Chancery, cursive;
+            /* font-family: Apple Chancery, cursive; */
         }
 
         .btn-info.text-light:hover,
