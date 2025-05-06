@@ -158,7 +158,7 @@ select.form-control {
 						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
 						
 						<select type="text" id="arrOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2 clsArrival" style="width:90%">
-							<option hidden selected><?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: 'Select Origin Pick-up & Drop-off Location' ?></option>
+							<option selected value="Select Origin/Drop-off" disabled> </option>
 						</select>
 						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off" value="<?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: '' ?>">
 						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price">
@@ -177,7 +177,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrAirport" class="control-label">Airport: <span class="required">*</span></label>
 						<select type="text" id="arrAirport" name="arr_airport" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option selected><?php echo isset($meta['arr_airport']) ? $meta['arr_airport']: 'Select Airport' ?></option>
+							<option selected value="Select Airport" disabled> </option>
 						</select>
 					</div>
 					<div class="form-group col-md-3 clsArrival">
@@ -194,7 +194,7 @@ select.form-control {
 					<div class="form-group col-md-3 clsArrival">
 						<label for="arrHotelResort" class="control-label">Hotel/Resort: <span class="required">*</span></label>
 						<select type="text" id="arrHotelResort" name="arr_hotel" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<option selected><?php echo isset($meta['arr_hotel']) ? $meta['arr_hotel']: 'Select Hotel/Resort' ?></option>
+							<option selected value="Select Hotel/Resort" disabled> </option>
 						</select>
 					</div>
 					<!-- Departure Details -->
@@ -400,6 +400,7 @@ select.form-control {
 </div>
 </div>
 <script>
+	//1
 	$(document).ready(function() {
 		let globalMOT = [];
 
@@ -407,11 +408,16 @@ select.form-control {
 		$('.clsDeparture').hide();
 		$('.clsRemarks').hide();
 
-		generateReservationID();
-		populateDropdowns(1);
+		$('#arrOriginDropOff').select2();
+		$('#depOriginDropOff').select2();
+
+		let meta = <?php echo isset($meta) ? json_encode($meta) : 'null'; ?>;
 
 		var id = document.getElementById('id').value;
-		
+
+		generateReservationID();
+
+		if(!id) populateDropdowns(1);
 
 		window.onload = function() {
 			
@@ -429,14 +435,15 @@ select.form-control {
 			}
 		};
 
-		$('#transferType').on('change', function() {
-			
-			if(!id){
-			reset();
+		// if (meta.terminal_fee > 0) $('#chkTerminalFee').prop('checked', true);
+		// if (meta.environment_fee > 0) $('#chkEnvFee').prop('checked', true);
 
-			//Adding default value
-			$('#modeOfTransfer').append('<option selected></option>');
-			$('#paymentType').append('<option  disabled selected></option>');
+		$('#transferType').on('change', function() {
+			if(!id){
+				reset();
+				//Adding default value
+				$('#modeOfTransfer').append('<option selected></option>');
+				$('#paymentType').append('<option  disabled selected></option>');
 			}
 
 			if ($('#transferType').val() == '1')
@@ -466,7 +473,22 @@ select.form-control {
 				$('.clsDeparture').hide();
 				$('.clsRemarks').hide();
 			}
+		
+			console.log("length => ",$('#arrOriginDropOff').length);
         });
+
+		if (id) {
+			const displayText = meta.arr_origin_drop_off;
+
+			$('#arrAirport').val(meta.arr_airport);
+			
+			$('#arrHotelResort').val(meta.arr_hotel);
+			
+			console.log(meta.arr_origin_drop_off);
+
+			// $('#arrOriginDropOff').text(displayText);
+			// $("#arrOriginDropOff").select2("val", $("#select option:contains(displayText)").val()).trigger('change');
+		}
 
 		$('#modeOfTransfer').on('change', function()
 		{
@@ -474,17 +496,17 @@ select.form-control {
 			$('#modeOfTransferPrice').val($(this).val());
 
 			const str = $('#modeOfTransfer option:selected').text();
+			alert("MOD");
 
 			if (str.includes("PRIVATE"))
 			{
-				if($('#transferType').val() == 3){
-					$privatePrice = $(this).val();
-				}else{
-					$privatePrice = $(this).val()/2;
-				}
+				let chargePrice = id ?  meta.transfer_mode_price : $(this).val();
+
+				if($('#transferType').val() !== 3) chargePrice = chargePrice/2;
+
 				$('#priceTitle').text(`Private Price/Head: `);
-				$('#lblPrice').text(`P${$privatePrice}`);
-				$('#chargePriceHolder').val($(this).val());
+				$('#lblPrice').text(`P${chargePrice}`);
+				$('#chargePriceHolder').val(chargePrice);
 			}
 			else if (str.includes("CHARTERED"))
 			{
@@ -517,9 +539,6 @@ select.form-control {
 			$('#hdDepOriginDropOff').val($('#depOriginDropOff option:selected').text());
 			$('#depOriginDropOffPrice').val($(this).val());
 		});
-
-		$('#arrOriginDropOff').select2();
-		$('#depOriginDropOff').select2();
 
 		$('#qtyGuest1').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
@@ -703,7 +722,7 @@ select.form-control {
 				let generatedID = 0;
 
 				let data = parseInt(response);
-				console.log(data);
+				// console.log(data);
 				if (data === 0)
 				{
 					const now = new Date();
@@ -807,7 +826,7 @@ select.form-control {
 
 			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5) + parseFloat(guest6) + parseFloat(guest7) + parseFloat(guest8);
 			// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
-			console.log("totalGuestPrice>>",totalGuestPrice);
+			// console.log("totalGuestPrice>>",totalGuestPrice);
 
 			$('#priceTitle').text(`Price: `);
 			$('#lblPrice').text(`P${totalGuestPrice}`);
@@ -827,27 +846,29 @@ select.form-control {
 			totalQty = guest1 + guest2 + guest3 + guest4 + guest5 + guest6 + guest8;
 
 			// if (totalQty < 1) alert("NOPE");
-			console.log("totalQty>>",totalQty);
+			// console.log("totalQty>>",totalQty);
 			const transferType = $('#transferType').val();
 			let chargePrice = parseFloat($('#chargePriceHolder').val());
 
 			if (transferType != 3) chargePrice = chargePrice/2;
-			
+			// console.log("chargePrice>>", chargePrice);
+			// console.log("totalQty>>", totalQty);
 			privatePrice = chargePrice * totalQty;
 			price = privatePrice;
+			// console.log("price>>", price);
 		}
 		else if (str.includes("CHARTERED")) price = $('#chargePriceHolder').val();
 
 		let terminalFee = $("#terminalFee").val() || 0;
 		let envFee = $("#envFee").val() || 0;
-		console.log("terminalFee>>",terminalFee);
-		console.log("envFee>>",envFee);
+		// console.log("terminalFee>>",terminalFee);
+		// console.log("envFee>>",envFee);
 		
-		console.log("price>>",price);
+		// console.log("price>>",price);
 
 		const total = parseFloat(price) + parseFloat(terminalFee) + parseFloat(envFee);
 
-		console.log("price>>",total);
+		// console.log("price>>",total);
 
 		$('#chargePrice').val(price);
 		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`);
@@ -860,7 +881,7 @@ select.form-control {
 			url: _base_url_+"classes/Booking.php?f=get_reference_table",
 			type: 'GET',
 			success: function(response) {
-				// console.log(response);
+				
 				let data = JSON.parse(response);
 
 				let arrPaymentModes = [];
@@ -869,8 +890,6 @@ select.form-control {
 				let arrAirports = [];
 				let arrHotelResorts = [];
 				let depOriginDropOffs = [];
-				// let depAirports = [];
-				// let depHotelResorts = [];
 
 				$.each(data, function(index, item) {
 
@@ -882,22 +901,13 @@ select.form-control {
 
 					if (parseInt(item.type) === 1)
 					{
-						/* else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
 						if (item.code == 'ODL') arrOriginDropOffs.push({amount: item.amount, description: item.description});
-						/* else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
-						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description}); */
 					}
-
-					if (parseInt(item.type) === 2)
+					else if (parseInt(item.type) === 2)
 					{
-						/* else if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description}); */
-						if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description});
-						else if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
-						/* else if (item.code == 'AP') depAirports.push({title: item.title, description: item.description});
-						else if (item.code == 'HR') depHotelResorts.push({title: item.title, description: item.description}); */
+						if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
 					}
-
-					if (parseInt(item.type) === 3)
+					else if (parseInt(item.type) === 3)
 					{
 						if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
 						else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
@@ -934,9 +944,11 @@ select.form-control {
 					$('#paymentType').append('<option value="' + item.title + '">' + item.description + '</option>');
 				});
 
+				console.log("transferType >",transferType);
 				if (transferType === 1 || transferType === 3) {
-					
-					if(!id){
+
+					if (!id)
+					{
 						$('#arrOriginDropOff').empty();
 						
 						$('#arrOriginDropOff').append('<option  disabled selected></option>');
@@ -959,13 +971,14 @@ select.form-control {
 				
 				if (transferType === 2 || transferType === 3) {
 
-					if(!id){
-					$('#depOriginDropOff').empty();
-					$('#depAirport').empty();
-					$('#depHotelResort').empty();
-					$('#depOriginDropOff').append('<option  disabled selected></option>');
-					$('#depAirport').append('<option value="" disabled selected></option>');
-					$('#depHotelResort').append('<option value="" disabled selected></option>');
+					if (!id)
+					{
+						$('#depOriginDropOff').empty();
+						$('#depAirport').empty();
+						$('#depHotelResort').empty();
+						$('#depOriginDropOff').append('<option  disabled selected></option>');
+						$('#depAirport').append('<option value="" disabled selected></option>');
+						$('#depHotelResort').append('<option value="" disabled selected></option>');
 					}
 
 					$.each(depOriginDropOffs, function(index, item) {
