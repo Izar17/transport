@@ -40,7 +40,7 @@
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="topNavBar">
         <div class="container">
-            <a class="navbar-brand" href="https://sourcecodester.com">
+            <a class="navbar-brand" href="#">
             Saint John Band 29
             </a>
 
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="description" class="control-label">Description</label>
-                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
+                                    <textarea rows="10" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="start_datetime" class="control-label">Start</label>
