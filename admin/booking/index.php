@@ -638,7 +638,6 @@ select.form-control {
 				if ($('#depFlightNumber').val() === '' || $('#depFlightNumber').val() === null) save = false;
 				if ($('#depHotelResort').val() === '' || $('#depHotelResort').val() === null) save = false;
 				if ($('#estpickup').val() === '' || $('#estpickup').val() === null) save = false;
-				if ($('#remarks').val() === '' || $('#remarks').val() === null) save = false;
 			}
 
 			if ($('#otherNames').val() === '' || $('#otherNames').val() === null) save = false;
