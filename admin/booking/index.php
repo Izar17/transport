@@ -252,10 +252,10 @@ select.form-control {
 							class="form-control form-control-sm form-control-border" 
 							style="height:100px;"><?php echo isset($meta['other_names']) ? trim($meta['other_names']) : ''; ?></textarea>
                     </div>
-                    <div class="form-group col-md-6 clsRemarks">
-                        <label for="remarks" class="control-label clsDeparture">Remarks:</label> <span class="optional">(Optional)</span>
+                    <div class="form-group col-md-6">
+                        <label for="remarks" class="control-label">Remarks:</label> <span class="optional">(Optional)</span>
                         <textarea id="remarks" autocomplete="off" oninput="this.value = this.value.toUpperCase()" name="remarks" 
-						autocomplete="off" class="form-control form-control-sm form-control-border clsDeparture" 
+						autocomplete="off" class="form-control form-control-sm form-control-border" 
 						style="height:100px;"><?php echo isset($meta['remarks']) ? trim($meta['remarks']) : ''; ?></textarea>
                     </div>
 					
