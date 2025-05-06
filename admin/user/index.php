@@ -17,11 +17,11 @@ foreach($user->fetch_array() as $k =>$v){
 				<input type="hidden" name="id" value="<?php echo $_settings->userdata('id') ?>">
 				<div class="form-group">
 					<label for="name">First Name</label>
-					<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo isset($meta['firstname']) ? $meta['firstname']: '' ?>"  required <?php echo isset($meta['type']) ? 'readonly' : '' ?>>
+					<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo isset($meta['firstname']) ? $meta['firstname']: '' ?>"  required <?php echo $meta['type']==2 ? 'readonly' : '' ?>>
 				</div>
 				<div class="form-group">
 					<label for="name">Last Name</label>
-					<input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo isset($meta['lastname']) ? $meta['lastname']: '' ?>" required <?php echo isset($meta['type']) ? 'readonly' : '' ?>>
+					<input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo isset($meta['lastname']) ? $meta['lastname']: '' ?>" required <?php echo $meta['type']==2 ? 'readonly' : '' ?>>
 				</div>
 				<div class="form-group">
 					<label for="username">Username</label>
