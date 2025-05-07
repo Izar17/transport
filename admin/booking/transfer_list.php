@@ -84,7 +84,8 @@
 									$row['qty_guest_4'],
 									$row['qty_guest_5'],
 									$row['qty_guest_6'],
-									$row['qty_guest_7']
+									$row['qty_guest_7'],
+									$row['qty_guest_8']
 								]); ?>
 							</td>
 							<td style="width:250px;">
@@ -186,7 +187,7 @@
 									</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-print text-secondary"></span> Print
+										<span class="fa fa-print text-secondary"></span> Print Manifest
 									</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item cancel_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
@@ -208,7 +209,7 @@
 									</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-print text-secondary"></span> Print
+										<span class="fa fa-print text-secondary"></span> Print Manifest
 									</a>
 								</div>
 							<?php
@@ -220,7 +221,7 @@
 									<div class="dropdown-divider"></div>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-print text-secondary"></span> Print
+										<span class="fa fa-print text-secondary"></span> Print Manifest
 									</a>
 								</div>
 							 <?php

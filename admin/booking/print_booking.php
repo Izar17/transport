@@ -30,10 +30,10 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
 		}
         body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 10px; }
         .container { width: 96%; max-width: 800px; border: 2px solid #000; padding: 10px; }
-        .header { text-align: center; font-size: 18px; font-weight: bold; }
+        .header { text-align: center; font-size: 20px; font-weight: bold; }
         .section { padding: 10px; border-bottom: 1px solid #ddd; display: flex; flex-wrap: wrap; }
         .section h3 { width: 100%; font-size: 20px; font-weight: bold; margin-bottom: 5px; text-align: left; }
-        .data-item { width: 18%; padding: 5px; text-align: left; }
+        .data-item { width: 20%; text-align: left; }
         .label { font-weight: bold; display: block; }
         .footer { text-align: center; margin-top: 20px; font-style: italic; }
     </style>
@@ -103,8 +103,19 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
             <div class="data-item"><span class="label">Lead Guest:</span> <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></div>
             <div class="data-item"><span class="label">Contact No:</span> <?php echo $data['contact_no']; ?></div>
             <div class="data-item"><span class="label">Email:</span> <?php echo $data['email_address']; ?></div>
-            <div class="data-item"><span class="label">Total Pax:</span> <?php echo $total_pax; ?></div>
             <div class="data-item"><span class="label">Other Names:</span> <?php echo $data['other_names']; ?></div>
+            <div class="data-item"><span class="label">Total Pax: <?php echo $total_pax; ?></span> 
+            <?php echo $data['qty_guest_1'] > 0? 'Adult(Local): ' . $data['qty_guest_1'] .'<br>' :'' ?>
+            <?php echo $data['qty_guest_2'] > 0? 'Adult(Foreign): ' . $data['qty_guest_2'] .'<br>' :'' ?>
+            <?php echo $data['qty_guest_3'] > 0? 'Senior/PWD: ' . $data['qty_guest_3'] .'<br>' :'' ?>
+            <?php echo $data['qty_guest_4'] > 0? 'Child Local(6-12 yo): ' . $data['qty_guest_4'] .'<br>' :'' ?>
+            <?php echo $data['qty_guest_5'] > 0? 'Child Foreign(6-12 yo): ' . $data['qty_guest_5'] .'<br>' :'' ?>
+            <?php echo $data['qty_guest_6'] > 0? 'Child (3-5 yo): ' . $data['qty_guest_6'] .'<br>':'' ?>
+            <?php echo $data['qty_guest_7'] > 0? '2 yo and below/FOC: ' . $data['qty_guest_7'] .'<br>' :'' ?>
+            <?php echo $data['qty_guest_8'] > 0? 'Resident: ' . $data['qty_guest_8'] :'' ?>
+                
+                
+            </div>
         </div>
 
         <!-- Transfer Details -->
