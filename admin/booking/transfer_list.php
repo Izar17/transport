@@ -203,6 +203,9 @@
                                 	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
                                     <span class="fa fa-eye text-dark"></span> View</a>
 									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="?page=booking&id=<?php echo $row['id'] ?>">
+										<span class="fa fa-edit text-primary"></span> Edit
+									</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
 										<span class="fa fa-print text-secondary"></span> Print
