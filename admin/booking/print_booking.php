@@ -122,7 +122,7 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
         <div class="section">
             
             <h3>Transfer Information</h3>
-            <span class="label">Mode of Transfer: </span><?php echo $data['transfer_mode']; ?>
+            <span class="label">Mode of Transfer: </span> <?php echo $data['transfer_mode']; ?>
             <div class="data-item" style="width:100%"><span class="label"><h4>ARRIVAL DETAILS</h4></span></div>
             <div class="data-item" style="width: 40%;"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['arr_origin_drop_off']; ?></div>
             <div class="data-item"><span class="label">Airport:</span> <?php echo $data['arr_airport']; ?></div>
