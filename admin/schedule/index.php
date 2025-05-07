@@ -14,6 +14,24 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./fullcalendar/lib/main.min.js"></script>
     <style>
+        @media (max-width: 768px) {
+            .fc-toolbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .fc-button-group {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .fc-button {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+
         :root {
             --bs-success-rgb: 71, 222, 152 !important;
         }
