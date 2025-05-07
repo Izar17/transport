@@ -120,20 +120,23 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
 
         <!-- Transfer Details -->
         <div class="section">
+            
             <h3>Transfer Information</h3>
-            <div class="data-item" style="width:100%"><span class="label"><b>Arrival Details</b></span></div>
-            <div class="data-item"><span class="label">Mode:</span> <?php echo $data['transfer_mode']; ?></div>
-            <div class="data-item"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['arr_origin_drop_off']; ?></div>
+            <span class="label">Mode of Transfer: </span><?php echo $data['transfer_mode']; ?>
+            <div class="data-item" style="width:100%"><span class="label"><h4>ARRIVAL DETAILS</h4></span></div>
+            <div class="data-item" style="width: 40%;"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['arr_origin_drop_off']; ?></div>
             <div class="data-item"><span class="label">Airport:</span> <?php echo $data['arr_airport']; ?></div>
             <div class="data-item"><span class="label">Flight No:</span> <?php echo $data['arr_flight_no']; ?></div>
             <div class="data-item"><span class="label">Arrival Date / ETA:</span> <?php echo $data['arr_date']; ?> <?php echo $data['arr_eta']; ?></div>
 		
-            <div class="data-item" style="width:100%"><span class="label"><b>Departure Details</b></span></div>
-            <div class="data-item"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['dep_origin_drop_off']; ?></div>
+            <div class="data-item" style="width:100%"><span class="label"><h4>DEPARTURE DETAILS</h4></span></div>
+            <div class="data-item" style="width: 40%;"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['dep_origin_drop_off']; ?></div>
             <div class="data-item"><span class="label">Airport:</span> <?php echo $data['dep_airport']; ?></div>
             <div class="data-item"><span class="label">Flight No:</span> <?php echo $data['dep_flight_no']; ?></div>
-            <div class="data-item"><span class="label">Arrival Date / ETA:</span> <?php echo $data['dep_date']; ?> <?php echo $data['dep_etd']; ?></div>
-            <div class="data-item"><span class="label">Estimated Pick-up Time:</span> <?php echo $data['est_pickup']; ?></div>
+            <div class="data-item"><span class="label">
+                Arrival Date / ETA:</span> <?php echo $data['dep_date']; ?> <?php echo $data['dep_etd']; ?><br>
+                <b>Estimated Pick-up Time:</b> <?php echo $data['est_pickup']; ?>
+            </div>
         </div>
 
         <!-- Pricing Breakdown -->
