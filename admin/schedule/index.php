@@ -30,6 +30,10 @@
                 width: 100%;
                 margin-bottom: 5px;
             }
+            #calendar {
+                margin-top: -45px;
+                height:500px;
+            }
         }
 
         :root {
