@@ -85,7 +85,7 @@ select.form-control {
 	<div class="card-body">
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post"  autocomplete="off">
-		<input type="hidden" name="id" id="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
+	<input type="hidden" name="id" id="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
         <div class="row">
             <!-- First Panel (10 columns) --> 
             <div class="col-md-10">
@@ -147,7 +147,7 @@ select.form-control {
 						<textarea id="paymentRemarks" oninput="this.value = this.value.toUpperCase()" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks"><?php 
 							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : ''; 
 						?></textarea>
-						<input type="hidden" id="paymentStatus" name="status"/>
+						<input type="hidden" id="paymentStatus" name="status" value="<?php echo isset($meta['status']) ? $meta['status']: '' ?>"/>
 					</div>
 					
 					<!-- Arrival Details -->
