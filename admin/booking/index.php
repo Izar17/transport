@@ -132,7 +132,6 @@ select.form-control {
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
 						<select type="text" id="modeOfTransfer" class="form-control form-control-sm form-control-border select2" autocomplete="off" required>
 							<option selected><?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: 'Select Mode of Transfer' ?></option>
-							<!-- <option selected disabled>Select Mode of Transfer</option> -->
 						</select>
 						<input type="hidden" id="hdModeOfTransfer" name="transfer_mode" value="<?php echo isset($meta['transfer_mode']) ? $meta['transfer_mode']: '' ?>">
 						<input type="hidden" id="modeOfTransferPrice" name="transfer_mode_price" value="<?php echo isset($meta['transfer_mode_price']) ? $meta['transfer_mode_price']: '' ?>">
@@ -140,8 +139,7 @@ select.form-control {
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
 						<select type="text" id="paymentType" name="payment_type" autocomplete="off" class="form-control form-control-sm form-control-border select2">
-							<!-- <option selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option> -->
-							<option selected disabled>Select Payment Type</option>
+							<option selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
@@ -157,11 +155,10 @@ select.form-control {
 						<h6>Arrival Details</h6>
 					</div>
 					<div class="form-group col-md-6 clsArrival">
-						<label for="arrOriginDropOff" class="control-label">Origin/Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
+						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
 						
 						<select type="text" id="arrOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2 clsArrival" style="width:90%">
-							<!-- <option selected value="Select Origin/Drop-off" disabled> </option> -->
-							<option selected><?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: 'Select Origin & Drop-Off' ?></option>
+							<option selected value="Select Origin/Drop-off" disabled> </option>
 						</select>
 						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off" value="<?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: '' ?>">
 						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price">
@@ -279,7 +276,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest1">0.00</label>
+							<label id="lblGuest1"><?php echo isset($meta['price_guest_1']) ? 'P'.number_format((float)$meta['price_guest_1'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest1" name="price_guest_1" value="<?php echo isset($meta['price_guest_1']) ? $meta['price_guest_1']: '' ?>"/>
 						</td>
 					</tr>
@@ -293,7 +290,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest2">0.00</label>
+							<label id="lblGuest2"><?php echo isset($meta['price_guest_2']) ? 'P'.number_format((float)$meta['price_guest_2'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest2" name="price_guest_2" value="<?php echo isset($meta['price_guest_2']) ? $meta['price_guest_2']: '' ?>"/>
 						</td>
 					</tr>
@@ -306,7 +303,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest3">0.00</label>
+							<label id="lblGuest3"><?php echo isset($meta['price_guest_3']) ? 'P'.number_format((float)$meta['price_guest_3'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest3" name="price_guest_3" value="<?php echo isset($meta['price_guest_3']) ? $meta['price_guest_3']: '' ?>"/>
 						</td>
 					</tr>
@@ -319,7 +316,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest4">0.00</label>
+							<label id="lblGuest4"><?php echo isset($meta['price_guest_4']) ? 'P'.number_format((float)$meta['price_guest_4'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest4" name="price_guest_4" value="<?php echo isset($meta['price_guest_4']) ? $meta['price_guest_4']: '' ?>"/>
 						</td>
 					</tr>
@@ -332,7 +329,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest5">0.00</label>
+							<label id="lblGuest5"><?php echo isset($meta['price_guest_5']) ? 'P'.number_format((float)$meta['price_guest_5'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest5" name="price_guest_5" value="<?php echo isset($meta['price_guest_5']) ? $meta['price_guest_5']: '' ?>"/>
 						</td>
 					</tr>
@@ -345,7 +342,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest6">0.00</label>
+							<label id="lblGuest6"><?php echo isset($meta['price_guest_6']) ? 'P'.number_format((float)$meta['price_guest_6'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest6" name="price_guest_6" value="<?php echo isset($meta['price_guest_6']) ? $meta['price_guest_6']: '' ?>"/>
 						</td>
 					</tr>
@@ -358,7 +355,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest7">0.00</label>
+							<label id="lblGuest7"><?php echo isset($meta['price_guest_7']) ? 'P'.number_format((float)$meta['price_guest_7'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest7" name="price_guest_7" value="<?php echo isset($meta['price_guest_7']) ? $meta['price_guest_7']: '' ?>"/>
 						</td>
 					</tr>
@@ -373,7 +370,7 @@ select.form-control {
 
 
 						<td style="text-align:right;">
-							<label id="lblGuest8">0.00</label>
+							<label id="lblGuest8"><?php echo isset($meta['price_guest_8']) ? 'P'.number_format((float)$meta['price_guest_8'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest8" name="price_guest_8" value="<?php echo isset($meta['price_guest_8']) ? $meta['price_guest_8']: '' ?>"/>
 						</td>
 					</tr>
@@ -403,7 +400,6 @@ select.form-control {
 </div>
 </div>
 <script>
-	let meta = <?php echo isset($meta) ? json_encode($meta) : 'null'; ?>;
 	//1
 	$(document).ready(function() {
 		let globalMOT = [];
@@ -415,7 +411,7 @@ select.form-control {
 		$('#arrOriginDropOff').select2();
 		$('#depOriginDropOff').select2();
 
-		
+		let meta = <?php echo isset($meta) ? json_encode($meta) : 'null'; ?>;
 
 		var id = document.getElementById('id').value;
 
@@ -482,17 +478,16 @@ select.form-control {
         });
 
 		if (id) {
+			const displayText = meta.arr_origin_drop_off;
+
 			$('#arrAirport').val(meta.arr_airport);
+			
 			$('#arrHotelResort').val(meta.arr_hotel);
-			$('#paymentType').val(meta.payment_type);
-			// $('#modeOfTransfer').text(meta.transfer_mode).trigger;
-			console.log("transfer_mode >>>", meta.transfer_mode);
-			$("#modeOfTransfer option").each(function() {
-				if ($(this).text() === meta.payment_type) {
-					$("#" + selectId).val($(this).val());
-					return false; // break the loop
-				}
-			});
+			
+			console.log(meta.arr_origin_drop_off);
+
+			// $('#arrOriginDropOff').text(displayText);
+			// $("#arrOriginDropOff").select2("val", $("#select option:contains(displayText)").val()).trigger('change');
 		}
 
 		$('#modeOfTransfer').on('change', function()
@@ -508,8 +503,6 @@ select.form-control {
 				let chargePrice = id ?  meta.transfer_mode_price : $(this).val();
 
 				if($('#transferType').val() !== 3) chargePrice = chargePrice/2;
-
-				console.log("chargePrice>>>",chargePrice);
 
 				$('#priceTitle').text(`Private Price/Head: `);
 				$('#lblPrice').text(`P${chargePrice}`);
@@ -811,7 +804,7 @@ select.form-control {
 
 		computeTotal();
 	};
-	//2
+
 	function computeTotal()
 	{
 
@@ -831,7 +824,7 @@ select.form-control {
 			const guest7 = parseFloat($("#priceGuest7").val()) || 0;
 			const guest8 = parseFloat($("#priceGuest8").val()) || 0;
 
-			const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5 + guest6 + guest7 + guest8;
+			const totalGuestPrice = parseFloat(guest1) + parseFloat(guest2) + parseFloat(guest3) + parseFloat(guest4) + parseFloat(guest5) + parseFloat(guest6) + parseFloat(guest7) + parseFloat(guest8);
 			// const totalGuestPrice = guest1 + guest2 + guest3 + guest4 + guest5;
 			// console.log("totalGuestPrice>>",totalGuestPrice);
 
@@ -853,16 +846,16 @@ select.form-control {
 			totalQty = guest1 + guest2 + guest3 + guest4 + guest5 + guest6 + guest8;
 
 			// if (totalQty < 1) alert("NOPE");
-			console.log("totalQty>>",totalQty);
+			// console.log("totalQty>>",totalQty);
 			const transferType = $('#transferType').val();
 			let chargePrice = parseFloat($('#chargePriceHolder').val());
 
 			if (transferType != 3) chargePrice = chargePrice/2;
-			console.log("chargePrice>>", chargePrice);
+			// console.log("chargePrice>>", chargePrice);
 			// console.log("totalQty>>", totalQty);
 			privatePrice = chargePrice * totalQty;
 			price = privatePrice;
-			console.log("price>>", price);
+			// console.log("price>>", price);
 		}
 		else if (str.includes("CHARTERED")) price = $('#chargePriceHolder').val();
 
@@ -875,7 +868,7 @@ select.form-control {
 
 		const total = parseFloat(price) + parseFloat(terminalFee) + parseFloat(envFee);
 
-		console.log("total price>>",total);
+		// console.log("price>>",total);
 
 		$('#chargePrice').val(price);
 		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`);
@@ -944,8 +937,7 @@ select.form-control {
 				
 				//Populating dropdowns
 				$.each(arrPaymentModes, function(index, item) {
-					if (id && item.description === meta.transfer_mode) console.log(item.description); 
-					else $('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.title + '</option>');
+					$('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.title + '</option>');
 				});
 
 				$.each(arrPaymentTypes, function(index, item) {
@@ -965,8 +957,7 @@ select.form-control {
 					}
 
 					$.each(arrOriginDropOffs, function(index, item) {
-						if (id && item.description === meta.arr_origin_drop_off) console.log(item.description); 
-						else $('#arrOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
+						$('#arrOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
 					});
 
 					$.each(arrAirports, function(index, item) {
