@@ -158,7 +158,7 @@ select.form-control {
 						<label for="arrOriginDropOff" class="control-label">Origing Pick-up and Drop-off Locations: <span class="required">*</span></label><br/>
 						
 						<select type="text" id="arrOriginDropOff" autocomplete="off" class="form-control form-control-sm form-control-border select2 clsArrival" style="width:90%">
-							<option selected value="Select Origin/Drop-off" disabled> </option>
+							<option  hidden selected><?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: 'Select Origin Pick-up & Drop-off Location' ?></option>
 						</select>
 						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off" value="<?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: '' ?>">
 						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price">
