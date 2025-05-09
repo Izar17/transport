@@ -279,7 +279,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest1">0.00</label>
+							<label id="lblGuest1"><?php echo isset($meta['price_guest_1']) ? 'P'.number_format((float)$meta['price_guest_1'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest1" name="price_guest_1" value="<?php echo isset($meta['price_guest_1']) ? $meta['price_guest_1']: '' ?>"/>
 						</td>
 					</tr>
@@ -293,7 +293,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest2">0.00</label>
+							<label id="lblGuest2"><?php echo isset($meta['price_guest_2']) ? 'P'.number_format((float)$meta['price_guest_2'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest2" name="price_guest_2" value="<?php echo isset($meta['price_guest_2']) ? $meta['price_guest_2']: '' ?>"/>
 						</td>
 					</tr>
@@ -306,7 +306,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest3">0.00</label>
+							<label id="lblGuest3"><?php echo isset($meta['price_guest_3']) ? 'P'.number_format((float)$meta['price_guest_3'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest3" name="price_guest_3" value="<?php echo isset($meta['price_guest_3']) ? $meta['price_guest_3']: '' ?>"/>
 						</td>
 					</tr>
@@ -319,7 +319,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest4">0.00</label>
+							<label id="lblGuest4"><?php echo isset($meta['price_guest_4']) ? 'P'.number_format((float)$meta['price_guest_4'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest4" name="price_guest_4" value="<?php echo isset($meta['price_guest_4']) ? $meta['price_guest_4']: '' ?>"/>
 						</td>
 					</tr>
@@ -332,7 +332,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest5">0.00</label>
+							<label id="lblGuest5"><?php echo isset($meta['price_guest_5']) ? 'P'.number_format((float)$meta['price_guest_5'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest5" name="price_guest_5" value="<?php echo isset($meta['price_guest_5']) ? $meta['price_guest_5']: '' ?>"/>
 						</td>
 					</tr>
@@ -345,7 +345,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest6">0.00</label>
+							<label id="lblGuest6"><?php echo isset($meta['price_guest_6']) ? 'P'.number_format((float)$meta['price_guest_6'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest6" name="price_guest_6" value="<?php echo isset($meta['price_guest_6']) ? $meta['price_guest_6']: '' ?>"/>
 						</td>
 					</tr>
@@ -358,7 +358,7 @@ select.form-control {
 					<tr>
 						<td></td>
 						<td style="text-align:right;">
-							<label id="lblGuest7">0.00</label>
+							<label id="lblGuest7"><?php echo isset($meta['price_guest_7']) ? 'P'.number_format((float)$meta['price_guest_7'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest7" name="price_guest_7" value="<?php echo isset($meta['price_guest_7']) ? $meta['price_guest_7']: '' ?>"/>
 						</td>
 					</tr>
@@ -373,7 +373,7 @@ select.form-control {
 
 
 						<td style="text-align:right;">
-							<label id="lblGuest8">0.00</label>
+							<label id="lblGuest8"><?php echo isset($meta['price_guest_8']) ? 'P'.number_format((float)$meta['price_guest_8'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest8" name="price_guest_8" value="<?php echo isset($meta['price_guest_8']) ? $meta['price_guest_8']: '' ?>"/>
 						</td>
 					</tr>

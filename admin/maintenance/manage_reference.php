@@ -176,8 +176,9 @@ function showGuest(id){
         'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7', 'price_guest_8'
     ];
 
-    if(id == 1){
+    if(id == 1 || id == 3){
         rightPanel.style.display = "block";
+        amountContainer.style.display = "block";
     }else{
 
         rightPanel.style.display = "none";
