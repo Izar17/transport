@@ -125,6 +125,13 @@ $('#manage_reference').submit(function(e){
     });
 
 
+window.onload = function() {
+    toggleFields();
+    let motTypeDropdown = document.getElementById('mot_type');
+    if (motTypeDropdown) {
+        showGuest(motTypeDropdown.value);
+    }
+}; 
 function toggleFields() {
     let dropdown = document.getElementById('code').value;
     let motTypeContainer = document.getElementById('motTypeContainer');
@@ -132,6 +139,11 @@ function toggleFields() {
     let amountContainer = document.getElementById('amountContainer');
     let amountField = document.getElementById('amount');
 
+
+    
+    if (dropdown) {
+        showGuest(dropdown.value);
+    }
     // Get all guest price fields
     let guestFields = [
         'price_guest_1', 'price_guest_2', 'price_guest_3',
