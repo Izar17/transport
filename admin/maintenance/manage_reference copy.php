@@ -17,7 +17,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <div class="container-fluid">
             <div id="msg"></div>
             <form action="" id="manage_reference">	
-                <input type="hidden" name="id" id="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
+                <input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
                 <div class="row">
                     <!-- Left Panel -->
                     <div class="col-md-6">
@@ -81,18 +81,16 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                             'price_guest_8' => 'Resident (No Terminal and Environment Fee)'
                         ];
                         foreach($fields as $key => $label): ?>
-                        <div class="form-group col-md-4">
+                        <div class="form-group" id="guestFee">
                             <label for="<?php echo $key; ?>"><?php echo $label; ?></label>
                             <input type="text" name="<?php echo $key; ?>" id="<?php echo $key; ?>" class="form-control" value="<?php echo isset($meta[$key]) ? $meta[$key]: '' ?>" required autocomplete="off">
                         </div>
                         
-                        <div class="form-row" style="margin-top: -20px;">
-                            <div class="form-group col-md-4" id="terminalFee">
-                                <input type="text" name="<?php echo $key; ?>_terminal" id="<?php echo $key; ?>_terminal" value="<?php echo isset($meta[$key.'_terminal']) ? $meta[$key.'_terminal'] : '' ?>" class="form-control" placeholder="Terminal Fee">
-                            </div>
-                            <div class="form-group col-md-4" id="environmentFee">
-                                <input type="text" name="<?php echo $key; ?>_environment" id="<?php echo $key; ?>_environment" value="<?php echo isset($meta[$key.'_environment']) ? $meta[$key.'_environment'] : '' ?>" class="form-control" placeholder="Environment Fee">
-                            </div>
+                        <div class="form-group col-md-4" id="terminalFee">
+                            <input type="text" name="<?php echo $key; ?>_terminal" id="<?php echo $key; ?>_terminal" class="form-control" placeholder="Terminal Fee">
+                        </div>
+                        <div class="form-group col-md-4" id="environmentFee">
+                            <input type="text" name="<?php echo $key; ?>_environment" id="<?php echo $key; ?>_environment" class="form-control" placeholder="Environment Fee">
                         </div>
                         <?php endforeach; ?>
                     </div>
@@ -140,28 +138,18 @@ window.onload = function() {
     if (motTypeDropdown) {
         showGuest(motTypeDropdown.value);
     }
-    let codeDropdown = document.getElementById('code');
-    if (codeDropdown && codeDropdown.value === "TC") {
-        toggleFields();
-    }
-};
+}; 
 function toggleFields() {
-    let selId = document.getElementById('id').value;
     let dropdown = document.getElementById('code').value;
     let motTypeContainer = document.getElementById('motTypeContainer');
-    let motType = document.getElementById('mot_type');
     let rightPanel = document.getElementById('rightPanel');
     let amountContainer = document.getElementById('amountContainer');
     let amountField = document.getElementById('amount');
+    let guestFee = document.getElementById('guestFee');
     let terminalFee = document.getElementById('terminalFee');
     let environmentFee = document.getElementById('environmentFee');
 
-    let terminalFields = [];
-    let environmentFields = [];
-    for (let i = 1; i <= 8; i++) {
-        terminalFields.push(document.getElementById(`price_guest_${i}_terminal`));
-        environmentFields.push(document.getElementById(`price_guest_${i}_environment`));
-    }
+
     
     if (dropdown) {
         showGuest(dropdown.value);
@@ -176,23 +164,15 @@ function toggleFields() {
         motTypeContainer.style.display = "block";
         amountContainer.style.display = "none";
         amountField.removeAttribute("required");
-        if(!selId)motType.value = "";
     } else if (dropdown === "TC") {
         amountContainer.style.display = "block";
         motTypeContainer.style.display = "none";
         rightPanel.style.display = "block";
-        amountContainer.style.display = "none";
+        amountField.setAttribute("required", "required");
 
-        terminalFields.forEach(field => {
-            if (field) field.style.display = "block";
-        });
-        environmentFields.forEach(field => {
-            if (field) field.style.display = "block";
-        });
         // Remove required attribute from guest fields
         guestFields.forEach(field => {
             document.getElementById(field).removeAttribute("required");
-            document.getElementById(field).style.display = "none";
         });
 
     } else {
@@ -204,7 +184,6 @@ function toggleFields() {
         // Remove required attribute from guest fields
         guestFields.forEach(field => {
             document.getElementById(field).removeAttribute("required");
-            document.getElementById(field).style.display = "block";
         });
     }
 }
@@ -212,12 +191,6 @@ function showGuest(id){
     let rightPanel = document.getElementById('rightPanel');
     let amountContainer = document.getElementById('amountContainer');
     let amountField = document.getElementById('amount');
-    let terminalFields = [];
-    let environmentFields = [];
-    for (let i = 1; i <= 8; i++) {
-        terminalFields.push(document.getElementById(`price_guest_${i}_terminal`));
-        environmentFields.push(document.getElementById(`price_guest_${i}_environment`));
-    }
 
     // Get all guest price fields
     let guestFields = [
@@ -225,20 +198,9 @@ function showGuest(id){
         'price_guest_4', 'price_guest_5', 'price_guest_6', 'price_guest_7', 'price_guest_8'
     ];
 
-    if(id == 1){
+    if(id == 1 || id == 3){
         rightPanel.style.display = "block";
         amountContainer.style.display = "block";
-        
-        terminalFields.forEach(field => {
-            if (field) field.style.display = "none";
-        });
-        environmentFields.forEach(field => {
-            if (field) field.style.display = "none";
-        });
-        guestFields.forEach(field => {
-            document.getElementById(field).removeAttribute("required");
-            document.getElementById(field).style.display = "block";
-        });
     }else{
 
         rightPanel.style.display = "none";
