@@ -38,6 +38,12 @@
 				height:24px;
 				font-size: 14px;
 			}
+			.dataTables_wrapper .top {
+				display: flex;
+				justify-content: space-between; /* Ensures spacing */
+				align-items: center;
+				margin-bottom: 10px; /* Adjust spacing */
+			}
 		</style>
 	
 			<table id="myTable" class="table table-bordered table-striped display" style="font-size: 14px;">
@@ -279,8 +285,12 @@
 		
     // Initialize DataTable		
 		var table = $('#myTable').DataTable({
-                dom: 'Bfrtip',
+				dom: '<"top"lBf>rt<"bottom"ip>',
 				paging: true,
+				info: true,
+				lengthChange: true, // Ensures dropdown is enabled
+				lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+				pageLength: 10,
                 buttons: [
 					{
 						extend: 'print',
