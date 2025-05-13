@@ -3,20 +3,30 @@
 	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
 </script>
 <?php endif;?>
-
 <style>
-    .img-avatar{
-        width:45px;
-        height:45px;
-        object-fit:cover;
-        object-position:center center;
-        border-radius:100%;
-    }
+
+	.dataTables_wrapper .top {
+    display: flex;
+    justify-content: space-between; /* Ensures spacing */
+    align-items: center;
+    margin-bottom: 10px; /* Adjust spacing */
+}
+
 </style>
 <div class="card card-outline card-primary">
 	<div class="card-header">
 		<h3 class="card-title">Maintenance</h3>
 		<div class="card-tools">
+		<label for="codeFilter">Code:</label>
+			<select id="codeFilter">
+				<option></option>
+				<option value="MODE OF TRANSFER">MODE OF TRANSFER</option>
+				<option value="PAYMENT TYPE">PAYMENT TYPE</option>
+				<option value="ORIGIN PICK-UP & DROP OFF">ORIGIN PICK-UP & DROP OFF</option>
+				<option value="AIRPORT">AIRPORT</option>
+				<option value="HOTEL/RESORT">HOTEL/RESORT</option>
+				<option value="RANSFER CHARGE">TRANSFER CHARGE</option>
+			</select>
 			<a href="?page=maintenance/manage_reference" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
 	</div>
@@ -60,7 +70,7 @@
 												echo 'DEPARTURE';
 												break;
 											case 3:
-												echo 'N/A';
+												echo 'ROUNDTRIP';
 												break;
 											default:
 												break;
@@ -135,11 +145,29 @@
 	</div>
 </div>
 <script>
+
+	
+
 	$(document).ready(function(){
 		$('.delete_data').click(function(){
 			_conf("Are you sure to delete this User permanently?","delete_reference",[$(this).attr('data-id')])
 		})
-		$('.table').dataTable();
+		
+		
+    // Initialize DataTable		
+	var table = $('.table').DataTable({
+		dom: '<"top"lBf>rt<"bottom"ip>',
+		paging: true,
+		info: true,
+		lengthChange: true, // Ensures dropdown is enabled
+		lengthMenu: [ [25, 50, 100, -1], [25, 50, 100, "All"] ],
+		pageLength: 25
+	});
+
+		
+		$('#codeFilter').on('change', function () {
+			table.column(2).search(this.value).draw(); 
+		});
 	})
 	function delete_reference($id){
 		start_loader();
