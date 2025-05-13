@@ -81,9 +81,16 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                             'price_guest_8' => 'Resident (No Terminal and Environment Fee)'
                         ];
                         foreach($fields as $key => $label): ?>
-                        <div class="form-group">
+                        <div class="form-group" id="guestFee">
                             <label for="<?php echo $key; ?>"><?php echo $label; ?></label>
                             <input type="text" name="<?php echo $key; ?>" id="<?php echo $key; ?>" class="form-control" value="<?php echo isset($meta[$key]) ? $meta[$key]: '' ?>" required autocomplete="off">
+                        </div>
+                        
+                        <div class="form-group col-md-4" id="terminalFee">
+                            <input type="text" name="<?php echo $key; ?>_terminal" id="<?php echo $key; ?>_terminal" class="form-control" placeholder="Terminal Fee">
+                        </div>
+                        <div class="form-group col-md-4" id="environmentFee">
+                            <input type="text" name="<?php echo $key; ?>_environment" id="<?php echo $key; ?>_environment" class="form-control" placeholder="Environment Fee">
                         </div>
                         <?php endforeach; ?>
                     </div>
@@ -138,6 +145,9 @@ function toggleFields() {
     let rightPanel = document.getElementById('rightPanel');
     let amountContainer = document.getElementById('amountContainer');
     let amountField = document.getElementById('amount');
+    let guestFee = document.getElementById('guestFee');
+    let terminalFee = document.getElementById('terminalFee');
+    let environmentFee = document.getElementById('environmentFee');
 
 
     
@@ -157,7 +167,7 @@ function toggleFields() {
     } else if (dropdown === "TC") {
         amountContainer.style.display = "block";
         motTypeContainer.style.display = "none";
-        rightPanel.style.display = "none";
+        rightPanel.style.display = "block";
         amountField.setAttribute("required", "required");
 
         // Remove required attribute from guest fields
