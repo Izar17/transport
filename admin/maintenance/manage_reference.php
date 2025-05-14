@@ -102,7 +102,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
     </div>
     <div class="card-footer">
         <div class="col-md-12">
-            <div class="row">
+            <div class="row justify-content-end">
                 <button class="btn btn-sm btn-primary mr-2" form="manage_reference">Save</button>
                 <a class="btn btn-sm btn-secondary" href="./?page=maintenance">Cancel</a>
             </div>
