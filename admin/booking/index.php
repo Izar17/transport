@@ -266,6 +266,7 @@ select.form-control {
             <div class="col-md-2 d-flex flex-column" style="border: 1px solid #000; border-radius:10px; padding: 10px; margin-top: -55px;background-color:#D4FEFD;">
                 <label for="transfercharges" class="control-label" style="text-align:center;font-size:18px;"><u>&nbsp;&nbsp;&nbsp; TRANSFER CHARGES &nbsp;&nbsp;&nbsp;</u></label>
                 <div id="charges" class="flex-grow-1">
+				<!-- Guests Table -->
 				<table style="width:100%;font-size:14px;padding:0px;font-weight:bold;">
 					<tr>
 						<td rowspan="2" width="25%"><input type="number" id="qtyGuest1" name="qty_guest_1" value="<?php echo isset($meta['qty_guest_1']) ? $meta['qty_guest_1']: '' ?>" class="transfercharges"/></td>
@@ -278,6 +279,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest1"><?php echo isset($meta['price_guest_1']) ? 'P'.number_format((float)$meta['price_guest_1'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest1" name="price_guest_1" value="<?php echo isset($meta['price_guest_1']) ? $meta['price_guest_1']: '' ?>"/>
+							<input type="hidden" id="envGuest1"/>
+							<input type="hidden" id="envGuest1Holder"/>
+							<input type="hidden" id="terminalGuest1"/>
+							<input type="hidden" id="terminalGuest1Holder"/>
 						</td>
 					</tr>
 					<!-- Repeat for other guest types -->
@@ -292,6 +297,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest2"><?php echo isset($meta['price_guest_2']) ? 'P'.number_format((float)$meta['price_guest_2'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest2" name="price_guest_2" value="<?php echo isset($meta['price_guest_2']) ? $meta['price_guest_2']: '' ?>"/>
+							<input type="hidden" id="envGuest2"/>
+							<input type="hidden" id="envGuest2Holder"/>
+							<input type="hidden" id="terminalGuest2"/>
+							<input type="hidden" id="terminalGuest2Holder"/>
 						</td>
 					</tr>
 					<tr>
@@ -305,6 +314,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest3"><?php echo isset($meta['price_guest_3']) ? 'P'.number_format((float)$meta['price_guest_3'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest3" name="price_guest_3" value="<?php echo isset($meta['price_guest_3']) ? $meta['price_guest_3']: '' ?>"/>
+							<input type="hidden" id="envGuest3"/>
+							<input type="hidden" id="envGuest3Holder"/>
+							<input type="hidden" id="terminalGuest3"/>
+							<input type="hidden" id="terminalGuest3Holder"/>
 						</td>
 					</tr>
 					<tr>
@@ -318,6 +331,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest4"><?php echo isset($meta['price_guest_4']) ? 'P'.number_format((float)$meta['price_guest_4'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest4" name="price_guest_4" value="<?php echo isset($meta['price_guest_4']) ? $meta['price_guest_4']: '' ?>"/>
+							<input type="hidden" id="envGuest4"/>
+							<input type="hidden" id="envGuest4Holder"/>
+							<input type="hidden" id="terminalGuest4"/>
+							<input type="hidden" id="terminalGuest4Holder"/>
 						</td>
 					</tr>
 					<tr>
@@ -331,6 +348,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest5"><?php echo isset($meta['price_guest_5']) ? 'P'.number_format((float)$meta['price_guest_5'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest5" name="price_guest_5" value="<?php echo isset($meta['price_guest_5']) ? $meta['price_guest_5']: '' ?>"/>
+							<input type="hidden" id="envGuest5"/>
+							<input type="hidden" id="envGuest5Holder"/>
+							<input type="hidden" id="terminalGuest5"/>
+							<input type="hidden" id="terminalGuest5Holder"/>
 						</td>
 					</tr>
 					<tr>
@@ -344,6 +365,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest6"><?php echo isset($meta['price_guest_6']) ? 'P'.number_format((float)$meta['price_guest_6'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest6" name="price_guest_6" value="<?php echo isset($meta['price_guest_6']) ? $meta['price_guest_6']: '' ?>"/>
+							<input type="hidden" id="envGuest6"/>
+							<input type="hidden" id="envGuest6Holder"/>
+							<input type="hidden" id="terminalGuest6"/>
+							<input type="hidden" id="terminalGuest6Holder"/>
 						</td>
 					</tr>
 					<tr>
@@ -357,6 +382,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest7"><?php echo isset($meta['price_guest_7']) ? 'P'.number_format((float)$meta['price_guest_7'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest7" name="price_guest_7" value="<?php echo isset($meta['price_guest_7']) ? $meta['price_guest_7']: '' ?>"/>
+							<input type="hidden" id="envGuest7"/>
+							<input type="hidden" id="envGuest7Holder"/>
+							<input type="hidden" id="terminalGuest7"/>
+							<input type="hidden" id="terminalGuest7Holder"/>
 						</td>
 					</tr>
 					<tr>
@@ -372,6 +401,10 @@ select.form-control {
 						<td style="text-align:right;">
 							<label id="lblGuest8"><?php echo isset($meta['price_guest_8']) ? 'P'.number_format((float)$meta['price_guest_8'], 2, '.', ','): '0.00' ?></label>
 							<input type="hidden" id="priceGuest8" name="price_guest_8" value="<?php echo isset($meta['price_guest_8']) ? $meta['price_guest_8']: '' ?>"/>
+							<input type="hidden" id="envGuest8"/>
+							<input type="hidden" id="envGuest8Holder"/>
+							<input type="hidden" id="terminalGuest8"/>
+							<input type="hidden" id="terminalGuest8Holder"/>
 						</td>
 					</tr>
 				</table><hr>
@@ -380,10 +413,10 @@ select.form-control {
 					<input type="hidden" id="chargePriceHolder"/>
 					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
-                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; with Shopping:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
+                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Environment Fee:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
 					<input type="hidden" id="terminalFee" name="terminal_fee" value="<?php echo isset($meta['terminal_fee']) ? $meta['terminal_fee']: '' ?>" /><br>
 					<input type="hidden" id="terminalFeeHolder"/>
-                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Others:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Terminal Fee:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
 					<input type="hidden" id="envFee" name="environment_fee" value="<?php echo isset($meta['environment_fee']) ? $meta['environment_fee']: '' ?>"/>
 					<input type="hidden" id="envFeeHolder"/>
 					<hr>
@@ -401,7 +434,21 @@ select.form-control {
 </div>
 <script>
 	//1
+	let dropDownData;
+
+	$.ajax({
+		url: _base_url_+"classes/Booking.php?f=get_reference_table",
+		type: 'GET',
+		success: function(response) {
+			dropDownData = JSON.parse(response);
+		},
+		error: function() {
+			alert("Error loading data.");
+		}
+	});
+	
 	$(document).ready(function() {
+
 		let globalMOT = [];
 
 		$('.clsArrival').hide();
@@ -474,7 +521,7 @@ select.form-control {
 				$('.clsRemarks').hide();
 			}
 		
-			console.log("length => ",$('#arrOriginDropOff').length);
+			// console.log("length => ",$('#arrOriginDropOff').length);
         });
 
 		if (id) {
@@ -805,6 +852,7 @@ select.form-control {
 		computeTotal();
 	};
 
+	//2
 	function computeTotal()
 	{
 
@@ -874,131 +922,166 @@ select.form-control {
 		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`);
 		$("#totalPrice").val(`${parseFloat(total).toFixed(2)}`);
 	};
-
+	//3
 	function populateDropdowns(transferType)
 	{
-		$.ajax({
+		/* $.ajax({
 			url: _base_url_+"classes/Booking.php?f=get_reference_table",
 			type: 'GET',
 			success: function(response) {
 				
-				let data = JSON.parse(response);
+				let data = JSON.parse(response); */
+		// console.log("dropDownData>>>",dropDownData);
+		let arrPaymentModes = [];
+		let arrPaymentTypes = [];
+		let arrOriginDropOffs = [];
+		let arrAirports = [];
+		let arrHotelResorts = [];
+		let depOriginDropOffs = [];
+		let arrTerminalFee = [];
+		let arrEnvFee = [];
 
-				let arrPaymentModes = [];
-				let arrPaymentTypes = [];
-				let arrOriginDropOffs = [];
-				let arrAirports = [];
-				let arrHotelResorts = [];
-				let depOriginDropOffs = [];
+		$.each(dropDownData, function(index, item) {
 
-				$.each(data, function(index, item) {
-
-					if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description, amount: item.amount, guestPrice1: item.price_guest_1, guestPrice2: item.price_guest_2, guestPrice3: item.price_guest_3, guestPrice4: item.price_guest_4, guestPrice5: item.price_guest_5, guestPrice6: item.price_guest_6, guestPrice7: item.price_guest_7, guestPrice8: item.price_guest_8});
-
-					if (transferType === 1) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("DEPARTURE") && !mode.title.includes("ROUNDTRIP"));
-					else if (transferType === 2) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("ROUNDTRIP"));
-					else if (transferType === 3) arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
-
-					if (parseInt(item.type) === 1)
-					{
-						if (item.code == 'ODL') arrOriginDropOffs.push({amount: item.amount, description: item.description});
-					}
-					else if (parseInt(item.type) === 2)
-					{
-						if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
-					}
-					else if (parseInt(item.type) === 3)
-					{
-						if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
-						else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
-						else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description});
-					}
-
-					if (item.code == 'TC')
-					{
-						if (item.title == 'TERMINAL')
-						{
-							const amount = parseFloat(item.amount);
-							$("#lblTerminalFee").text(`P${amount.toFixed(2)}`);
-							$("#terminalFeeHolder").val(`${amount.toFixed(2)}`);
-						}
-						if (item.title == 'ENVIRONMENT')
-						{
-							const amount = parseFloat(item.amount);
-							$("#lblEnvFee").text(`P${amount.toFixed(2)}`);
-							$("#envFeeHolder").val(`${amount.toFixed(2)}`);
-						}
-
-					}
-
-				});
-
-				globalMOT = arrPaymentModes;
+			if (item.code == 'MOT') arrPaymentModes.push({title: item.title, description: item.description, amount: item.amount, guestPrice1: item.price_guest_1, guestPrice2: item.price_guest_2, guestPrice3: item.price_guest_3, guestPrice4: item.price_guest_4, guestPrice5: item.price_guest_5, guestPrice6: item.price_guest_6, guestPrice7: item.price_guest_7, guestPrice8: item.price_guest_8});
+			
+			if (item.code == 'TC')
+			{
+				arrTerminalFee.push({type: item.type, title: item.title, priceGuest1Terminal: item.price_guest_1_terminal,priceGuest2Terminal: item.price_guest_2_terminal, priceGuest3Terminal: item.price_guest_3_terminal, priceGuest4Terminal: item.price_guest_4_terminal, priceGuest5Terminal: item.price_guest_5_terminal, priceGuest6Terminal: item.price_guest_6_terminal, priceGuest7Terminal: item.price_guest_7_terminal, priceGuest8Terminal: item.price_guest_8_terminal});
 				
-				//Populating dropdowns
-				$.each(arrPaymentModes, function(index, item) {
-					$('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.title + '</option>');
-				});
+				arrEnvFee.push({type: item.type, title: item.title, priceGuest1Env: item.price_guest_1_environment, priceGuest2Env: item.price_guest_2_environment, priceGuest3Env: item.price_guest_3_environment, priceGuest4Env: item.price_guest_4_environment, priceGuest5Env: item.price_guest_5_environment, priceGuest6Env: item.price_guest_6_environment, priceGuest7Env: item.price_guest_7_environment, priceGuest8Env: item.price_guest_8_environment});
+			} 
+			
+			if (transferType === 1) 
+			{
+				arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("DEPARTURE") && !mode.title.includes("ROUNDTRIP"));
+				arrTerminalFee = arrTerminalFee.filter(mode => !mode.title.includes("DEPARTURE") && !mode.title.includes("ROUNDTRIP"));
+				arrEnvFee = arrEnvFee.filter(mode => !mode.title.includes("DEPARTURE") && !mode.title.includes("ROUNDTRIP"));
+			}
+			else if (transferType === 2) 
+			{
+				arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("ROUNDTRIP"));
+				arrTerminalFee = arrTerminalFee.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("ROUNDTRIP"));
+				arrEnvFee = arrEnvFee.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("ROUNDTRIP"));
+			}
+			else if (transferType === 3)
+			{
+				arrPaymentModes = arrPaymentModes.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
+				arrTerminalFee = arrTerminalFee.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
+				arrEnvFee = arrEnvFee.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
+			}
+			//axle
+			if (parseInt(item.type) === 1)
+			{
+				if (item.code == 'ODL') arrOriginDropOffs.push({amount: item.amount, description: item.description});
+			}
+			else if (parseInt(item.type) === 2)
+			{
+				if (item.code == 'ODL') depOriginDropOffs.push({amount: item.amount, description: item.description});
+			}
+			else if (parseInt(item.type) === 3)
+			{
+				if (item.code == 'PT') arrPaymentTypes.push({title: item.title, description: item.description});
+				else if (item.code == 'AP') arrAirports.push({title: item.title, description: item.description});
+				else if (item.code == 'HR') arrHotelResorts.push({title: item.title, description: item.description});
+			}
 
-				$.each(arrPaymentTypes, function(index, item) {
-					$('#paymentType').append('<option value="' + item.title + '">' + item.description + '</option>');
-				});
-
-				console.log("transferType >",transferType);
-				if (transferType === 1 || transferType === 3) {
-
-					if (!id)
-					{
-						$('#arrOriginDropOff').empty();
-						
-						$('#arrOriginDropOff').append('<option  disabled selected></option>');
-						$('#arrAirport').append('<option value="" disabled selected></option>');
-						$('#arrHotelResort').append('<option value="" disabled selected></option>');
-					}
-
-					$.each(arrOriginDropOffs, function(index, item) {
-						$('#arrOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
-					});
-
-					$.each(arrAirports, function(index, item) {
-						$('#arrAirport').append('<option value="' + item.title + '">' + item.description + '</option>');
-					});
-
-					$.each(arrHotelResorts, function(index, item) {
-						$('#arrHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
-					});
+			/* if (item.code == 'TC')
+			{
+				if (item.title == 'TERMINAL')
+				{
+					const amount = parseFloat(item.amount);
+					$("#lblTerminalFee").text(`P${amount.toFixed(2)}`);
+					$("#terminalFeeHolder").val(`${amount.toFixed(2)}`);
 				}
-				
-				if (transferType === 2 || transferType === 3) {
-
-					if (!id)
-					{
-						$('#depOriginDropOff').empty();
-						$('#depAirport').empty();
-						$('#depHotelResort').empty();
-						$('#depOriginDropOff').append('<option  disabled selected></option>');
-						$('#depAirport').append('<option value="" disabled selected></option>');
-						$('#depHotelResort').append('<option value="" disabled selected></option>');
-					}
-
-					$.each(depOriginDropOffs, function(index, item) {
-						$('#depOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
-					});
-
-					$.each(arrAirports, function(index, item) {
-						$('#depAirport').append('<option value="' + item.title + '">' + item.description + '</option>');
-					});
-
-					$.each(arrHotelResorts, function(index, item) {
-						$('#depHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
-					});
+				if (item.title == 'ENVIRONMENT')
+				{
+					const amount = parseFloat(item.amount);
+					$("#lblEnvFee").text(`P${amount.toFixed(2)}`);
+					$("#envFeeHolder").val(`${amount.toFixed(2)}`);
 				}
 
-			},
+			} */
+
+		});
+
+		globalMOT = arrPaymentModes;
+		
+		//Populating dropdowns
+		$.each(arrPaymentModes, function(index, item) {
+			$('#modeOfTransfer').append('<option value="' + item.amount + '">' + item.title + '</option>');
+		});
+
+		$.each(arrPaymentTypes, function(index, item) {
+			$('#paymentType').append('<option value="' + item.title + '">' + item.description + '</option>');
+		});
+
+		$.each(arrTerminalFee, function(index, item) {
+			$('#terminalGuest1Holder').val(item.priceGuest1Terminal);
+			$('#terminalGuest2Holder').val(item.priceGuest2Terminal);
+			$('#terminalGuest3Holder').val(item.priceGuest3Terminal);
+			$('#terminalGuest4Holder').val(item.priceGuest4Terminal);
+			$('#terminalGuest5Holder').val(item.priceGuest5Terminal);
+			$('#terminalGuest6Holder').val(item.priceGuest6Terminal);
+			$('#terminalGuest7Holder').val(item.priceGuest7Terminal);
+			$('#terminalGuest8Holder').val(item.priceGuest8Terminal);
+		});
+
+		console.log("transferType >",transferType);
+		if (transferType === 1 || transferType === 3) {
+
+			if (!id)
+			{
+				$('#arrOriginDropOff').empty();
+				
+				$('#arrOriginDropOff').append('<option  disabled selected></option>');
+				$('#arrAirport').append('<option value="" disabled selected></option>');
+				$('#arrHotelResort').append('<option value="" disabled selected></option>');
+			}
+
+			$.each(arrOriginDropOffs, function(index, item) {
+				$('#arrOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
+			});
+
+			$.each(arrAirports, function(index, item) {
+				$('#arrAirport').append('<option value="' + item.title + '">' + item.description + '</option>');
+			});
+
+			$.each(arrHotelResorts, function(index, item) {
+				$('#arrHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
+			});
+		}
+		
+		if (transferType === 2 || transferType === 3) {
+
+			if (!id)
+			{
+				$('#depOriginDropOff').empty();
+				$('#depAirport').empty();
+				$('#depHotelResort').empty();
+				$('#depOriginDropOff').append('<option  disabled selected></option>');
+				$('#depAirport').append('<option value="" disabled selected></option>');
+				$('#depHotelResort').append('<option value="" disabled selected></option>');
+			}
+
+			$.each(depOriginDropOffs, function(index, item) {
+				$('#depOriginDropOff').append('<option value="' + item.amount + '">' + item.description + '</option>');
+			});
+
+			$.each(arrAirports, function(index, item) {
+				$('#depAirport').append('<option value="' + item.title + '">' + item.description + '</option>');
+			});
+
+			$.each(arrHotelResorts, function(index, item) {
+				$('#depHotelResort').append('<option value="' + item.title + '">' + item.description + '</option>');
+			});
+		}
+
+			/* },
 			error: function() {
 				alert("Error loading data.");
 			}
-		});
+		}); */
 	}
 
 

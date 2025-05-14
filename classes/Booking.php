@@ -41,7 +41,16 @@ Class Booking extends DBConnection {
 
 	function get_reference_table() {
 		// SQL query to fetch specific fields (e.g., 'id' and 'product_name')
-		$query = "SELECT type, code, title, description, amount, price_guest_1, price_guest_2, price_guest_3, price_guest_4, price_guest_5, price_guest_6, price_guest_7, price_guest_8 FROM reference_table";
+		$query = "SELECT type, code, title, description, amount, price_guest_1, price_guest_2, price_guest_3, price_guest_4, price_guest_5, price_guest_6, price_guest_7, price_guest_8, 
+		price_guest_1_terminal, price_guest_1_environment,
+		price_guest_2_terminal, price_guest_2_environment,
+		price_guest_3_terminal, price_guest_3_environment,
+		price_guest_4_terminal, price_guest_4_environment,
+		price_guest_5_terminal, price_guest_5_environment,
+		price_guest_6_terminal, price_guest_6_environment,
+		price_guest_7_terminal, price_guest_7_environment,
+		price_guest_8_terminal, price_guest_8_environment
+		FROM reference_table";
 		$result = $this->conn->query($query);
 
 		// Array to store the data
