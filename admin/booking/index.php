@@ -269,7 +269,7 @@ select.form-control {
 				<!-- Guests Table -->
 				<table style="width:100%;font-size:14px;padding:0px;font-weight:bold;">
 					<tr>
-						<td rowspan="2" width="25%"><input type="number" id="qtyGuest1" name="qty_guest_1" value="<?php echo isset($meta['qty_guest_1']) ? $meta['qty_guest_1']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2" width="25%"><input type="number" min="0" id="qtyGuest1" name="qty_guest_1" value="<?php echo isset($meta['qty_guest_1']) ? $meta['qty_guest_1']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Local)</td>
@@ -287,7 +287,7 @@ select.form-control {
 					</tr>
 					<!-- Repeat for other guest types -->
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest2" name="qty_guest_2" value="<?php echo isset($meta['qty_guest_2']) ? $meta['qty_guest_2']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest2" name="qty_guest_2" value="<?php echo isset($meta['qty_guest_2']) ? $meta['qty_guest_2']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Foreign)</td>
@@ -304,7 +304,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest3" name="qty_guest_3" value="<?php echo isset($meta['qty_guest_3']) ? $meta['qty_guest_3']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest3" name="qty_guest_3" value="<?php echo isset($meta['qty_guest_3']) ? $meta['qty_guest_3']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Senior/PWD</td>
@@ -321,7 +321,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest4" name="qty_guest_4" value="<?php echo isset($meta['qty_guest_4']) ? $meta['qty_guest_4']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest4" name="qty_guest_4" value="<?php echo isset($meta['qty_guest_4']) ? $meta['qty_guest_4']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Child Local (6-12 yo)</td>
@@ -338,7 +338,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest5" name="qty_guest_5" value="<?php echo isset($meta['qty_guest_5']) ? $meta['qty_guest_5']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest5" name="qty_guest_5" value="<?php echo isset($meta['qty_guest_5']) ? $meta['qty_guest_5']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Child Foreign (6-12 yo)</td>
@@ -355,7 +355,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest6" name="qty_guest_6" value="<?php echo isset($meta['qty_guest_6']) ? $meta['qty_guest_6']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest6" name="qty_guest_6" value="<?php echo isset($meta['qty_guest_6']) ? $meta['qty_guest_6']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Child (3-5 yo)</td>
@@ -372,7 +372,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest7" name="qty_guest_7" value="<?php echo isset($meta['qty_guest_7']) ? $meta['qty_guest_7']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest7" name="qty_guest_7" value="<?php echo isset($meta['qty_guest_7']) ? $meta['qty_guest_7']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>2 yo and below /<br> <span style="color:red">FOC Employee</span></td>
@@ -389,7 +389,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" id="qtyGuest8" name="qty_guest_8" value="<?php echo isset($meta['qty_guest_8']) ? $meta['qty_guest_8']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest8" name="qty_guest_8" value="<?php echo isset($meta['qty_guest_8']) ? $meta['qty_guest_8']: '' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr>
 						<td>Resident (<span style="color:grey">No Terminal & Environment Fee</span>)</td>
@@ -407,16 +407,22 @@ select.form-control {
 							<input type="hidden" id="terminalGuest8Holder"/>
 						</td>
 					</tr>
+					<tr class="trChartered">
+						<td rowspan="2"><input type="number" min="0" id="vehicleQty" value="<?php echo isset($meta['vehicle_qty']) ? $meta['vehicle_qty']: '' ?>" class="transfercharges"/></td>
+					</tr>
+					<tr class="trChartered">
+						<td># of Vehicle Unit</td>
+					</tr>
 				</table><hr>
 					<label id="priceTitle">Price</label> <label id="lblPrice">P0.00</label><br>
 					<input type="hidden" id="chargePrice" name="price"/>
 					<input type="hidden" id="chargePriceHolder"/>
 					<input type="hidden" id="envFee" name="environment_fee"/>
 					<input type="hidden" id="envFeeHolder"/>
-                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Environment Fee:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
+                    <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal Fee:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
 					<input type="hidden" id="terminalFee" name="terminal_fee" value="<?php echo isset($meta['terminal_fee']) ? $meta['terminal_fee']: '' ?>" /><br>
 					<input type="hidden" id="terminalFeeHolder"/>
-                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Terminal Fee:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
+                    <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environment Fee:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
 					<input type="hidden" id="envFee" name="environment_fee" value="<?php echo isset($meta['environment_fee']) ? $meta['environment_fee']: '' ?>"/>
 					<input type="hidden" id="envFeeHolder"/>
 					<hr>
@@ -454,6 +460,7 @@ select.form-control {
 		$('.clsArrival').hide();
 		$('.clsDeparture').hide();
 		$('.clsRemarks').hide();
+		$('.trChartered').hide();
 
 		$('#arrOriginDropOff').select2();
 		$('#depOriginDropOff').select2();
@@ -554,18 +561,23 @@ select.form-control {
 				$('#priceTitle').text(`Private Price/Head: `);
 				$('#lblPrice').text(`P${chargePrice}`);
 				$('#chargePriceHolder').val(chargePrice);
+				$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
+				$('.trChartered').hide();
 			}
 			else if (str.includes("CHARTERED"))
 			{
 				$('#priceTitle').text(`Chartered Price: `);
 				$('#lblPrice').text(`P${$(this).val()}`);
 				$('#chargePriceHolder').val($(this).val());
+				$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
+				$('.trChartered').show();
 			}
 			else if (str.includes("SHARED"))
 			{
 				$('#priceTitle').text(`Price: `);
 				$('#lblPrice').text(`P0.00`);
 				$('#chargePriceHolder').val("0");
+				$('.trChartered').hide();
 			}
 
 			computeTotal();
@@ -586,7 +598,7 @@ select.form-control {
 			$('#hdDepOriginDropOff').val($('#depOriginDropOff option:selected').text());
 			$('#depOriginDropOffPrice').val($(this).val());
 		});
-
+		
 		$('#qtyGuest1').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest1`,`#priceGuest1`,$(this).val());
@@ -637,19 +649,15 @@ select.form-control {
 		
 
 		$('#chkTerminalFee').change(function() {
-			if ($(this).is(':checked')) {
-				$("#terminalFee").val($("#terminalFeeHolder").val());
-			} else {
-				$("#terminalFee").val("0");
+			if (!$(this).is(':checked')){
+				$("#lblTerminalFee").text("0.00");
 			}
 			computeTotal();
 		});
 
 		$('#chkEnvFee').change(function() {
-			if ($(this).is(':checked')) {
-				$("#envFee").val($("#envFeeHolder").val());
-			} else {
-				$("#envFee").val("0");
+			if (!$(this).is(':checked')){
+				$("#lblEnvFee").text("0.00");
 			}
 			computeTotal();
 		});
@@ -805,7 +813,7 @@ select.form-control {
 		if (transType === "ARRIVAL") originPrice = arrOriginDropOffPrice;
 		else if (transType === "DEPARTURE") originPrice = depOriginDropOffPrice;
 		else if (transType === "ROUNDTRIP") originPrice = arrOriginDropOffPrice + depOriginDropOffPrice;
- */
+		*/
 		const modeOfTransferPrice = parseInt($('#modeOfTransferPrice').val()) || 0;
 
 		const modeOfTransfers = globalMOT;
@@ -814,7 +822,6 @@ select.form-control {
 
 		let guestPrice = 0;
 		
-		//lblGuest1
 		switch (targetField){
 			case "#lblGuest1":
 				guestPrice = selectedMode.guestPrice1;
@@ -855,7 +862,6 @@ select.form-control {
 	//2
 	function computeTotal()
 	{
-
 		let totalQty = 0;
 		let privatePrice = 0;
 		let price = 0;
@@ -907,8 +913,29 @@ select.form-control {
 		}
 		else if (str.includes("CHARTERED")) price = $('#chargePriceHolder').val();
 
-		let terminalFee = $("#terminalFee").val() || 0;
-		let envFee = $("#envFee").val() || 0;
+		let terminalFee = 0;
+		let envFee = 0;
+
+		if ($("#chkTerminalFee").is(':checked')) {
+			terminalFee = computeTerminalFee();
+			$("#terminalFee").val(terminalFee);
+		}
+
+		if ($("#chkEnvFee").is(':checked')) {
+			envFee = computeEnvFee();
+			$("#envFee").val(envFee);
+		}
+
+		console.log("terminalFee>>",terminalFee);
+		console.log("envFee>>",envFee);
+		/* if ($("#chkEnvFee").is(':checked')) {
+			$("#envFee").val($("#envFeeHolder").val());
+		} else {
+			$("#envFee").val("0");
+		} */
+
+		// let terminalFee = $("#terminalFee").val() || 0;
+		// let envFee = $("#envFee").val() || 0;
 		// console.log("terminalFee>>",terminalFee);
 		// console.log("envFee>>",envFee);
 		
@@ -923,6 +950,100 @@ select.form-control {
 		$("#totalPrice").val(`${parseFloat(total).toFixed(2)}`);
 	};
 	//3
+	function computeTerminalFee()
+	{
+		//Get Quantity per Guest
+		const guest1 = parseInt($("#qtyGuest1").val()) || 0;
+		const guest2 = parseInt($("#qtyGuest2").val()) || 0;
+		const guest3 = parseInt($("#qtyGuest3").val()) || 0;
+		const guest4 = parseInt($("#qtyGuest4").val()) || 0;
+		const guest5 = parseInt($("#qtyGuest5").val()) || 0;
+		const guest6 = parseInt($("#qtyGuest6").val()) || 0;
+		const guest7 = parseInt($("#qtyGuest7").val()) || 0;
+		const guest8 = parseInt($("#qtyGuest8").val()) || 0;
+
+		//Get Terminal Fee per Guest
+		const terminalPrice1 = parseFloat($('#terminalGuest1Holder').val());
+		const terminalPrice2 = parseFloat($('#terminalGuest2Holder').val());
+		const terminalPrice3 = parseFloat($('#terminalGuest3Holder').val());
+		const terminalPrice4 = parseFloat($('#terminalGuest4Holder').val());
+		const terminalPrice5 = parseFloat($('#terminalGuest5Holder').val());
+		const terminalPrice6 = parseFloat($('#terminalGuest6Holder').val());
+		const terminalPrice7 = parseFloat($('#terminalGuest7Holder').val());
+		const terminalPrice8 = parseFloat($('#terminalGuest8Holder').val());
+
+		const priceGuest1Terminal = guest1 * terminalPrice1;
+		const priceGuest2Terminal = guest2 * terminalPrice2;
+		const priceGuest3Terminal = guest3 * terminalPrice3;
+		const priceGuest4Terminal = guest4 * terminalPrice4;
+		const priceGuest5Terminal = guest5 * terminalPrice5;
+		const priceGuest6Terminal = guest6 * terminalPrice6;
+		const priceGuest7Terminal = guest7 * terminalPrice7;
+		const priceGuest8Terminal = guest8 * terminalPrice8;
+
+		$('#terminalGuest1').val(priceGuest1Terminal);
+		$('#terminalGuest2').val(priceGuest2Terminal);
+		$('#terminalGuest3').val(priceGuest3Terminal);
+		$('#terminalGuest4').val(priceGuest4Terminal);
+		$('#terminalGuest5').val(priceGuest5Terminal);
+		$('#terminalGuest6').val(priceGuest6Terminal);
+		$('#terminalGuest7').val(priceGuest7Terminal);
+		$('#terminalGuest8').val(priceGuest8Terminal);
+
+		const totalTerminalFee = parseFloat(priceGuest1Terminal) + parseFloat(priceGuest2Terminal) + parseFloat(priceGuest3Terminal) + parseFloat(priceGuest4Terminal) + parseFloat(priceGuest5Terminal) + parseFloat(priceGuest6Terminal) + parseFloat(priceGuest7Terminal) + parseFloat(priceGuest8Terminal);
+
+		$("#lblTerminalFee").text(totalTerminalFee);
+		
+		return totalTerminalFee;
+	}
+
+	function computeEnvFee()
+	{
+		//Get Quantity per Guest
+		const guest1 = parseInt($("#qtyGuest1").val()) || 0;
+		const guest2 = parseInt($("#qtyGuest2").val()) || 0;
+		const guest3 = parseInt($("#qtyGuest3").val()) || 0;
+		const guest4 = parseInt($("#qtyGuest4").val()) || 0;
+		const guest5 = parseInt($("#qtyGuest5").val()) || 0;
+		const guest6 = parseInt($("#qtyGuest6").val()) || 0;
+		const guest7 = parseInt($("#qtyGuest7").val()) || 0;
+		const guest8 = parseInt($("#qtyGuest8").val()) || 0;
+
+		//Get Env Fee per Guest
+		const envPrice1 = parseFloat($('#envGuest1Holder').val());
+		const envPrice2 = parseFloat($('#envGuest2Holder').val());
+		const envPrice3 = parseFloat($('#envGuest3Holder').val());
+		const envPrice4 = parseFloat($('#envGuest4Holder').val());
+		const envPrice5 = parseFloat($('#envGuest5Holder').val());
+		const envPrice6 = parseFloat($('#envGuest6Holder').val());
+		const envPrice7 = parseFloat($('#envGuest7Holder').val());
+		const envPrice8 = parseFloat($('#envGuest8Holder').val());
+
+		const priceGuest1Env = guest1 * envPrice1;
+		const priceGuest2Env = guest2 * envPrice2;
+		const priceGuest3Env = guest3 * envPrice3;
+		const priceGuest4Env = guest4 * envPrice4;
+		const priceGuest5Env = guest5 * envPrice5;
+		const priceGuest6Env = guest6 * envPrice6;
+		const priceGuest7Env = guest7 * envPrice7;
+		const priceGuest8Env = guest8 * envPrice8;
+
+		$('#envGuest1').val(priceGuest1Env);
+		$('#envGuest2').val(priceGuest2Env);
+		$('#envGuest3').val(priceGuest3Env);
+		$('#envGuest4').val(priceGuest4Env);
+		$('#envGuest5').val(priceGuest5Env);
+		$('#envGuest6').val(priceGuest6Env);
+		$('#envGuest7').val(priceGuest7Env);
+		$('#envGuest8').val(priceGuest8Env);
+
+		const totalEnvFee = parseFloat(priceGuest1Env) + parseFloat(priceGuest2Env) + parseFloat(priceGuest3Env) + parseFloat(priceGuest4Env) + parseFloat(priceGuest5Env) + parseFloat(priceGuest6Env) + parseFloat(priceGuest7Env) + parseFloat(priceGuest8Env);
+
+		$("#lblEnvFee").text(totalEnvFee);
+		
+		return totalEnvFee;
+	}
+	
 	function populateDropdowns(transferType)
 	{
 		/* $.ajax({
@@ -970,7 +1091,7 @@ select.form-control {
 				arrTerminalFee = arrTerminalFee.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
 				arrEnvFee = arrEnvFee.filter(mode => !mode.title.includes("ARRIVAL") && !mode.title.includes("DEPARTURE"));
 			}
-			//axle
+			
 			if (parseInt(item.type) === 1)
 			{
 				if (item.code == 'ODL') arrOriginDropOffs.push({amount: item.amount, description: item.description});
@@ -1027,7 +1148,20 @@ select.form-control {
 			$('#terminalGuest8Holder').val(item.priceGuest8Terminal);
 		});
 
-		console.log("transferType >",transferType);
+		$.each(arrEnvFee, function(index, item) {
+			$('#envGuest1Holder').val(item.priceGuest1Env);
+			$('#envGuest2Holder').val(item.priceGuest2Env);
+			$('#envGuest3Holder').val(item.priceGuest3Env);
+			$('#envGuest4Holder').val(item.priceGuest4Env);
+			$('#envGuest5Holder').val(item.priceGuest5Env);
+			$('#envGuest6Holder').val(item.priceGuest6Env);
+			$('#envGuest7Holder').val(item.priceGuest7Env);
+			$('#envGuest8Holder').val(item.priceGuest8Env);
+		});
+
+		console.log("arrTerminalFee >",arrTerminalFee);
+		console.log("arrEnvFee >",arrEnvFee);
+
 		if (transferType === 1 || transferType === 3) {
 
 			if (!id)
