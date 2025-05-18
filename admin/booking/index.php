@@ -802,16 +802,13 @@ select.form-control {
 
 			if (save === false)
 			{
-				//axle
 				let fieldNames = "";
-				console.log("fieldNames>>",JSON.stringify(emptyFields));
 				for (const i in emptyFields)
 				{
 					fieldNames += "#" + emptyFields[i]  + ",";
 				}
 
 				if(fieldNames) fieldNames = fieldNames.slice(0,-1);
-				console.log("fieldNames>>",fieldNames);
 
 				$(fieldNames).css("border-color", "red");
 				$('#msg').html('<div class="alert alert-danger">Please complete all the required fields</div>')
