@@ -560,8 +560,8 @@ select.form-control {
 			if (str.includes("PRIVATE"))
 			{
 				let chargePrice = id ?  meta.transfer_mode_price : $(this).val();
-
-				if($('#transferType').val() !== 3) chargePrice = chargePrice/2;
+				if($('#transferType').val() != 3) chargePrice = chargePrice/2;
+				
 
 				$('#priceTitle').text(`Private Price/Head: `);
 				$('#lblPrice').text(`P${chargePrice}`);
