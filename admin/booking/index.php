@@ -138,13 +138,13 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentType" class="control-label">Payment Type: <span class="required">*</span></label>
-						<select type="text" id="paymentType" name="payment_type" autocomplete="off" class="form-control form-control-sm form-control-border select2">
+						<select type="text" id="paymentType" name="payment_type" autocomplete="off" class="form-control form-control-sm form-control-border select2" required>
 							<option selected><?php echo isset($meta['payment_type']) ? $meta['payment_type']: 'Select Payment Type' ?></option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="paymentRemarks" class="control-label">Payment Remarks: <span class="required">*</span></label>
-						<textarea id="paymentRemarks" oninput="this.value = this.value.toUpperCase()" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks"><?php 
+						<textarea id="paymentRemarks" oninput="this.value = this.value.toUpperCase()" name="payment_remarks" autocomplete="off" class="form-control form-control-sm form-control-border w-100" placeholder = "Input Payment Remarks" required><?php 
 							echo isset($meta['payment_remarks']) ? str_replace(["\r", "\n", "\t"], '', trim($meta['payment_remarks'])) : ''; 
 						?></textarea>
 						<input type="hidden" id="paymentStatus" name="status" value="<?php echo isset($meta['status']) ? $meta['status']: '' ?>"/>
@@ -246,7 +246,7 @@ select.form-control {
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6">
-                        <label for="otherNames" class="control-label">Other Names:</label>
+                        <label for="otherNames" class="control-label">Other Names:<span class="required">*</span></label>
                         <textarea id="otherNames" name="other_names" autocomplete="off"
 							oninput="this.value = this.value.toUpperCase()" 
 							class="form-control form-control-sm form-control-border" 
@@ -408,7 +408,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr class="trChartered">
-						<td rowspan="2"><input type="number" min="0" id="vehicleQty" value="<?php echo isset($meta['vehicle_qty']) ? $meta['vehicle_qty']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['vehicle_qty']) ? $meta['vehicle_qty']: '1' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr class="trChartered">
 						<td># of Vehicle Unit</td>
@@ -417,11 +417,11 @@ select.form-control {
 					<label id="priceTitle">Price</label> <label id="lblPrice">P0.00</label><br>
 					<input type="hidden" id="chargePrice" name="price"/>
 					<input type="hidden" id="chargePriceHolder"/>
-					<input type="hidden" id="envFee" name="environment_fee"/>
-					<input type="hidden" id="envFeeHolder"/>
+					<!-- Terminal Fee -->
                     <label><input type="checkbox" id="chkTerminalFee" value="yes"> &nbsp; Terminal Fee:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
 					<input type="hidden" id="terminalFee" name="terminal_fee" value="<?php echo isset($meta['terminal_fee']) ? $meta['terminal_fee']: '' ?>" /><br>
 					<input type="hidden" id="terminalFeeHolder"/>
+					<!-- Environment Fee -->
                     <label><input type="checkbox" id="chkEnvFee" value="yes"> &nbsp; Environment Fee:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
 					<input type="hidden" id="envFee" name="environment_fee" value="<?php echo isset($meta['environment_fee']) ? $meta['environment_fee']: '' ?>"/>
 					<input type="hidden" id="envFeeHolder"/>
@@ -538,11 +538,16 @@ select.form-control {
 			
 			$('#arrHotelResort').val(meta.arr_hotel);
 			
-			console.log(meta.arr_origin_drop_off);
+			// console.log(meta.arr_origin_drop_off);
 
 			// $('#arrOriginDropOff').text(displayText);
 			// $("#arrOriginDropOff").select2("val", $("#select option:contains(displayText)").val()).trigger('change');
 		}
+
+		$('#vehiclesQty').on('change', function()
+		{
+			computeTotal();
+		});
 
 		$('#modeOfTransfer').on('change', function()
 		{
@@ -602,55 +607,55 @@ select.form-control {
 		$('#qtyGuest1').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest1`,`#priceGuest1`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest2').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest2`,`#priceGuest2`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest3').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest3`,`#priceGuest3`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest4').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest4`,`#priceGuest4`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest5').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest5`,`#priceGuest5`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest6').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest6`,`#priceGuest6`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest7').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest7`,`#priceGuest7`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
 
 		$('#qtyGuest8').on('change', function() {
 			const str = $('#modeOfTransfer option:selected').text();
 			if (str.includes("SHARED")) computePrice(`#lblGuest8`,`#priceGuest8`,$(this).val());
-			else if (str.includes("PRIVATE")) computeTotal(); 
+			else if (str.includes("PRIVATE") || str.includes("CHARTERED")) computeTotal();
 		});
-		
 
 		$('#chkTerminalFee').change(function() {
 			if (!$(this).is(':checked')){
 				$("#lblTerminalFee").text("0.00");
+				$("#terminalFee").val("0");
 			}
 			computeTotal();
 		});
@@ -658,6 +663,7 @@ select.form-control {
 		$('#chkEnvFee').change(function() {
 			if (!$(this).is(':checked')){
 				$("#lblEnvFee").text("0.00");
+				$("#envFee").val("0");
 			}
 			computeTotal();
 		});
@@ -688,48 +694,130 @@ select.form-control {
 
 			const formData = new FormData(this);
 			
-			for (let [key, value] of formData.entries()) {
+			/* for (let [key, value] of formData.entries()) {
 				console.log(key, value);
-			}
+			} */
 
 			let save = true;
+			let emptyFields = [];
+			
+			//Reset all required fields to black
+			$("#arrDate, #eta, #arrAirport, #arrFlightNumber, #arrHotelResort, #depOriginDropOff, #depDate, #etd, #depAirport, #depFlightNumber, #depHotelResort, #estpickup, #otherNames").css("border-color", "black");
+			//
 
 			//ARRIVAL VALIDATIONS
 			if ( $('#transferType').val() === "1" || $('#transferType').val() === "3")
 			{
-				if ($('#arrOriginDropOff').val() === '' || $('#arrOriginDropOff').val() === null) save = false;
-				if ($('#arrDate').val() === '' || $('#arrDate').val() === null) save = false;
-				if ($('#eta').val() === '' || $('#eta').val() === null) save = false;
-				if ($('#arrAirport').val() === '' || $('#arrAirport').val() === null) save = false;
-				if ($('#arrFlightNumber').val() === '' || $('#arrFlightNumber').val() === null) save = false;
-				if ($('#arrHotelResort').val() === '' || $('#arrHotelResort').val() === null) save = false;
+				if ($('#arrOriginDropOff').val() === '' || $('#arrOriginDropOff').val() === null || $('#arrOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
+				{
+					save = false;
+					$('#arrOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'red');
+				} else $('#arrOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'black');
+
+				if ($('#arrDate').val() === '' || $('#arrDate').val() === null)
+				{
+					save = false;
+					emptyFields.push("arrDate");
+				}
+				
+				if ($('#eta').val() === '' || $('#eta').val() === null)
+				{
+					save = false;
+					emptyFields.push("eta");
+				}
+				
+				if ($('#arrAirport').val() === '' || $('#arrAirport').val() === null)
+				{
+					save = false;
+					emptyFields.push("arrAirport");
+				}
+				
+				if ($('#arrFlightNumber').val() === '' || $('#arrFlightNumber').val() === null)
+				{
+					save = false;
+					emptyFields.push("arrFlightNumber");
+				}
+				
+				if ($('#arrHotelResort').val() === '' || $('#arrHotelResort').val() === null)
+				{
+					save = false;
+					emptyFields.push("arrHotelResort");
+				}
 				
 			}
 			
 			//DEPARTURE VALIDATIONS
 			if ( $('#transferType').val() === "2" || $('#transferType').val() === "3")
 			{
-				if ($('#depOriginDropOff').val() === '' || $('#depOriginDropOff').val() === null) save = false;
-				if ($('#depDate').val() === '' || $('#depDate').val() === null) save = false;
-				if ($('#etd').val() === '' || $('#etd').val() === null) save = false;
-				if ($('#depAirport').val() === '' || $('#depAirport').val() === null) save = false;
-				if ($('#depFlightNumber').val() === '' || $('#depFlightNumber').val() === null) save = false;
-				if ($('#depHotelResort').val() === '' || $('#depHotelResort').val() === null) save = false;
-				if ($('#estpickup').val() === '' || $('#estpickup').val() === null) save = false;
+				if ($('#depOriginDropOff').val() === '' || $('#depOriginDropOff').val() === null || $('#depOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
+				{
+					save = false;
+					$('#depOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'red');
+				} else $('#depOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'black');
+
+				if ($('#depDate').val() === '' || $('#depDate').val() === null) 
+				{
+					save = false;
+					emptyFields.push("depDate");
+				}
+				if ($('#etd').val() === '' || $('#etd').val() === null) 
+				{
+					save = false;
+					emptyFields.push("etd");
+				}
+				if ($('#depAirport').val() === '' || $('#depAirport').val() === null) 
+				{
+					save = false;
+					emptyFields.push("depAirport");
+				}
+				if ($('#depFlightNumber').val() === '' || $('#depFlightNumber').val() === null) 
+				{
+					save = false;
+					emptyFields.push("depFlightNumber");
+				}
+				if ($('#depHotelResort').val() === '' || $('#depHotelResort').val() === null) 
+				{
+					save = false;
+					emptyFields.push("depHotelResort");
+				}
+				if ($('#estpickup').val() === '' || $('#estpickup').val() === null) 
+				{
+					save = false;
+					emptyFields.push("estpickup");
+				}
 			}
 
-			if ($('#otherNames').val() === '' || $('#otherNames').val() === null) save = false;
+			if ($('#otherNames').val() === '' || $('#otherNames').val() === null)
+			{
+				save = false;
+				emptyFields.push("otherNames");
+			}
 
 			let hasQty = false;
-
+			
 			for(let x = 1; x<8; x++)
 			{
 				if ($('#qtyGuest' + x).val() !== '' && $('#qtyGuest' + x).val() > 0) hasQty = true;
 			}
 
-			if (save === false || hasQty === false)
+			if (save === false)
 			{
+				let fieldNames = "";
+				for (const i in emptyFields)
+				{
+					fieldNames += "#" + emptyFields[i]  + ",";
+				}
+
+				if(fieldNames) fieldNames = fieldNames.slice(0,-1);
+
+				$(fieldNames).css("border-color", "red");
 				$('#msg').html('<div class="alert alert-danger">Please complete all the required fields</div>')
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+				return;
+			}
+			else if (hasQty === false)
+			{
+				$('#msg').html('<div class="alert alert-danger">Please fill up transfer charges</div>')
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				return;
 			}
@@ -911,7 +999,13 @@ select.form-control {
 			price = privatePrice;
 			// console.log("price>>", price);
 		}
-		else if (str.includes("CHARTERED")) price = $('#chargePriceHolder').val();
+		else if (str.includes("CHARTERED"))
+		{
+			const chargePriceHolder = $('#chargePriceHolder').val() || 0;
+			const vehiclesQty = $('#vehiclesQty').val();
+			
+			price = parseFloat(chargePriceHolder) * parseInt(vehiclesQty);
+		}
 
 		let terminalFee = 0;
 		let envFee = 0;
@@ -926,20 +1020,8 @@ select.form-control {
 			$("#envFee").val(envFee);
 		}
 
-		console.log("terminalFee>>",terminalFee);
-		console.log("envFee>>",envFee);
-		/* if ($("#chkEnvFee").is(':checked')) {
-			$("#envFee").val($("#envFeeHolder").val());
-		} else {
-			$("#envFee").val("0");
-		} */
-
-		// let terminalFee = $("#terminalFee").val() || 0;
-		// let envFee = $("#envFee").val() || 0;
 		// console.log("terminalFee>>",terminalFee);
 		// console.log("envFee>>",envFee);
-		
-		// console.log("price>>",price);
 
 		const total = parseFloat(price) + parseFloat(terminalFee) + parseFloat(envFee);
 
@@ -949,7 +1031,7 @@ select.form-control {
 		$("#lblTotalPrice").text(`P${parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`);
 		$("#totalPrice").val(`${parseFloat(total).toFixed(2)}`);
 	};
-	//3
+	
 	function computeTerminalFee()
 	{
 		//Get Quantity per Guest
@@ -1159,8 +1241,8 @@ select.form-control {
 			$('#envGuest8Holder').val(item.priceGuest8Env);
 		});
 
-		console.log("arrTerminalFee >",arrTerminalFee);
-		console.log("arrEnvFee >",arrEnvFee);
+		// console.log("arrTerminalFee >",arrTerminalFee);
+		// console.log("arrEnvFee >",arrEnvFee);
 
 		if (transferType === 1 || transferType === 3) {
 
