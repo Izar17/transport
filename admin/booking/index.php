@@ -797,7 +797,7 @@ select.form-control {
 			
 			for(let x = 1; x<8; x++)
 			{
-				if ($('#qtyGuest' + x).val() !== '' && $('#qtyGuest' + x).val() > 0) hasQty = true;
+				if ($('#qtyGuest' + x).val() != '' && $('#qtyGuest' + x).val() > 0) hasQty = true;
 			}
 
 			if (save === false)
