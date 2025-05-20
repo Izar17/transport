@@ -184,7 +184,11 @@
 								?></td>
 							<td><?php echo $row['transfer_mode'] ?></td>
 							<td><?php echo $row['other_names'] . '<br><br>' . $row['remarks'];?></td>
-							<td>BOOKED BY: <br><?php echo $row['created_by'] ?></td>
+							<td>
+								<b>PROCESSED BY: </b><?php echo $row['created_by'] ?> <br>
+								<b>UPDATED BY: </b><?php echo $row['updated_by']; ?> <br>
+								<b>DRIVER: </b><?php echo $row['driver_name']; ?>
+							</td>
 							<td><?php echo $row['created_date'] ?></td>
 							<td><?php echo $row['payment_type'] .'<br> Remarks: ' . $row['payment_remarks'] .'<br>Amount: <b>P' . number_format($row['total_price'], 2) . '</b>'?><br>
 							
@@ -279,9 +283,6 @@
 											<span class="fa fa-print text-secondary"></span> Print Manifest
 										</a>
 									</div>
-								</div>
-								<div class="mt-2 text-muted" style="font-size:12px;">
-									Updated by:<br><?php echo $row['updated_by']; ?>
 								</div>
 							<?php else: ?>
 								<div class="dropdown">
