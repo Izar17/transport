@@ -152,9 +152,6 @@
 										case 3:
 											echo '<span class="badge badge-secondary bg-gradient-secondary px-3 rounded-pill">Cancelled</span>';
 											break;
-										case 4:
-											echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Delivered</span>';
-											break;
 										default:
 											echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">N/A</span>';
 											break;

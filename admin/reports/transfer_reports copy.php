@@ -40,8 +40,8 @@
                                 <th class="text-center align-middle py-1">#</th>
                                 <th class="text-center align-middle py-1">Date Created</th>
                                 <th class="text-center align-middle py-1">Ref. Code</th>
-                                <th class="text-center align-middle py-1">Client</th>
-                                <th class="text-center align-middle py-1">Vendor</th>
+                                <th class="text-center align-middle py-1">Transfer Type</th>
+                                <th class="text-center align-middle py-1">Guest</th>
                                 <th class="text-center align-middle py-1">Status</th>
                                 <th class="text-center align-middle py-1">Total Amount</th>
                             </tr>
