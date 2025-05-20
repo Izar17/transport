@@ -408,7 +408,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr class="trChartered">
-						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['num_of_vehicles']) ? $meta['num_of_vehicles']: '1' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['num_of_vehicles']) ? $meta['num_of_vehicles']: '1' ?>" class="transfercharges" autocomplete="off" /></td>
 					</tr>
 					<tr class="trChartered">
 						<td># of Vehicle Unit</td>
@@ -555,19 +555,18 @@ select.form-control {
 			$('#modeOfTransferPrice').val($(this).val());
 
 			const str = $('#modeOfTransfer option:selected').text();
-			// alert("MOD");
 
 			if (str.includes("PRIVATE"))
 			{
 				let chargePrice = id ?  meta.transfer_mode_price : $(this).val();
 				if($('#transferType').val() != 3) chargePrice = chargePrice/2;
-				
 
 				$('#priceTitle').text(`Private Price/Head: `);
 				$('#lblPrice').text(`P${chargePrice}`);
 				$('#chargePriceHolder').val(chargePrice);
 				$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
 				$('.trChartered').hide();
+				$('#vehiclesQty').prop('required', false).prop('disabled', true);
 			}
 			else if (str.includes("CHARTERED"))
 			{
@@ -576,6 +575,7 @@ select.form-control {
 				$('#chargePriceHolder').val($(this).val());
 				$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
 				$('.trChartered').show();
+				$('#vehiclesQty').prop('required', true).prop('disabled', false);
 			}
 			else if (str.includes("SHARED"))
 			{
@@ -583,6 +583,7 @@ select.form-control {
 				$('#lblPrice').text(`P0.00`);
 				$('#chargePriceHolder').val("0");
 				$('.trChartered').hide();
+				$('#vehiclesQty').prop('required', false).prop('disabled', true);
 			}
 
 			computeTotal();
