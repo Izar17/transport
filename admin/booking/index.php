@@ -408,7 +408,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr class="trChartered">
-						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['num_of_vehicles']) ? $meta['num_of_vehicles']: '1' ?>" class="transfercharges" autocomplete="off"/></td>
+						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['num_of_vehicles']) ? $meta['num_of_vehicles']: '1' ?>" class="transfercharges"/></td>
 					</tr>
 					<tr class="trChartered">
 						<td># of Vehicle Unit</td>
