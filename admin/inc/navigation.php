@@ -49,6 +49,7 @@
                     </li>
                     
                     <?php if($_settings->userdata('type') == 1): ?>
+
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=reports/transfer_reports" class="nav-link nav-reports_transfer_reports">
@@ -63,6 +64,14 @@
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>
                           General
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=driver_list" class="nav-link nav-driver_list">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                          Driver List
                         </p>
                       </a>
                     </li>

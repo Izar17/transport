@@ -20,7 +20,7 @@ Class Master extends DBConnection {
 			exit;
 		}
 	}
-	function save_shop_type(){
+	function save_driver(){
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k =>$v){
@@ -30,7 +30,7 @@ Class Master extends DBConnection {
 			}
 		}
 		
-		$check = $this->conn->query("SELECT * FROM `shop_type_list` where `name` = '{$name}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `driver_list` where `name` = '{$name}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
 		if($this->capture_err())
 			return $this->capture_err();
 		if($check > 0){
@@ -38,9 +38,9 @@ Class Master extends DBConnection {
 			$resp['msg'] = "Shop Type already exists.";
 		}else{
 			if(empty($id)){
-				$sql = "INSERT INTO `shop_type_list` set {$data} ";
+				$sql = "INSERT INTO `driver_list` set {$data} ";
 			}else{
-				$sql = "UPDATE `shop_type_list` set {$data} where id = '{$id}' ";
+				$sql = "UPDATE `driver_list` set {$data} where id = '{$id}' ";
 			}
 			$save = $this->conn->query($sql);
 			if($save){
@@ -58,9 +58,9 @@ Class Master extends DBConnection {
 			$this->settings->set_flashdata('success',$resp['msg']);
 		return json_encode($resp);
 	}
-	function delete_shop_type(){
+	function delete_driver(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `shop_type_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `driver_list` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Shop Type successfully deleted.");
@@ -377,11 +377,11 @@ $Master = new Master();
 $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
 $sysset = new SystemSettings();
 switch ($action) {
-	case 'save_shop_type':
-		echo $Master->save_shop_type();
+	case 'save_driver':
+		echo $Master->save_driver();
 	break;
-	case 'delete_shop_type':
-		echo $Master->delete_shop_type();
+	case 'delete_driver':
+		echo $Master->delete_driver();
 	break;
 	case 'save_category':
 		echo $Master->save_category();
