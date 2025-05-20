@@ -269,7 +269,7 @@ select.form-control {
 				<!-- Guests Table -->
 				<table style="width:100%;font-size:14px;padding:0px;font-weight:bold;">
 					<tr>
-						<td rowspan="2" width="25%"><input type="number" min="0" id="qtyGuest1" name="qty_guest_1" value="<?php echo isset($meta['qty_guest_1']) ? $meta['qty_guest_1']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2" width="25%"><input type="number" min="0" id="qtyGuest1" name="qty_guest_1" value="<?php echo isset($meta['qty_guest_1']) ? $meta['qty_guest_1']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Local)</td>
@@ -278,7 +278,7 @@ select.form-control {
 						<td></td>
 						<td style="text-align:right;">
 							<label id="lblGuest1"><?php echo isset($meta['price_guest_1']) ? 'P'.number_format((float)$meta['price_guest_1'], 2, '.', ','): '0.00' ?></label>
-							<input type="hidden" id="priceGuest1" name="price_guest_1" value="<?php echo isset($meta['price_guest_1']) ? $meta['price_guest_1']: '' ?>"/>
+							<input type="hidden" id="priceGuest1" name="price_guest_1" value="<?php echo isset($meta['price_guest_1']) ? $meta['price_guest_1']: '' ?>" />
 							<input type="hidden" id="envGuest1"/>
 							<input type="hidden" id="envGuest1Holder"/>
 							<input type="hidden" id="terminalGuest1"/>
@@ -287,7 +287,7 @@ select.form-control {
 					</tr>
 					<!-- Repeat for other guest types -->
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest2" name="qty_guest_2" value="<?php echo isset($meta['qty_guest_2']) ? $meta['qty_guest_2']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest2" name="qty_guest_2" value="<?php echo isset($meta['qty_guest_2']) ? $meta['qty_guest_2']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Adult (Foreign)</td>
@@ -304,7 +304,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest3" name="qty_guest_3" value="<?php echo isset($meta['qty_guest_3']) ? $meta['qty_guest_3']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest3" name="qty_guest_3" value="<?php echo isset($meta['qty_guest_3']) ? $meta['qty_guest_3']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Senior/PWD</td>
@@ -321,7 +321,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest4" name="qty_guest_4" value="<?php echo isset($meta['qty_guest_4']) ? $meta['qty_guest_4']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest4" name="qty_guest_4" value="<?php echo isset($meta['qty_guest_4']) ? $meta['qty_guest_4']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Child Local (6-12 yo)</td>
@@ -338,7 +338,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest5" name="qty_guest_5" value="<?php echo isset($meta['qty_guest_5']) ? $meta['qty_guest_5']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest5" name="qty_guest_5" value="<?php echo isset($meta['qty_guest_5']) ? $meta['qty_guest_5']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Child Foreign (6-12 yo)</td>
@@ -355,7 +355,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest6" name="qty_guest_6" value="<?php echo isset($meta['qty_guest_6']) ? $meta['qty_guest_6']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest6" name="qty_guest_6" value="<?php echo isset($meta['qty_guest_6']) ? $meta['qty_guest_6']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Child (3-5 yo)</td>
@@ -372,7 +372,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest7" name="qty_guest_7" value="<?php echo isset($meta['qty_guest_7']) ? $meta['qty_guest_7']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest7" name="qty_guest_7" value="<?php echo isset($meta['qty_guest_7']) ? $meta['qty_guest_7']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>2 yo and below /<br> <span style="color:red">FOC Employee</span></td>
@@ -389,7 +389,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2"><input type="number" min="0" id="qtyGuest8" name="qty_guest_8" value="<?php echo isset($meta['qty_guest_8']) ? $meta['qty_guest_8']: '' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="0" id="qtyGuest8" name="qty_guest_8" value="<?php echo isset($meta['qty_guest_8']) ? $meta['qty_guest_8']: '' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr>
 						<td>Resident (<span style="color:grey">No Terminal & Environment Fee</span>)</td>
@@ -408,7 +408,7 @@ select.form-control {
 						</td>
 					</tr>
 					<tr class="trChartered">
-						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['num_of_vehicles']) ? $meta['num_of_vehicles']: '1' ?>" class="transfercharges"/></td>
+						<td rowspan="2"><input type="number" min="1" id="vehiclesQty" name="num_of_vehicles" value="<?php echo isset($meta['num_of_vehicles']) ? $meta['num_of_vehicles']: '1' ?>" class="transfercharges" autocomplete="off"/></td>
 					</tr>
 					<tr class="trChartered">
 						<td># of Vehicle Unit</td>

@@ -66,33 +66,6 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
 				}
 			?>
 			</div>
-            <div class="data-item"><span class="label">Status:</span> 
-			<?php 
-				switch($data['status']){
-					case 0:
-						echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Unpaid</span>';
-						break;
-					case 1:
-						echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">FOC</span>';
-						break;
-					case 2:
-						echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Paid</span>';
-						break;
-					case 3:
-						echo '<span class="badge badge-secondary bg-gradient-secondary px-3 rounded-pill">Cancelled</span>';
-						break;
-					case 4:
-						echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Delivered</span>';
-						break;
-					case 5:
-						echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Cancelled</span>';
-						break;
-					default:
-						echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">N/A</span>';
-						break;
-				}
-			?>
-			</div>
             <div class="data-item"><span class="label">Processed By:</span> <?php echo $data['created_by']; ?></div>
             <div class="data-item"><span class="label">Created Date:</span> <?php echo date("Y-m-d H:i:s", strtotime($data['created_date'])); ?></div>
         </div>
@@ -142,6 +115,33 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
         <!-- Pricing Breakdown -->
         <div class="section">
             <h3>Payment Details</h3>
+            <div class="data-item"><span class="label">Status:</span> 
+			<?php 
+				switch($data['status']){
+					case 0:
+						echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Unpaid</span>';
+						break;
+					case 1:
+						echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">FOC</span>';
+						break;
+					case 2:
+						echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Paid</span>';
+						break;
+					case 3:
+						echo '<span class="badge badge-secondary bg-gradient-secondary px-3 rounded-pill">Cancelled</span>';
+						break;
+					case 4:
+						echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Delivered</span>';
+						break;
+					case 5:
+						echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Cancelled</span>';
+						break;
+					default:
+						echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">N/A</span>';
+						break;
+				}
+			?>
+			</div>
             <div class="data-item"><span class="label">Total Amount:</span> ₱<?php echo number_format($data['total_price'], 2); ?></div>
             <div class="data-item"><span class="label">Payment Type:</span> <?php echo $data['payment_type']; ?></div>
             <div class="data-item"><span class="label">Payment Remarks:</span> <?php echo $data['payment_remarks']; ?></div>

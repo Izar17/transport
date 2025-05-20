@@ -69,13 +69,13 @@
 						<th>REF.</th>
 						<th>LEAD PAX</th>
 						<th>PAX#</th>
-						<th>TRANSFER DETAILS</th>
-						<th>MODE OF TRANSFER</th>
+						<th width="20%">TRANSFER DETAILS</th>
+						<th width="10%">MODE OF TRANSFER</th>
 						<th>OTHER NAMES | REMARKS</th>
 						<th>BOOKING INFO</th>
 						<th>DATE POSTED</th>
-						<th>PAYMENT TYPE</th>
-						<th width="3%">ACTION</th>
+						<th width="10%">PAYMENT TYPE</th>
+						<th width="8%">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
