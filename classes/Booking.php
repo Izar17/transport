@@ -131,6 +131,21 @@ Class Booking extends DBConnection {
 		return json_encode($resp);
 
 	}
+	function update_driver(){
+		extract($_POST);
+		$update = $this->conn->query("UPDATE `booking` set `driver_name` = '{$driver_name}' where id = '{$id}'");
+		if($update){
+			$resp['status'] = 'success';
+			$resp['msg'] = " Driver has been successfully assigned.";
+		}else{
+			$resp['status'] = 'success';
+			$resp['msg'] = " Driver assign has failed to update.";
+			$resp['error'] = $this->conn->error;
+		}
+		if($resp['status'] == 'success')
+		$this->settings->set_flashdata('success',$resp['msg']);
+		return json_encode($resp);
+	}
 
 }
 
@@ -153,6 +168,8 @@ switch ($action) {
 	case 'cancel_booking':
 		echo $Booking->cancel_booking();
 	break;
+	case 'update_driver':
+		echo $Booking->update_driver();
 	default:
 		// echo $sysset->index();
 		break;

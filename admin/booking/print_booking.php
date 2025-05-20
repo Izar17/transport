@@ -2,7 +2,7 @@
 require_once('./../../config.php');
 
 if(isset($_GET['id']) && $_GET['id'] > 0){
-    $qry = $conn->query("SELECT * FROM `booking` WHERE id = '{$_GET['id']}' AND delete_flag = 0");
+    $qry = $conn->query("SELECT * FROM `booking` WHERE id = '{$_GET['id']}'");
     if($qry->num_rows > 0){
         $data = $qry->fetch_assoc();
         
@@ -68,6 +68,7 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
 			</div>
             <div class="data-item"><span class="label">Processed By:</span> <?php echo $data['created_by']; ?></div>
             <div class="data-item"><span class="label">Created Date:</span> <?php echo date("Y-m-d H:i:s", strtotime($data['created_date'])); ?></div>
+            <div class="data-item"><span class="label">Driver:</span> <?php echo $data['driver_name']; ?></div>
         </div>
 
         <!-- Guest Information -->

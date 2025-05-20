@@ -219,69 +219,91 @@
 								justify-content: center;
 							}
 							</style>
-
-							<?php if($row['status'] == 0) {?>
-							<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
-								Action &nbsp;
-								<span class="sr-only">Toggle Dropdown</span>
-							</button>
-								<input type="hidden" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname');?>" id="user"/>
-								
-								<div class="dropdown-menu" role="menu">
-                                	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
-                                    <span class="fa fa-eye text-dark"></span> View</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="?page=booking&id=<?php echo $row['id'] ?>">
-										<span class="fa fa-edit text-primary"></span> Edit
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item paid_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-money-bill text-success"></span> Paid
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-print text-secondary"></span> Print Manifest
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item cancel_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-trash text-danger"></span> Cancel
-									</a>
-								</div>
-							<?php } else if($row['status'] == 2){ ?>
-								<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
-								Action &nbsp;
-								<span class="sr-only">Toggle Dropdown</span>
-							</button>
-								<input type="hidden" value="<?php echo $_settings->userdata('lastname') .', '. $_settings->userdata('firstname');?>" id="user"/>
-								<div class="dropdown-menu" role="menu">
-                                	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
-                                    <span class="fa fa-eye text-dark"></span> View</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="?page=booking&id=<?php echo $row['id'] ?>">
-										<span class="fa fa-edit text-primary"></span> Edit
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-print text-secondary"></span> Print Manifest
-									</a>
-								</div>
 							<?php
-								echo 'Updated by: <br>' .$row['updated_by'];
-							 } else { ?>
-								<div class="dropdown-menu" role="menu">
-                                	<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
-                                    <span class="fa fa-eye text-dark"></span> View</a>
-									<div class="dropdown-divider"></div>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
-										<span class="fa fa-print text-secondary"></span> Print Manifest
-									</a>
+							$userFullName = $_settings->userdata('lastname') . ', ' . $_settings->userdata('firstname');
+							$status = $row['status'];
+							?>
+
+							<input type="hidden" value="<?php echo $userFullName; ?>" id="user"/>
+
+							<?php if ($status == 0): ?>
+								<div class="dropdown">
+									<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
+										Action &nbsp;<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu" role="menu">
+										<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
+											<span class="fa fa-eye text-dark"></span> View
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="?page=booking&id=<?php echo $row['id'] ?>">
+											<span class="fa fa-edit text-primary"></span> Edit
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item paid_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-money-bill text-success"></span> Paid
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-print text-secondary"></span> Print Manifest
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item assign_driver" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-user-tie text-primary"></span> Assign Driver
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item cancel_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-trash text-danger"></span> Cancel
+										</a>
+									</div>
 								</div>
-							 <?php
-								echo '<span >Cancelled</span>';
-								echo '<br> reason: <br>' .$row['status_remarks'];
-								echo '<br> Cancel by: <br>' .$row['updated_by'];
-							 } ?>
+							<?php elseif ($status == 2): ?>
+								<div class="dropdown">
+									<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
+										Action &nbsp;<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu" role="menu">
+										<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
+											<span class="fa fa-eye text-dark"></span> View
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="?page=booking&id=<?php echo $row['id'] ?>">
+											<span class="fa fa-edit text-primary"></span> Edit
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item assign_driver" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-user-tie text-primary"></span> Assign Driver
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-print text-secondary"></span> Print Manifest
+										</a>
+									</div>
+								</div>
+								<div class="mt-2 text-muted" style="font-size:12px;">
+									Updated by:<br><?php echo $row['updated_by']; ?>
+								</div>
+							<?php else: ?>
+								<div class="dropdown">
+									<button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon small-button" data-toggle="dropdown">
+										Action &nbsp;<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu" role="menu">
+										<a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?= $row['id'] ?>">
+											<span class="fa fa-eye text-dark"></span> View
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item print_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">
+											<span class="fa fa-print text-secondary"></span> Print Manifest
+										</a>
+									</div>
+								</div>
+								<div class="mt-2 text-danger" style="font-size:12px;">
+									<span>Cancelled</span>
+									<br>Reason:<br><?php echo $row['status_remarks']; ?>
+									<br>Cancelled by:<br><?php echo $row['updated_by']; ?>
+								</div>
+							<?php endif; ?>
 							</td>
 						</tr>
 					<?php endwhile; ?>
@@ -293,6 +315,12 @@
 <script>
 	$(document).ready(function(){
 
+
+		$('.assign_driver').click(function(){
+			var bookingId = $(this).attr('data-id');
+			var mode = "assign"; // Define the mode for viewing
+			uni_modal('Assign driver', "booking/assign_driver.php?id=" + bookingId + "&mode=" + mode, 'small');
+		});
 	
 		$('.view_data').click(function(){
 			var bookingId = $(this).attr('data-id');
