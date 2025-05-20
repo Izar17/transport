@@ -418,11 +418,11 @@ select.form-control {
 					<input type="hidden" id="chargePrice" name="price"/>
 					<input type="hidden" id="chargePriceHolder"/>
 					<!-- Terminal Fee -->
-                    <label><input type="checkbox" id="chkTerminalFee" value="yes" <?php echo $meta['terminal_fee'] > 0 ? 'checked': '' ?>> &nbsp; Terminal Fee:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
+					<label><input type="checkbox" id="chkTerminalFee" value="yes" <?php echo (isset($meta['terminal_fee']) && $meta['terminal_fee'] > 0) ? 'checked': '' ?>> &nbsp; Terminal Fee:&nbsp</label><label id="lblTerminalFee"> 0.00</label>
 					<input type="hidden" id="terminalFee" name="terminal_fee" value="<?php echo isset($meta['terminal_fee']) ? $meta['terminal_fee']: '' ?>" /><br>
 					<input type="hidden" id="terminalFeeHolder"/>
 					<!-- Environment Fee -->
-                    <label><input type="checkbox" id="chkEnvFee" value="yes" <?php echo $meta['environment_fee'] > 0 ? 'checked': '' ?>> &nbsp; Environment Fee:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
+					<label><input type="checkbox" id="chkEnvFee" value="yes" <?php echo (isset($meta['environment_fee']) && $meta['environment_fee'] > 0) ? 'checked': '' ?>> &nbsp; Environment Fee:&nbsp</label> <label id="lblEnvFee"> 0.00</label>
 					<input type="hidden" id="envFee" name="environment_fee" value="<?php echo isset($meta['environment_fee']) ? $meta['environment_fee']: '' ?>"/>
 					<input type="hidden" id="envFeeHolder"/>
 					<hr>

@@ -47,48 +47,17 @@
                         </p>
                       </a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=products" class="nav-link nav-products">
-                        <i class="nav-icon fas fa-boxes"></i>
-                        <p>
-                          Services
-                        </p>
-                      </a>
-                    </li> -->
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=orders" class="nav-link nav-orders">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p>
-                          Orders
-                        </p>
-                      </a>
-                    </li> -->
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=vendors" class="nav-link nav-vendors">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                          Shop Owner List
-                        </p>
-                      </a>
-                    </li> -->
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=clients" class="nav-link nav-clients">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                          Guest List
-                        </p>
-                      </a>
-                    </li> -->
+                    
                     <?php if($_settings->userdata('type') == 1): ?>
                     <li class="nav-header">Maintenance</li>
-                    <!-- <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=reports/order_reports" class="nav-link nav-reports_order_reports">
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=reports/transfer_reports" class="nav-link nav-reports_transfer_reports">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
-                          Monthly Order Report
+                          Transfer Sales Report
                         </p>
                       </a>
-                    </li> -->
+                    </li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=maintenance" class="nav-link nav-maintenance">
                         <i class="nav-icon fas fa-th-list"></i>
