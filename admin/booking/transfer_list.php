@@ -8,26 +8,15 @@
 	<div class="card-header">
 		<h3 class="card-title">Transfer List</h3>
 		<div class="card-tools">
-		<label for="transferFilter">Transfer Type:</label>
-			<select id="transferFilter">
-				<option value="">All</option>
-				<option value="ARRIVAL">ARRIVAL</option>
-				<option value="DEPARTURE">DEPARTURE</option>
-				<option value="ROUNDTRIP">ROUNDTRIP</option>
-			</select>
-		<label for="paymentStatFilter">Payment Status: </label>
-			<select id="paymentStatFilter">
-				<option value="">All</option>
-				<option value="Unpaid">Unpaid</option>
-				<option value="FOC">FOC</option>
-				<option value="Paid">Paid</option>
-				<option value="Cancelled">Cancelled</option>
-			</select>
+
 			<label for="startDate">Start Date:</label>
 			<input type="date" id="startDate">
 			
 			<label for="endDate">End Date:</label>
 			<input type="date" id="endDate" style="margin-right:20px;"> 
+
+			<button class="btn btn-primary btn-flat btn-sm filter" style="margin-right:100px;"><i class="fa fa-filter"></i> Filter</button>
+
 			<a href="?page=booking" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
 	</div>
@@ -45,7 +34,23 @@
 				margin-bottom: 10px; /* Adjust spacing */
 			}
 		</style>
-	
+		<div style="float: right;">
+		<label for="transferFilter">Transfer Type:</label>
+			<select id="transferFilter">
+				<option value="">All</option>
+				<option value="ARRIVAL">ARRIVAL</option>
+				<option value="DEPARTURE">DEPARTURE</option>
+				<option value="ROUNDTRIP">ROUNDTRIP</option>
+			</select>
+		<label for="paymentStatFilter">Payment Status: </label>
+			<select id="paymentStatFilter">
+				<option value="">All</option>
+				<option value="Unpaid">Unpaid</option>
+				<option value="FOC">FOC</option>
+				<option value="Paid">Paid</option>
+				<option value="Cancelled">Cancelled</option>
+			</select>
+		</div>
 			<table id="myTable" class="table table-bordered table-striped display" style="font-size: 14px;">
 				<!-- <colgroup>
 					<col width="3%">
@@ -76,8 +81,53 @@
 				<tbody>
 					<?php
 					$i = 1;
-						$qry = $conn->query("SELECT * from booking order by id desc");
-						while($row = $qry->fetch_assoc()):
+
+					// Get filter values from GET parameters
+					$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : date('Y-m-d');
+					$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : date('Y-m-d', strtotime('+7 days'));
+					$transferType = isset($_GET['transfer_type']) ? $_GET['transfer_type'] : null;
+					$paymentStatus = isset($_GET['payment_status']) ? $_GET['payment_status'] : null;
+
+					// Build WHERE conditions
+					$where = [];
+					if ($startDate && $endDate) {
+						$where[] = "(
+							(arr_date IS NOT NULL AND arr_date BETWEEN '{$startDate}' AND '{$endDate}')
+							OR
+							(dep_date IS NOT NULL AND dep_date BETWEEN '{$startDate}' AND '{$endDate}')
+						)";
+					}
+					if ($transferType) {
+						// transfer_type: 1=ARRIVAL, 2=DEPARTURE, 3=ROUNDTRIP
+						$typeMap = [
+							'ARRIVAL' => 1,
+							'DEPARTURE' => 2,
+							'ROUNDTRIP' => 3
+						];
+						if (isset($typeMap[$transferType])) {
+							$where[] = "transfer_type = '{$typeMap[$transferType]}'";
+						}
+					}
+					if ($paymentStatus) {
+						// status: 0=Unpaid, 1=FOC, 2=Paid, 3=Cancelled
+						$statusMap = [
+							'Unpaid' => 0,
+							'FOC' => 1,
+							'Paid' => 2,
+							'Cancelled' => 3
+						];
+						if (isset($statusMap[$paymentStatus])) {
+							$where[] = "status = '{$statusMap[$paymentStatus]}'";
+						}
+					}
+
+					$whereSql = '';
+					if (!empty($where)) {
+						$whereSql = 'WHERE ' . implode(' AND ', $where);
+					}
+
+					$qry = $conn->query("SELECT * FROM booking {$whereSql} ORDER BY id DESC");
+					while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
@@ -256,19 +306,48 @@
 			window.open("booking/print_booking.php?id=" + bookingId + "&mode=" + mode, '_blank');
 		});
 
-    // Function to set default dates
-    function setDefaultDates() {
-		let today = new Date().toISOString().split('T')[0];
+	// Filter button click handler
+	$('.filter').on('click', function(e) {
+		e.preventDefault();
+		// Get filter values
+		const transferType = $('#transferFilter').val();
+		const paymentStat = $('#paymentStatFilter').val();
+		const startDate = $('#startDate').val();
+		const endDate = $('#endDate').val();
 
-		// Calculate the date **one month** from today
-		let oneMonthLater = new Date();
-		oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-		oneMonthLater = oneMonthLater.toISOString().split('T')[0];
+		// Build query string
+		let params = [];
+		if (transferType) params.push('transfer_type=' + encodeURIComponent(transferType));
+		if (paymentStat) params.push('payment_status=' + encodeURIComponent(paymentStat));
+		if (startDate) params.push('startDate=' + encodeURIComponent(startDate));
+		if (endDate) params.push('endDate=' + encodeURIComponent(endDate));
 
-		// Apply default values to the input fields
-		$('#startDate').val(today);
-		$('#endDate').val(oneMonthLater);
-    }
+		let query = params.length ? '&' + params.join('&') : '';
+		location.href = "./?page=booking/transfer_list" + query;
+	});
+
+	// Function to set default dates, but only if not already set (e.g., from GET params)
+	function setDefaultDates() {
+		let urlParams = new URLSearchParams(window.location.search);
+		let startDate = urlParams.get('startDate');
+		let endDate = urlParams.get('endDate');
+
+		if (!startDate) {
+			let today = new Date().toISOString().split('T')[0];
+			$('#startDate').val(today);
+		} else {
+			$('#startDate').val(startDate);
+		}
+
+		if (!endDate) {
+			let oneWeekLater = new Date();
+			oneWeekLater.setDate(oneWeekLater.getDate() + 7);
+			oneWeekLater = oneWeekLater.toISOString().split('T')[0];
+			$('#endDate').val(oneWeekLater);
+		} else {
+			$('#endDate').val(endDate);
+		}
+	}
 
     // Function to apply date-based filtering
     function applyDateFilter() {
@@ -384,11 +463,11 @@
 			}
 
 			// Filter by extracted date
-			if (extractedDate) {
-				if ((start && extractedDate < start) || (end && extractedDate > end)) {
-					return false;
-				}
-			}
+			// if (extractedDate) {
+			// 	if ((start && extractedDate <= start) || (end && extractedDate >= end)) {
+			// 		return false;
+			// 	}
+			// }
 
 			return true;
 		});

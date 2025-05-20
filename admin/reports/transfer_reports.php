@@ -188,7 +188,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
     </div>
     <div class="col-auto flex-shrink-1 flex-grow-1 px-4">
         <h4 class="text-center m-0"><?= $_settings->info('name') ?></h4>
-        <h3 class="text-center m-0"><b>Order Report</b></h3>
+        <h3 class="text-center m-0"><b>Transfer Sales Report</b></h3>
         <h5 class="text-center m-0">For the 
             <?php
             if($filter_type == 'month') echo "Month of " . date("F Y", strtotime($month));
