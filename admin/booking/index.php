@@ -161,7 +161,7 @@ select.form-control {
 							<option  hidden selected><?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: 'Select Origin Pick-up & Drop-off Location' ?></option>
 						</select>
 						<input type="hidden" id="hdArrOriginDropOff" name="arr_origin_drop_off" value="<?php echo isset($meta['arr_origin_drop_off']) ? $meta['arr_origin_drop_off']: '' ?>">
-						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price">
+						<input type="hidden" id="arrOriginDropOffPrice" name="arr_origin_drop_off_price" value="<?php echo isset($meta['arr_origin_drop_off_price']) ? $meta['arr_origin_drop_off_price']: '0' ?>">
 					</div>
 
 
@@ -207,7 +207,7 @@ select.form-control {
 							<option  hidden selected><?php echo isset($meta['dep_origin_drop_off']) ? $meta['dep_origin_drop_off']: 'Select Origin Pick-up & Drop-off Location' ?></option>
 						</select>
 						<input type="hidden" id="hdDepOriginDropOff" name="dep_origin_drop_off" value="<?php echo isset($meta['dep_origin_drop_off']) ? $meta['dep_origin_drop_off']: '' ?>">
-						<input type="hidden" id="depOriginDropOffPrice" name="dep_origin_drop_off_price">
+						<input type="hidden" id="depOriginDropOffPrice" name="dep_origin_drop_off_price" value="<?php echo isset($meta['dep_origin_drop_off_price']) ? $meta['dep_origin_drop_off_price']: '0' ?>">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depDate" class="control-label">Date: <span class="required">*</span></label>
