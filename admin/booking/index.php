@@ -567,6 +567,7 @@ select.form-control {
 				$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
 				$('.trChartered').hide();
 				$('#vehiclesQty').prop('required', false).prop('disabled', false);
+				
 			}
 			else if (str.includes("CHARTERED"))
 			{
@@ -584,6 +585,7 @@ select.form-control {
 				$('#chargePriceHolder').val("0");
 				$('.trChartered').hide();
 				$('#vehiclesQty').prop('required', false).prop('disabled', false);
+				
 			}
 
 			computeTotal();
@@ -705,9 +707,15 @@ select.form-control {
 			//Reset all required fields to black
 			$("#arrDate, #eta, #arrAirport, #arrFlightNumber, #arrHotelResort, #depOriginDropOff, #depDate, #etd, #depAirport, #depFlightNumber, #depHotelResort, #estpickup, #otherNames").css("border-color", "black");
 			//
-
+			const str = $('#modeOfTransfer option:selected').text();
 			//ARRIVAL VALIDATIONS
-			if ( $('#transferType').val() === "1" || $('#transferType').val() === "3")
+			if (
+				(
+					$('#transferType').val() === "1" ||
+					$('#transferType').val() === "3"
+				) &&
+				!str.includes("CHARTERED")
+			)
 			{
 				if ($('#arrOriginDropOff').val() === '' || $('#arrOriginDropOff').val() === null || $('#arrOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
 				{
@@ -748,7 +756,13 @@ select.form-control {
 			}
 			
 			//DEPARTURE VALIDATIONS
-			if ( $('#transferType').val() === "2" || $('#transferType').val() === "3")
+			if (
+				(
+					$('#transferType').val() === "2" ||
+					$('#transferType').val() === "3"
+				) &&
+				!str.includes("CHARTERED")
+			)
 			{
 				if ($('#depOriginDropOff').val() === '' || $('#depOriginDropOff').val() === null || $('#depOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
 				{
