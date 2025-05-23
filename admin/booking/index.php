@@ -119,14 +119,22 @@ select.form-control {
                         <input type="email" id="email" name="email_address" autocomplete="off" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()">
                     </div>
 					<!-- 2nd row -->
-					<div class="form-group col-md-3">
-						<label for="transferType" class="control-label">Transfer Type: <span class="required">*</span></label>
-						<select type="text" id="transferType" name="transfer_type" autocomplete="off" class="form-control form-control-sm form-control-border select2" required>
-							<option selected>Select Transfer Type</option>
-							<option value="1" <?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
-							<option value="2"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
-							<option value="3"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 3 ? 'selected' : '' ?>>ROUNDTRIP</option>
-						</select>
+					<div class="form-group col-md-3 d-flex align-items-end">
+						<div style="width:100%">
+							<label for="transferType" class="control-label mb-0" style="font-size: 0.8em;">
+								Transfer Type: <span class="required">*</span>
+								<span style="float:right;margin-left:100px;">
+									<input type="checkbox" id="viaLand" style="margin-left:10px;"/>
+									<label for="viaLand" style="font-size: 14px; margin-left:3px;">Via Land</label>
+								</span>
+							</label>
+							<select type="text" id="transferType" name="transfer_type" autocomplete="off" class="form-control form-control-sm form-control-border select2" required>
+								<option selected>Select Transfer Type</option>
+								<option value="1" <?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 1 ? 'selected' : '' ?>>ARRIVAL</option>
+								<option value="2"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
+								<option value="3"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 3 ? 'selected' : '' ?>>ROUNDTRIP</option>
+							</select>
+						</div>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
@@ -708,97 +716,112 @@ select.form-control {
 			$("#arrDate, #eta, #arrAirport, #arrFlightNumber, #arrHotelResort, #depOriginDropOff, #depDate, #etd, #depAirport, #depFlightNumber, #depHotelResort, #estpickup, #otherNames").css("border-color", "black");
 			//
 			const str = $('#modeOfTransfer option:selected').text();
-			//ARRIVAL VALIDATIONS
-			if (
-				(
-					$('#transferType').val() === "1" ||
-					$('#transferType').val() === "3"
-				) &&
-				!str.includes("CHARTERED")
-			)
-			{
-				if ($('#arrOriginDropOff').val() === '' || $('#arrOriginDropOff').val() === null || $('#arrOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
+			if (!$('#viaLand').is(':checked')) {
+				if (
+					(
+						($('#transferType').val() === "1" ||
+						$('#transferType').val() === "3")
+					) &&
+					!str.includes("CHARTERED") 
+				)
 				{
-					save = false;
-					$('#arrOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'red');
-				} else $('#arrOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'black');
+					if ($('#arrOriginDropOff').val() === '' || $('#arrOriginDropOff').val() === null || $('#arrOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
+					{
+						save = false;
+						$('#arrOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'red');
+					} else $('#arrOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'black');
 
-				if ($('#arrDate').val() === '' || $('#arrDate').val() === null)
-				{
-					save = false;
-					emptyFields.push("arrDate");
+					if ($('#arrDate').val() === '' || $('#arrDate').val() === null)
+					{
+						save = false;
+						emptyFields.push("arrDate");
+					}
+					
+					if ($('#eta').val() === '' || $('#eta').val() === null)
+					{
+						save = false;
+						emptyFields.push("eta");
+					}
+					
+					if ($('#arrAirport').val() === '' || $('#arrAirport').val() === null)
+					{
+						save = false;
+						emptyFields.push("arrAirport");
+					}
+					
+					if ($('#arrFlightNumber').val() === '' || $('#arrFlightNumber').val() === null)
+					{
+						save = false;
+						emptyFields.push("arrFlightNumber");
+					}
+					
+					if ($('#arrHotelResort').val() === '' || $('#arrHotelResort').val() === null)
+					{
+						save = false;
+						emptyFields.push("arrHotelResort");
+					}
+					
 				}
 				
-				if ($('#eta').val() === '' || $('#eta').val() === null)
+				//DEPARTURE VALIDATIONS
+				if (
+					(
+						$('#transferType').val() === "2" ||
+						$('#transferType').val() === "3"
+					) &&
+					!str.includes("CHARTERED")
+				)
 				{
-					save = false;
-					emptyFields.push("eta");
-				}
-				
-				if ($('#arrAirport').val() === '' || $('#arrAirport').val() === null)
-				{
-					save = false;
-					emptyFields.push("arrAirport");
-				}
-				
-				if ($('#arrFlightNumber').val() === '' || $('#arrFlightNumber').val() === null)
-				{
-					save = false;
-					emptyFields.push("arrFlightNumber");
-				}
-				
-				if ($('#arrHotelResort').val() === '' || $('#arrHotelResort').val() === null)
-				{
-					save = false;
-					emptyFields.push("arrHotelResort");
-				}
-				
-			}
-			
-			//DEPARTURE VALIDATIONS
-			if (
-				(
-					$('#transferType').val() === "2" ||
-					$('#transferType').val() === "3"
-				) &&
-				!str.includes("CHARTERED")
-			)
-			{
-				if ($('#depOriginDropOff').val() === '' || $('#depOriginDropOff').val() === null || $('#depOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
-				{
-					save = false;
-					$('#depOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'red');
-				} else $('#depOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'black');
+					if ($('#depOriginDropOff').val() === '' || $('#depOriginDropOff').val() === null || $('#depOriginDropOff').val() === 'Select Origin Pick-up & Drop-off Location')
+					{
+						save = false;
+						$('#depOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'red');
+					} else $('#depOriginDropOff').next('.select2-container').find('.select2-selection').css('border-color', 'black');
 
-				if ($('#depDate').val() === '' || $('#depDate').val() === null) 
-				{
-					save = false;
-					emptyFields.push("depDate");
+					if ($('#depDate').val() === '' || $('#depDate').val() === null) 
+					{
+						save = false;
+						emptyFields.push("depDate");
+					}
+					if ($('#etd').val() === '' || $('#etd').val() === null) 
+					{
+						save = false;
+						emptyFields.push("etd");
+					}
+					if ($('#depAirport').val() === '' || $('#depAirport').val() === null) 
+					{
+						save = false;
+						emptyFields.push("depAirport");
+					}
+					if ($('#depFlightNumber').val() === '' || $('#depFlightNumber').val() === null) 
+					{
+						save = false;
+						emptyFields.push("depFlightNumber");
+					}
+					if ($('#depHotelResort').val() === '' || $('#depHotelResort').val() === null) 
+					{
+						save = false;
+						emptyFields.push("depHotelResort");
+					}
+					if ($('#estpickup').val() === '' || $('#estpickup').val() === null) 
+					{
+						save = false;
+						emptyFields.push("estpickup");
+					}
 				}
-				if ($('#etd').val() === '' || $('#etd').val() === null) 
-				{
-					save = false;
-					emptyFields.push("etd");
+			} else {
+				// If viaLand is checked, only require arrDate or depDate based on transfer type
+				if ($('#transferType').val() === "1" || $('#transferType').val() === "3") {
+					if ($('#arrDate').val() === '' || $('#arrDate').val() === null) {
+						save = false;
+						emptyFields.push("arrDate");
+					}
 				}
-				if ($('#depAirport').val() === '' || $('#depAirport').val() === null) 
-				{
-					save = false;
-					emptyFields.push("depAirport");
-				}
-				if ($('#depFlightNumber').val() === '' || $('#depFlightNumber').val() === null) 
-				{
-					save = false;
-					emptyFields.push("depFlightNumber");
-				}
-				if ($('#depHotelResort').val() === '' || $('#depHotelResort').val() === null) 
-				{
-					save = false;
-					emptyFields.push("depHotelResort");
-				}
-				if ($('#estpickup').val() === '' || $('#estpickup').val() === null) 
-				{
-					save = false;
-					emptyFields.push("estpickup");
+				if ($('#transferType').val() === "2" || $('#transferType').val() === "3") {
+					if ($('#depDate').val() === '' || $('#depDate').val() === null) {
+						save = false;
+						emptyFields.push("depDate");
+					}
 				}
 			}
 
