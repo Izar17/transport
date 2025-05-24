@@ -34,7 +34,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT * from `driver_list` order by `name` asc ");
+						$qry = $conn->query("SELECT * from `driver_list` where delete_flag != 1 order by `name` asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
@@ -71,13 +71,13 @@
 <script>
 	$(document).ready(function(){
 		$('#create_new').click(function(){
-			uni_modal('Add New Shop Type',"driver_list/manage_driver_list.php")
+			uni_modal('Add New Driver',"driver_list/manage_driver_list.php")
 		})
 		$('.edit_data').click(function(){
-			uni_modal('Update Shop Type',"driver_list/manage_driver_list.php?id="+$(this).attr('data-id'))
+			uni_modal('Update Driver',"driver_list/manage_driver_list.php?id="+$(this).attr('data-id'))
 		})
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this Shop Type permanently?","delete_driver_list",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this driver permanently?","delete_driver_list",[$(this).attr('data-id')])
 		})
 		$('table .th,table .td').addClass('align-middle px-2 py-1')
 		$('.table').dataTable();
