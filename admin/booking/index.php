@@ -86,6 +86,7 @@ select.form-control {
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post"  autocomplete="off">
 	<input type="hidden" name="id" id="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
+	<input type="hidden" name="delete_flag" value="<?php echo isset($meta['delete_flag']) ? $meta['delete_flag']: '0' ?>">
         <div class="row">
             <!-- First Panel (10 columns) --> 
             <div class="col-md-10">
@@ -119,14 +120,9 @@ select.form-control {
                         <input type="email" id="email" name="email_address" autocomplete="off" value="<?php echo isset($meta['email_address']) ? $meta['email_address']: '' ?>" class="form-control form-control-sm form-control-border" oninput="this.value = this.value.toLowerCase()">
                     </div>
 					<!-- 2nd row -->
-					<div class="form-group col-md-3 d-flex align-items-end">
-						<div style="width:100%">
+					<div class="form-group col-md-3">
 							<label for="transferType" class="control-label mb-0" style="font-size: 0.8em;">
 								Transfer Type: <span class="required">*</span>
-								<span style="float:right;margin-left:100px;">
-									<input type="checkbox" id="viaLand" style="margin-left:10px;"/>
-									<label for="viaLand" style="font-size: 14px; margin-left:3px;">Via Land</label>
-								</span>
 							</label>
 							<select type="text" id="transferType" name="transfer_type" autocomplete="off" class="form-control form-control-sm form-control-border select2" required>
 								<option selected>Select Transfer Type</option>
@@ -134,7 +130,6 @@ select.form-control {
 								<option value="2"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 2 ? 'selected' : '' ?>>DEPARTURE</option>
 								<option value="3"<?php echo isset($meta['transfer_type']) && $meta['transfer_type'] == 3 ? 'selected' : '' ?>>ROUNDTRIP</option>
 							</select>
-						</div>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="modeOfTransfer" class="control-label">Mode of Transfer: <span class="required">*</span></label>
@@ -716,7 +711,7 @@ select.form-control {
 			$("#arrDate, #eta, #arrAirport, #arrFlightNumber, #arrHotelResort, #depOriginDropOff, #depDate, #etd, #depAirport, #depFlightNumber, #depHotelResort, #estpickup, #otherNames").css("border-color", "black");
 			//
 			const str = $('#modeOfTransfer option:selected').text();
-			if (!$('#viaLand').is(':checked')) {
+			if (!str.includes("LAND")) {
 				if (
 					(
 						($('#transferType').val() === "1" ||

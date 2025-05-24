@@ -35,7 +35,7 @@ Class Master extends DBConnection {
 			return $this->capture_err();
 		if($check > 0){
 			$resp['status'] = 'failed';
-			$resp['msg'] = "Shop Type already exists.";
+			$resp['msg'] = "Driver already exists.";
 		}else{
 			if(empty($id)){
 				$sql = "INSERT INTO `driver_list` set {$data} ";
@@ -46,9 +46,9 @@ Class Master extends DBConnection {
 			if($save){
 				$resp['status'] = 'success';
 				if(empty($id))
-				$resp['msg'] = " New Shop Type successfully saved.";
+				$resp['msg'] = " New driver successfully saved.";
 				else
-				$resp['msg'] = " Shop Type successfully updated.";
+				$resp['msg'] = " Driver successfully updated.";
 			}else{
 				$resp['status'] = 'failed';
 				$resp['err'] = $this->conn->error."[{$sql}]";
@@ -60,10 +60,10 @@ Class Master extends DBConnection {
 	}
 	function delete_driver(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `driver_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `driver_list` set delete_flag = 1, status = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," Shop Type successfully deleted.");
+			$this->settings->set_flashdata('success'," Driver successfully deleted.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
