@@ -562,10 +562,10 @@ select.form-control {
 			if (str.includes("PRIVATE"))
 			{
 				let chargePrice = id ?  meta.transfer_mode_price : $(this).val();
-				if($('#transferType').val() != 3) chargePrice = chargePrice/2;
+				// if($('#transferType').val() != 3) chargePrice = chargePrice/2;
 
-				$('#priceTitle').text(`Private Price/Head: `);
-				$('#lblPrice').text(`P${chargePrice}`);
+				// $('#priceTitle').text(`Private Price/Head: `);
+				// $('#lblPrice').text(`P${chargePrice}`);
 				$('#chargePriceHolder').val(chargePrice);
 				$('#lblGuest1, #lblGuest2, #lblGuest3, #lblGuest4, #lblGuest5, #lblGuest6, #lblGuest7, #lblGuest8').text('0.00');
 				$('.trChartered').hide();
