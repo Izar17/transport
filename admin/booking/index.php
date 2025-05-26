@@ -1028,6 +1028,8 @@ select.form-control {
 			if (transferType != 3) chargePrice = chargePrice/2;
 			// console.log("chargePrice>>", chargePrice);
 			// console.log("totalQty>>", totalQty);
+			$('#priceTitle').text(`Private Price/Head: `);
+			$('#lblPrice').text(`P${chargePrice}`);
 			privatePrice = chargePrice * totalQty;
 			price = privatePrice;
 			// console.log("price>>", price);
