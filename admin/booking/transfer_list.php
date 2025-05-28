@@ -132,7 +132,9 @@
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td class="text-center"><?php echo $row['reserve_num'] ?></td>
-							<td><?php echo $row['last_name'] .','. $row['first_name'] .'<br>'.$row['contact_no'].'<br>'.$row['email_address']; ?></td>
+							<td><?php echo $row['last_name'] .','. $row['first_name'] .'<br>'.$row['contact_no'].'<br>'.$row['email_address']; ?><br>Other Names: <br>
+								<?php echo $row['other_names']; ?>
+							</td>
 							<td><?php echo array_sum([
 									$row['qty_guest_1'],
 									$row['qty_guest_2'],

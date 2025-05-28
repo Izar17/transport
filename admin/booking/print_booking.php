@@ -41,6 +41,9 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
 <body onload="window.print(); window.onafterprint = function(){ window.close(); }">
 <!-- <body> -->
     <div class="container">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-thumbnail rounded-circle" id="logo-img" style="height: 150px; width: 150px; object-fit: contain;">
+        </div>
         <div class="header">VS Makan Transport, Inc.</div>
         <p style="text-align: center;">Thank you for choosing VS Makan Transport, Inc.</p>
 
