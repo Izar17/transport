@@ -86,6 +86,13 @@ select.form-control {
 	<div id="msg"></div>
     <form id="frmBooking" action="" method="post"  autocomplete="off">
 	<input type="hidden" name="id" id="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
+	<?php
+		// Set timezone to Philippine time
+		$createdDate = isset($meta['created_date']) ? $meta['created_date'] : date('Y-m-d H:i:s');
+		$updateddDate = isset($meta['id']) ? date('Y-m-d H:i:s') : '';
+	?>
+	<input type="hidden" name="created_date" value="<?php echo $createdDate; ?>">
+	<input type="hidden" name="updated_date" value="<?php echo $updateddDate; ?>">
 	<input type="hidden" name="delete_flag" value="<?php echo isset($meta['delete_flag']) ? $meta['delete_flag']: '0' ?>">
         <div class="row">
             <!-- First Panel (10 columns) --> 

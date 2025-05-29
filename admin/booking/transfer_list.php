@@ -191,7 +191,7 @@
 								<b>UPDATED BY: </b><?php echo $row['updated_by']; ?> <br>
 								<b>DRIVER: </b><?php echo $row['driver_name']; ?>
 							</td>
-							<td><?php echo $row['created_date'] ?></td>
+							<td><?php echo $row['created_date'] ?><br><b>UPDATED DATE</b> <br><?php echo $row['updated_date'] ?></td>
 							<td><?php echo $row['payment_type'] .'<br> Remarks: ' . $row['payment_remarks'] .'<br>Amount: <b>P' . number_format($row['total_price'], 2) . '</b>'?><br>
 							
 								<?php 
@@ -304,7 +304,8 @@
 								<div class="mt-2 text-danger" style="font-size:12px;">
 									<span>Cancelled</span>
 									<br>Reason:<br><?php echo $row['status_remarks']; ?>
-									<br>Cancelled by:<br><?php echo $row['updated_by']; ?>
+									<br>By:<br><?php echo $row['updated_by']; ?>
+									<br>Date:<br><?php echo $row['deleted_date']; ?>
 								</div>
 							<?php endif; ?>
 							</td>
@@ -371,10 +372,10 @@
 		}
 
 		if (!endDate) {
-			let oneWeekLater = new Date();
-			oneWeekLater.setDate(oneWeekLater.getDate() + 7);
-			oneWeekLater = oneWeekLater.toISOString().split('T')[0];
-			$('#endDate').val(oneWeekLater);
+			let oneMonthLater = new Date();
+			oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+			oneMonthLater = oneMonthLater.toISOString().split('T')[0];
+			$('#endDate').val(oneMonthLater);
 		} else {
 			$('#endDate').val(endDate);
 		}

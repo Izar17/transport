@@ -120,7 +120,9 @@ Class Booking extends DBConnection {
 	public function cancel_booking(){
 		extract($_POST);
 		// $updated_by = $_settings->userdata('lastname');
-		$del = $this->conn->query("UPDATE `booking` set delete_flag = 1, status = 3, status_remarks = '$reason', updated_by = '$user' where id = '{$id}'");
+		// Set timezone to Asia/Manila for this session
+		$this->conn->query("SET time_zone = '+08:00'");
+		$del = $this->conn->query("UPDATE `booking` SET delete_flag = 1, status = 3, status_remarks = '$reason', deleted_by = '$user', deleted_date = NOW() WHERE id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success',"Booking successfully cancelled!");
