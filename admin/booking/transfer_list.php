@@ -71,7 +71,7 @@
 						<th>PAX#</th>
 						<th width="20%">TRANSFER DETAILS</th>
 						<th width="10%">MODE OF TRANSFER</th>
-						<th>OTHER NAMES | REMARKS</th>
+						<th>REMARKS</th>
 						<th>BOOKING INFO</th>
 						<th>DATE POSTED</th>
 						<th width="10%">PAYMENT TYPE</th>
@@ -185,7 +185,7 @@
 									}
 								?></td>
 							<td><?php echo $row['transfer_mode'] ?></td>
-							<td><?php echo $row['other_names'] . '<br><br>' . $row['remarks'];?></td>
+							<td><?php echo $row['remarks'];?></td>
 							<td>
 								<b>PROCESSED BY: </b><?php echo $row['created_by'] ?> <br>
 								<b>UPDATED BY: </b><?php echo $row['updated_by']; ?> <br>
