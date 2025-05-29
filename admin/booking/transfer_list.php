@@ -372,10 +372,10 @@
 		}
 
 		if (!endDate) {
-			let oneWeekLater = new Date();
-			oneWeekLater.setDate(oneWeekLater.getDate() + 7);
-			oneWeekLater = oneWeekLater.toISOString().split('T')[0];
-			$('#endDate').val(oneWeekLater);
+			let oneMonthLater = new Date();
+			oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+			oneMonthLater = oneMonthLater.toISOString().split('T')[0];
+			$('#endDate').val(oneMonthLater);
 		} else {
 			$('#endDate').val(endDate);
 		}
