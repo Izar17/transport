@@ -71,7 +71,7 @@
 						<th>PAX#</th>
 						<th width="20%">TRANSFER DETAILS</th>
 						<th width="10%">MODE OF TRANSFER</th>
-						<th>REMARKS</th>
+						<th>OTHER NAMES | REMARKS</th>
 						<th>BOOKING INFO</th>
 						<th>DATE POSTED</th>
 						<th width="10%">PAYMENT TYPE</th>
@@ -132,8 +132,15 @@
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td class="text-center"><?php echo $row['reserve_num'] ?></td>
-							<td><?php echo $row['last_name'] .','. $row['first_name'] .'<br>'.$row['contact_no'].'<br>'.$row['email_address']; ?><br>Other Names: <br>
-								<?php echo $row['other_names']; ?>
+							<td><b><?php echo $row['last_name'] .','. $row['first_name'] .'</b><br>'.$row['contact_no'].'<br>'.$row['email_address']; ?><br><b># of Guest</b> <br>
+								<?php echo $row['qty_guest_1'] > 0? 'Adult(Local): ' . $row['qty_guest_1'] .'<br>' :'' ?>
+								<?php echo $row['qty_guest_2'] > 0? 'Adult(Foreign): ' . $row['qty_guest_2'] .'<br>' :'' ?>
+								<?php echo $row['qty_guest_3'] > 0? 'Senior/PWD: ' . $row['qty_guest_3'] .'<br>' :'' ?>
+								<?php echo $row['qty_guest_4'] > 0? 'Child Local(6-12 yo): ' . $row['qty_guest_4'] .'<br>' :'' ?>
+								<?php echo $row['qty_guest_5'] > 0? 'Child Foreign(6-12 yo): ' . $row['qty_guest_5'] .'<br>' :'' ?>
+								<?php echo $row['qty_guest_6'] > 0? 'Child (3-5 yo): ' . $row['qty_guest_6'] .'<br>':'' ?>
+								<?php echo $row['qty_guest_7'] > 0? '2 yo and below/FOC: ' . $row['qty_guest_7'] .'<br>' :'' ?>
+								<?php echo $row['qty_guest_8'] > 0? 'Resident: ' . $row['qty_guest_8'] :'' ?>
 							</td>
 							<td><?php echo array_sum([
 									$row['qty_guest_1'],
@@ -185,7 +192,7 @@
 									}
 								?></td>
 							<td><?php echo $row['transfer_mode'] ?></td>
-							<td><?php echo $row['remarks'];?></td>
+							<td><?php echo $row['other_names'] . '<br><br><b>REMARKS</b><br>' . $row['remarks'];?></td>
 							<td>
 								<b>PROCESSED BY: </b><?php echo $row['created_by'] ?> <br>
 								<b>UPDATED BY: </b><?php echo $row['updated_by']; ?> <br>
