@@ -111,7 +111,7 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
             <div class="data-item"><span class="label">Airport:</span> <?php echo $data['dep_airport']; ?></div>
             <div class="data-item"><span class="label">Flight No:</span> <?php echo $data['dep_flight_no']; ?></div>
             <div class="data-item"><span class="label">
-                Arrival Date / ETA:</span> <?php echo $data['dep_date']; ?> <?php echo $data['dep_etd']; ?><br>
+                Departure Date / ETD:</span> <?php echo $data['dep_date']; ?> <?php echo $data['dep_etd']; ?><br>
                 <b>Estimated Pick-up Time:</b> <?php echo $data['est_pickup']; ?>
             </div>
         </div>
@@ -151,6 +151,10 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
             <div class="data-item"><span class="label">Payment Remarks:</span> <?php echo $data['payment_remarks']; ?></div>
         </div>
 
+        <div class="section">
+            <h3>Remarks</h3>
+            <div class="data-item"><span class="label"> <?php echo $data['remarks']; ?></span></div>
+        </div>
         <div class="footer">We look forward to serving you!</div>
     </div>
 	<div class="clear-fix mb-3"></div>
