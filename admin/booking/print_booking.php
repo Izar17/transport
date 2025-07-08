@@ -100,12 +100,14 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
             
             <h3>Transfer Information</h3>
             <span class="label">Mode of Transfer: </span><?php echo $data['transfer_mode']; ?>
+            <?php if($data['arr_origin_drop_off']){ ?>
             <div class="data-item" style="width:100%"><span class="label"><h4>ARRIVAL DETAILS</h4></span></div>
             <div class="data-item" style="width: 40%;"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['arr_origin_drop_off']; ?></div>
             <div class="data-item"><span class="label">Airport:</span> <?php echo $data['arr_airport']; ?></div>
             <div class="data-item"><span class="label">Flight No:</span> <?php echo $data['arr_flight_no']; ?></div>
             <div class="data-item"><span class="label">Arrival Date / ETA:</span> <?php echo $data['arr_date']; ?> <?php echo $data['arr_eta']; ?></div>
-		
+            <?php } ?>
+            <?php if($data['dep_origin_drop_off']){ ?>  
             <div class="data-item" style="width:100%"><span class="label"><h4>DEPARTURE DETAILS</h4></span></div>
             <div class="data-item" style="width: 40%;"><span class="label">Origin Pick-up & Drop-off Location:</span> <?php echo $data['dep_origin_drop_off']; ?></div>
             <div class="data-item"><span class="label">Airport:</span> <?php echo $data['dep_airport']; ?></div>
@@ -114,6 +116,7 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
                 Departure Date / ETD:</span> <?php echo $data['dep_date']; ?> <?php echo $data['dep_etd']; ?><br>
                 <b>Estimated Pick-up Time:</b> <?php echo $data['est_pickup']; ?>
             </div>
+            <?php } ?>
         </div>
 
         <!-- Pricing Breakdown -->
