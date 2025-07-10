@@ -88,10 +88,10 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         
                         <div class="form-row" style="margin-top: -20px;">
                             <div class="form-group col-md-4" id="terminalFee">
-                                <input type="text" name="<?php echo $key; ?>_terminal" id="<?php echo $key; ?>_terminal" value="<?php echo isset($meta[$key.'_terminal']) ? $meta[$key.'_terminal'] : '' ?>" class="form-control" placeholder="Terminal Fee">
+                                <input type="text" name="<?php echo $key; ?>_terminal" id="<?php echo $key; ?>_terminal" value="<?php echo isset($meta[$key.'_terminal']) ? $meta[$key.'_terminal'] : '0' ?>" class="form-control" placeholder="Terminal Fee">
                             </div>
                             <div class="form-group col-md-4" id="environmentFee">
-                                <input type="text" name="<?php echo $key; ?>_environment" id="<?php echo $key; ?>_environment" value="<?php echo isset($meta[$key.'_environment']) ? $meta[$key.'_environment'] : '' ?>" class="form-control" placeholder="Environment Fee">
+                                <input type="text" name="<?php echo $key; ?>_environment" id="<?php echo $key; ?>_environment" value="<?php echo isset($meta[$key.'_environment']) ? $meta[$key.'_environment'] : '0' ?>" class="form-control" placeholder="Environment Fee">
                             </div>
                         </div>
                         <?php endforeach; ?>

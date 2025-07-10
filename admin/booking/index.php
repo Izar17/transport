@@ -78,6 +78,10 @@ select.form-control {
 
 
 </style>
+<!-- Include Flatpickr CSS and JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <div class="card card-outline card-primary">
 	<div class="card-header">
 		<h3 class="card-title">Booking Transfer</h3>
@@ -181,7 +185,10 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsArrival">
 						<label for="eta" class="control-label">ETA: <span class="required">*</span></label>
-						<input type="time" id="eta" autofocus name="arr_eta"  value="<?php echo isset($meta['arr_eta']) ? $meta['arr_eta']: '06:00' ?>" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<!-- <input type="time" id="eta" autofocus name="arr_eta"  value="<?php echo isset($meta['arr_eta']) ? $meta['arr_eta']: '06:00' ?>" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50"> -->
+						
+						<input type="text" id="eta" autofocus name="arr_eta"  value="<?php echo isset($meta['arr_eta']) ? $meta['arr_eta']: '00:00' ?>" lang="en-GB" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+
 					</div>
 
 					<div class="form-group col-md-3 clsArrival">
@@ -225,7 +232,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="etd" class="control-label">ETD: <span class="required">*</span></label>
-						<input type="time" id="etd" autofocus name="dep_etd" value="<?php echo isset($meta['dep_etd']) ? $meta['dep_etd']: '06:00' ?>" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
+						<input type="text" id="etd" autofocus name="dep_etd" value="<?php echo isset($meta['dep_etd']) ? $meta['dep_etd']: '00:00' ?>" autocomplete="off" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="depAirport" class="control-label">Airport: <span class="required">*</span></label>
@@ -252,7 +259,7 @@ select.form-control {
 					</div>
 					<div class="form-group col-md-3 clsDeparture">
 						<label for="estpickup" class="control-label">Estimated Pick-up Time:</label>
-						<input type="time" id="estpickup" name="est_pickup" autofocus autocomplete="off" value="<?php echo isset($meta['est_pickup']) ? $meta['est_pickup']: '' ?>" class="form-control form-control-sm form-control-border w-50">
+						<input type="text" id="estpickup" name="est_pickup" autofocus autocomplete="off" value="<?php echo isset($meta['est_pickup']) ? $meta['est_pickup']: '00:00' ?>" class="form-control form-control-sm form-control-border w-50">
 					</div>
 					<!-- Fifth Row -->
                     <div class="form-group col-md-6">
@@ -448,7 +455,26 @@ select.form-control {
     </form>
 </div>
 </div>
+
 <script>
+	flatpickr("#eta", {
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: "H:i", // 24-hour format
+		time_24hr: true
+	});
+	flatpickr("#etd", {
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: "H:i",
+		time_24hr: true
+	});
+	flatpickr("#estpickup", {
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: "H:i",
+		time_24hr: true
+	});
 	//1
 	let dropDownData;
 

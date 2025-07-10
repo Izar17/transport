@@ -158,6 +158,39 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'view';
             <h3>Remarks</h3>
             <div class="data-item"><span class="label"> <?php echo $data['remarks']; ?></span></div>
         </div>
+
+        
+        <?php if(stripos($data['transfer_mode'], 'SHARED') !== false){ ?>
+        <div class="section">
+            <h3 style="color:red;">Terms and Condition</h3>
+            <div  class="data-item" style="width:100%"><span class="label">SHARED TRANSFER - with other Fairways guests</span>
+            <ul class="data-item" style="width:100%">
+                <li>Minimum of 2 person (With same flight).</li>
+                <li>Inclusive of Terminal & Environment Fee.</li>
+                <li>Non-Refundable.</li>
+                <li>Porterage is not included.</li> 
+                <li>Senior and PWD Discount are applicable for filipino citizens only.</li>
+                <li style="color:red;">(Dual Citizen must have a Philippine Government Issued ID).</li>
+            </ul>
+            </div>
+        </div>
+        <?php } ?>
+
+        
+        <?php if(stripos($data['transfer_mode'], 'PRIVATE') !== false){ ?>
+        <div class="section">
+            <h3 style="color:red;">Terms and Condition</h3>
+            <div  class="data-item" style="width:100%"><span class="label">PRIVATE TRANSFER</span>
+            <ul class="data-item" style="width:100%">
+                <li>Inclusive of Terminal & Environment Fee.</li>
+                <li>Non-Refundable.</li>
+                <li>Porterage is not included.</li> 
+                <li>Senior and PWD Discount are "NOT APPLICABLE".</li>
+            </ul>
+            </div>
+        </div>
+        <?php } ?>
+        
         <div class="footer">We look forward to serving you!</div>
     </div>
 	<div class="clear-fix mb-3"></div>
