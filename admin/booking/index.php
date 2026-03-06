@@ -861,7 +861,7 @@ select.form-control {
 
 			let hasQty = false;
 			
-			for(let x = 1; x<8; x++)
+			for(let x = 1; x<9; x++)
 			{
 				if ($('#qtyGuest' + x).val() != '' && $('#qtyGuest' + x).val() > 0) hasQty = true;
 			}
