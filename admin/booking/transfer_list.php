@@ -132,7 +132,8 @@
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td class="text-center"><?php echo $row['reserve_num'] ?></td>
-							<td><b><?php echo $row['last_name'] .','. $row['first_name'] .'</b><br>'.$row['contact_no'].'<br>'.$row['email_address']; ?><br><b># of Guest</b> <br>
+							<td><b><?php echo $row['last_name'] .','. $row['first_name'] .'</b><br>'.$row['contact_no'].'<br>'.$row['email_address']; ?><br>
+								<b># of Guest</b> <br>
 								<?php echo $row['qty_guest_1'] > 0? 'Adult(Local): ' . $row['qty_guest_1'] .'<br>' :'' ?>
 								<?php echo $row['qty_guest_2'] > 0? 'Adult(Foreign): ' . $row['qty_guest_2'] .'<br>' :'' ?>
 								<?php echo $row['qty_guest_3'] > 0? 'Senior/PWD: ' . $row['qty_guest_3'] .'<br>' :'' ?>
@@ -173,13 +174,13 @@
 											break;
 										case 3:
 											echo "<b>ROUNDTRIP";
-											echo '<br>(ARR) '. $row['arr_date'] .' '. $row['arr_eta'] .'</b><br>';
+											echo '<br>(ARRIVAL) '. $row['arr_date'] .' '. $row['arr_eta'] .'</b><br>';
 											echo $row['arr_origin_drop_off'] .'<br>';
 											echo $row['arr_airport'] . '<br>' . $row['arr_flight_no'].'<br>';
 											echo $row['arr_hotel'] .'<br>';
 
 											
-											echo '<br><b>(DEP) Estimated Pick-up Time: '.$row['est_pickup'].
+											echo '<br><b>(DEPARTURE) Estimated Pick-up Time: '.$row['est_pickup'].
 												'<br>'. $row['dep_date'] .' '. $row['dep_etd'] .'</b><br>';
 											echo $row['dep_origin_drop_off'] .'<br>';
 											echo $row['dep_airport'] . '<br>' . $row['dep_flight_no'].'<br>';
